@@ -1,0 +1,31 @@
+{
+  "id": "2025-09-11",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think alliances and currencies.",
+  "help": "Pick 4 countries per hidden rule. No overlaps between categories.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "European countries NOT in NATO",
+      "items": ["Ireland", "Austria", "Switzerland", "Serbia"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "Capitals starting with 'B'",
+      "items": ["Belgium", "Germany", "Hungary", "Romania"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Countries with a land border with Russia",
+      "items": ["Norway", "Latvia", "Poland", "Finland"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "EU countries with non-European overseas territories",
+      "items": ["France", "Spain", "Portugal", "Netherlands"],
+      "color": "#FFECEC"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}

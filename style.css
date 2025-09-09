@@ -1,0 +1,51 @@
+:root {
+  --bg: #f7f9fb;
+  --card: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --accent: #4f46e5;
+  --accent-weak: #e0e7ff;
+  --danger: #dc2626;
+  --ok: #059669;
+  --border: #e5e7eb;
+  --selected: #dbeafe;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 16px;
+  font-family: system-ui, Arial, sans-serif;
+  color: var(--ink); background: var(--bg);
+}
+.wrap { max-width: 900px; margin: 0 auto; }
+header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom: 12px; }
+h1 { margin:0; font-size: 28px; }
+.sub { color: var(--muted); font-size: 14px; }
+.corner-actions { display:flex; align-items:center; gap:8px; }
+.chip { font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:var(--card); cursor:pointer; }
+.chip.spoiler { filter: blur(3px); }
+.chip.revealed { filter: none; background: var(--accent-weak); }
+.help { cursor:pointer; padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:var(--card); }
+
+.panel { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px; }
+.solved { display:grid; gap:8px; margin:10px 0 14px; }
+.bar { display:flex; justify-content:space-between; padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:#ecfdf5; }
+.bar .name { font-weight:600; }
+.bar .items { color: var(--muted); font-size: 14px; }
+
+.grid { display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap:10px; }
+.cell {
+  background: var(--card); border:2px solid var(--border);
+  padding:14px; border-radius:12px; text-align:center; cursor:pointer;
+  min-height:60px; display:flex; align-items:center; justify-content:center;
+}
+.cell.selected { background: var(--selected); border-color:#93c5fd; }
+.controls { display:flex; gap:8px; margin:12px 0; }
+button { padding:10px 16px; border-radius:999px; border:1px solid var(--border); background: var(--card); cursor:pointer; }
+button.primary { background: var(--accent); color: white; border-color: var(--accent); }
+button:disabled { opacity: 0.5; cursor:not-allowed; }
+.status { display:flex; justify-content:space-between; font-size:14px; color: var(--muted); min-height: 24px; }
+.lives { color: var(--danger); font-weight:600; }
+.ok { color: var(--ok); }
+.footer { margin-top: 14px; font-size: 13px; color: var(--muted); display:flex; justify-content:space-between; }
+.linkish { color: var(--accent); text-decoration: underline; cursor:pointer; }
+@media (max-width: 520px) { .grid { grid-template-columns: repeat(2, 1fr); } }
