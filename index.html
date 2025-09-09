@@ -4,35 +4,24 @@
   <meta charset="UTF-8" />
   <title>GeoQuads</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <!-- cache-buster v=4 -->
-  <link rel="stylesheet" href="assets/style.css?v=4" />
+  <link rel="stylesheet" href="style.css?v=1" />
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div>
-        <h1>GeoQuads</h1>
-        <div class="sub" id="today"></div>
-      </div>
-      <div class="corner-actions">
-        <div id="spoiler" class="chip spoiler" title="Click to reveal a hint">
-          Spoiler: Think categories like capitals / rivers.
-        </div>
-        <div class="help" id="help">?</div>
-      </div>
+      <h1>GeoQuads</h1>
+      <div class="sub" id="today"></div>
     </header>
 
     <div id="solved" class="solved"></div>
 
     <div class="panel">
       <div id="grid" class="grid"></div>
-
       <div class="controls">
         <button id="clearBtn">Clear</button>
         <button id="submitBtn" class="primary" disabled>Submit</button>
         <button id="shuffleBtn">Shuffle</button>
       </div>
-
       <div class="status">
         <div id="message" class="msg"></div>
         <div>Mistakes: <span id="mistakes" class="lives">0</span>/4</div>
@@ -41,18 +30,9 @@
 
     <div class="footer">
       <div>⏱️ Next daily in: <span id="countdown">--:--:--</span></div>
-      <div>
-        <span class="linkish" id="practice">Practice</span> ·
-        <span class="linkish" id="archive">Archive</span>
-      </div>
     </div>
   </div>
 
-  <noscript>
-    <p style="padding:12px;color:#b91c1c">JavaScript is required to play GeoQuads.</p>
-  </noscript>
-
-  <!-- cache-buster v=4 + defer -->
-  <script src="assets/app.js?v=4" defer></script>
+  <script src="app.js?v=1" defer></script>
 </body>
 </html>
