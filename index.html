@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>GeoQuads</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      gap: 10px;
+      justify-content: center;
+      margin: 20px auto;
+    }
+    .cell {
+      background: #ecf0f1;
+      border: 2px solid #7f8c8d;
+      padding: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .buttons {
+      margin-top: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>GeoQuads Demo</h1>
+  <p>Σήμερα: 9 Σεπτεμβρίου 2025</p>
+
+  <div class="grid">
+    <div class="cell">Αθήνα</div>
+    <div class="cell">Ρώμη</div>
+    <div class="cell">Λονδίνο</div>
+    <div class="cell">Παρίσι</div>
+    <div class="cell">Νείλος</div>
+    <div class="cell">Αμαζόνιος</div>
+    <div class="cell">Δούναβης</div>
+    <div class="cell">Μισισιπής</div>
+    <div class="cell">Ελβετία</div>
+    <div class="cell">Ελλάδα</div>
+    <div class="cell">Γαλλία</div>
+    <div class="cell">Ιταλία</div>
+    <div class="cell">Άλπεις</div>
+    <div class="cell">Πίνδος</div>
+    <div class="cell">Καύκασος</div>
+    <div class="cell">Ιμαλάια</div>
+  </div>
+
+  <div class="buttons">
+    <button>Clear</button>
+    <button>Submit</button>
+    <button>Shuffle</button>
+  </div>
+</body>
+</html>
