@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>GeoQuads</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="assets/style.css" />
+  <!-- cache-buster v=4 -->
+  <link rel="stylesheet" href="assets/style.css?v=4" />
 </head>
 <body>
   <div class="wrap">
@@ -14,8 +15,8 @@
         <div class="sub" id="today"></div>
       </div>
       <div class="corner-actions">
-        <div id="spoiler" class="chip spoiler" title="Πάτα για υπόνοια">
-          Spoiler: Σκέψου κατηγορίες όπως πρωτεύουσες / ποτάμια.
+        <div id="spoiler" class="chip spoiler" title="Click to reveal a hint">
+          Spoiler: Think categories like capitals / rivers.
         </div>
         <div class="help" id="help">?</div>
       </div>
@@ -34,12 +35,12 @@
 
       <div class="status">
         <div id="message" class="msg"></div>
-        <div>Λάθη: <span id="mistakes" class="lives">0</span>/4</div>
+        <div>Mistakes: <span id="mistakes" class="lives">0</span>/4</div>
       </div>
     </div>
 
     <div class="footer">
-      <div>⏱️ Επόμενο daily σε: <span id="countdown">--:--:--</span></div>
+      <div>⏱️ Next daily in: <span id="countdown">--:--:--</span></div>
       <div>
         <span class="linkish" id="practice">Practice</span> ·
         <span class="linkish" id="archive">Archive</span>
@@ -47,6 +48,11 @@
     </div>
   </div>
 
-  <script src="assets/app.js"></script>
+  <noscript>
+    <p style="padding:12px;color:#b91c1c">JavaScript is required to play GeoQuads.</p>
+  </noscript>
+
+  <!-- cache-buster v=4 + defer -->
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>
