@@ -1,4 +1,4 @@
-// ========= GeoQuads — Template Loader (per-quiz JSON, validated) =========
+// ========= GeoQuads — Template Loader (per-quiz JSON, validated, root paths) =========
 
 // -- State --
 let tiles = [];
@@ -11,6 +11,7 @@ let cfg = null;
 
 // -- Helpers --
 const $ = (id) => document.getElementById(id);
+console.log("GeoQuads app.js loaded");
 
 function shuffleArray(arr) {
   const a = arr.slice();
@@ -33,7 +34,7 @@ function isGameOver() {
 
 // -- Validation (4x4 and unique membership) --
 function normalizeLabel(s) {
-  return String(s).trim(); // keep case-sensitive names, just trim spaces
+  return String(s).trim();
 }
 
 function validateConfig(config) {
@@ -47,11 +48,9 @@ function validateConfig(config) {
       alert(`Invalid group "${g.name || "(no name)"}": must have exactly 4 items.`);
       return false;
     }
-    // trim items in-place
     g.items = g.items.map(normalizeLabel);
     all.push(...g.items);
   }
-  // check duplicates across groups
   const seen = new Set();
   for (const label of all) {
     if (seen.has(label)) {
@@ -63,29 +62,34 @@ function validateConfig(config) {
   return true;
 }
 
-// -- Load per-quiz JSON --
+// -- Load per-quiz JSON (ROOT paths) --
 async function loadQuizConfig() {
-  // 1) ?id=... => quizzes/<id>.json
+  // 1) ?id=foo  -> fetch "foo.json" from root
   const params = new URLSearchParams(location.search);
   const id = params.get("id");
   if (id) {
-    const res = await fetch(`quizzes/${id}.json`);
+    const url = `${id}.json`;
+    const res = await fetch(url);
+    console.log("Trying param quiz:", url, res.status);
     if (res.ok) return res.json();
   }
-  // 2) daily by local date: quizzes/YYYY-MM-DD.json
+
+  // 2) Daily by local date -> fetch "YYYY-MM-DD.json" from root
   const d = new Date();
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth() + 1).padStart(2, "0");
   const dd = String(d.getDate()).padStart(2, "0");
-  const dailyFile = `quizzes/${yyyy}-${mm}-${dd}.json`;
+  const dailyFile = `${yyyy}-${mm}-${dd}.json`;
   const r2 = await fetch(dailyFile);
+  console.log("Trying daily quiz:", dailyFile, r2.status);
   if (r2.ok) return r2.json();
 
-  // 3) fallback
-  const r3 = await fetch("quizzes/practice-easy.json");
+  // 3) Fallback -> "practice-easy.json" in root
+  const r3 = await fetch("practice-easy.json");
+  console.log("Trying fallback quiz: practice-easy.json", r3.status);
   if (r3.ok) return r3.json();
 
-  throw new Error("No suitable quiz JSON found.");
+  throw new Error("No suitable quiz JSON found in root.");
 }
 
 // -- Apply config to UI --
@@ -102,11 +106,13 @@ function applyConfigToUI() {
     );
 
   const spoilerEl = $("spoiler");
-  spoilerEl.textContent = cfg.spoiler || "Spoiler available";
-  spoilerEl.onclick = () => {
-    spoilerEl.classList.toggle("revealed");
-    spoilerEl.classList.toggle("spoiler");
-  };
+  if (spoilerEl) {
+    spoilerEl.textContent = cfg.spoiler || "Spoiler available";
+    spoilerEl.onclick = () => {
+      spoilerEl.classList.toggle("revealed");
+      spoilerEl.classList.toggle("spoiler");
+    };
+  }
 
   MAX_MISTAKES = Number.isInteger(cfg.lives) ? cfg.lives : 4;
   SHOW_ONE_AWAY = cfg.showOneAway !== false;
@@ -146,7 +152,7 @@ function renderGrid() {
   grid.innerHTML = "";
   tiles.forEach((t, idx) => {
     const cell = document.createElement("div");
-    cell.className = "cell" + (selected.has(idx) ? " selected" : "");
+    cell.className = "cell" + (selected.has(idx) ? "selected " : "");
     cell.textContent = t.label;
     cell.tabIndex = 0;
     cell.onclick = () => toggleSelect(idx);
@@ -221,7 +227,6 @@ function isOneAway(chosen) {
 }
 
 function endGame(won) {
-  // reveal all remaining
   cfg.groups.forEach((_, gi) => {
     if (!solvedGroups.has(gi)) solvedGroups.add(gi);
   });
@@ -263,11 +268,9 @@ $("submitBtn").onclick = checkSelection;
 (async function bootstrap() {
   try {
     const loaded = await loadQuizConfig();
-
-    // validate & normalize before using
     if (!validateConfig(loaded)) return;
     cfg = loaded;
-
+    console.log("Loaded quiz config:", cfg.id || "(no id)");
     applyConfigToUI();
     init();
   } catch (e) {
