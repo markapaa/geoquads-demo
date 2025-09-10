@@ -1,4 +1,4 @@
-// ========= GeoQuads — Diagnostic Loader (root JSON paths, with fallback demo) =========
+// ========= GeoQuads — Loader (root JSON paths) =========
 
 // -- State --
 let tiles = [];
@@ -9,7 +9,7 @@ let MAX_MISTAKES = 4;
 let SHOW_ONE_AWAY = true;
 let cfg = null;
 
-// -- Built-in demo (only for diagnostics fallback) --
+// -- Built-in demo (fallback) --
 const BUILTIN_DEMO = {
   id: "builtin-demo",
   title: "GeoQuads — Demo",
@@ -40,6 +40,7 @@ function shuffleArray(arr) {
 }
 function setMessage(text, ok = false) {
   const el = $("message");
+  if (!el) return;
   el.textContent = text || "";
   el.className = "msg" + (ok ? " ok" : "");
 }
@@ -83,63 +84,6 @@ async function tryFetchJSON(url) {
   }
 }
 
-// ---- Switch to a specific quiz by id (e.g., "practice-easy") ----
-async function switchToQuiz(id) {
-  try {
-    const newCfg = await tryFetchJSON(`${id}.json`); // από root
-    validateConfig(newCfg);
-    cfg = newCfg;
-    applyConfigToUI();
-    init();
-    // κάνε το URL shareable
-    history.replaceState(null, "", `?id=${encodeURIComponent(id)}`);
-    setMessage(`Loaded: ${cfg.title || id}`, true);
-  } catch (e) {
-    console.error(e);
-    setMessage(`Couldn't load "${id}": ${e.message}`);
-  }
-}
-// ---- Simple overlay menu for Practice ----
-function ensurePracticeMenu() {
-  let menu = document.getElementById("practiceMenu");
-  if (menu) {
-    menu.classList.toggle("open");
-    return;
-  }
-  menu = document.createElement("div");
-  menu.id = "practiceMenu";
-  menu.innerHTML = `
-    <div class="pmenu">
-      <div style="font-weight:600;margin-bottom:6px;">Choose a practice</div>
-      <button data-id="practice-easy">Practice — Easy</button>
-      <button data-id="practice-hard">Practice — Hard</button>
-      <button class="ghost" data-id="__close">Close</button>
-    </div>
-  `;
-  document.body.appendChild(menu);
-
-  menu.addEventListener("click", (e) => {
-    const id = e.target?.dataset?.id;
-    if (!id) return;
-    if (id === "__close") {
-      menu.classList.remove("open");
-      return;
-    }
-    switchToQuiz(id);
-    menu.classList.remove("open");
-  });
-
-  requestAnimationFrame(() => menu.classList.add("open"));
-}
-
-// Bind the footer links
-const practiceLink = $("practice");
-if (practiceLink) practiceLink.onclick = ensurePracticeMenu;
-
-const archiveLink = $("archive");
-if (archiveLink) archiveLink.onclick = () => { location.search = ""; }; // γυρνά στο daily (ή fallback)
-
-
 async function loadQuizConfig() {
   // 1) ?id=foo  -> foo.json
   const params = new URLSearchParams(location.search);
@@ -159,19 +103,96 @@ async function loadQuizConfig() {
   return await tryFetchJSON("practice-easy.json");
 }
 
+// ---- Practice / Daily helpers ----
+function isPracticeActive() {
+  const id = new URLSearchParams(location.search).get("id");
+  return !!(id && id.startsWith("practice-"));
+}
+function updateDailyLinkVisibility() {
+  const el = $("daily");
+  if (!el) return;
+  el.style.display = isPracticeActive() ? "inline" : "none";
+}
+async function switchToQuiz(id) {
+  try {
+    const newCfg = await tryFetchJSON(`${id}.json`);
+    validateConfig(newCfg);
+    cfg = newCfg;
+    applyConfigToUI();
+    init();
+    history.replaceState(null, "", `?id=${encodeURIComponent(id)}`);
+    setMessage(`Loaded: ${cfg.title || id}`, true);
+  } catch (e) {
+    console.error(e);
+    setMessage(`Couldn't load "${id}": ${e.message}`);
+  }
+  updateDailyLinkVisibility();
+}
+async function switchToDaily() {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  const dailyFile = `${yyyy}-${mm}-${dd}.json`;
+
+  try {
+    const newCfg = await tryFetchJSON(dailyFile);
+    validateConfig(newCfg);
+    cfg = newCfg;
+    applyConfigToUI();
+    init();
+    history.replaceState(null, "", location.pathname); // καθάρισε ?id
+    setMessage(`Back to daily: ${cfg.title || dailyFile}`, true);
+  } catch (e) {
+    console.warn(`Daily not found (${dailyFile}), falling back to practice-easy.`, e.message);
+    await switchToQuiz("practice-easy");
+  }
+  updateDailyLinkVisibility();
+}
+
+// ---- Practice menu ----
+function ensurePracticeMenu() {
+  let menu = document.getElementById("practiceMenu");
+  if (menu) { menu.classList.toggle("open"); return; }
+
+  menu = document.createElement("div");
+  menu.id = "practiceMenu";
+  menu.innerHTML = `
+    <div class="pmenu">
+      <div style="font-weight:600;margin-bottom:6px;">Choose a practice</div>
+      <button data-id="practice-easy">Practice — Easy</button>
+      <button data-id="practice-hard">Practice — Hard</button>
+      <button class="ghost" data-id="__close">Close</button>
+    </div>
+  `;
+  document.body.appendChild(menu);
+
+  menu.addEventListener("click", (e) => {
+    const id = e.target?.dataset?.id;
+    if (!id) return;
+    if (id === "__close") { menu.classList.remove("open"); return; }
+    switchToQuiz(id);
+    menu.classList.remove("open");
+  });
+
+  requestAnimationFrame(() => menu.classList.add("open"));
+}
+
 // -- Apply UI from cfg --
 function applyConfigToUI() {
   document.title = cfg.title || "GeoQuads";
   const locale = cfg.ui?.locale || "en-US";
   const todayStr = new Date().toLocaleDateString(locale);
-  $("today").textContent = `Today: ${todayStr}`;
+  const todayEl = $("today"); if (todayEl) todayEl.textContent = `Today: ${todayStr}`;
 
-  $("help").onclick = () =>
-    alert(
-      cfg.help ||
-      "Rules:\n• 16 items → 4 categories × 4 items.\n• Select 4 and press Submit.\n• You have 4 mistakes.\n• 'One away' means 3/4 are correct."
-    );
-
+  const helpEl = $("help");
+  if (helpEl) {
+    helpEl.onclick = () =>
+      alert(
+        cfg.help ||
+        "Rules:\n• 16 items → 4 categories × 4 items.\n• Select 4 and press Submit.\n• You have 4 mistakes.\n• 'One away' means 3/4 are correct."
+      );
+  }
   const spoilerEl = $("spoiler");
   if (spoilerEl) {
     spoilerEl.textContent = cfg.spoiler || "Spoiler available";
@@ -188,6 +209,8 @@ function applyConfigToUI() {
     document.documentElement.style.setProperty("--accent", cfg.ui.accent);
     document.documentElement.style.setProperty("--accent-weak", "#e0e7ff");
   }
+
+  updateDailyLinkVisibility();
 }
 
 // -- Build / render --
@@ -196,9 +219,9 @@ function buildTiles() {
   cfg.groups.forEach((g, gi) => g.items.forEach((label, idx) => base.push({ label, groupIndex: gi, id: `${gi}-${idx}` })));
   return shuffleArray(base);
 }
-
 function renderSolvedBars() {
   const container = $("solved");
+  if (!container) return;
   container.innerHTML = "";
   [...solvedGroups].forEach((gi) => {
     const g = cfg.groups[gi];
@@ -209,9 +232,9 @@ function renderSolvedBars() {
     container.appendChild(bar);
   });
 }
-
 function renderGrid() {
   const grid = $("grid");
+  if (!grid) return;
   grid.innerHTML = "";
   tiles.forEach((t, idx) => {
     const cell = document.createElement("div");
@@ -229,10 +252,11 @@ function renderGrid() {
   });
   updateSubmitState();
 }
-
 function updateSubmitState() {
-  $("submitBtn").disabled = selected.size !== 4 || isGameOver();
-  $("mistakes").textContent = mistakes;
+  const btn = $("submitBtn");
+  if (btn) btn.disabled = selected.size !== 4 || isGameOver();
+  const livesEl = $("mistakes");
+  if (livesEl) livesEl.textContent = mistakes;
 }
 
 // -- Game logic --
@@ -284,6 +308,7 @@ function endGame(won) {
 
 // -- Countdown --
 function updateCountdown() {
+  const el = $("countdown"); if (!el) return;
   const now = new Date();
   const nextMidnight = new Date(now);
   nextMidnight.setHours(24, 0, 0, 0);
@@ -291,7 +316,7 @@ function updateCountdown() {
   const h = String(Math.floor(diff / 3600000)).padStart(2, "0");
   const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
   const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
-  $("countdown").textContent = `${h}:${m}:${s}`;
+  el.textContent = `${h}:${m}:${s}`;
 }
 setInterval(updateCountdown, 1000);
 updateCountdown();
@@ -306,9 +331,21 @@ function init() {
   renderGrid();
   setMessage("");
 }
-$("clearBtn").onclick = clearSelection;
-$("shuffleBtn").onclick = shuffleTiles;
-$("submitBtn").onclick = checkSelection;
+
+// Bind controls & footer links
+const practiceLink = $("practice");
+if (practiceLink) practiceLink.onclick = ensurePracticeMenu;
+const archiveLink = $("archive");
+if (archiveLink) archiveLink.onclick = () => { location.search = ""; }; // back to daily route
+const dailyLink = $("daily");
+if (dailyLink) dailyLink.onclick = switchToDaily;
+
+const clearBtn = $("clearBtn");
+if (clearBtn) clearBtn.onclick = clearSelection;
+const shuffleBtn = $("shuffleBtn");
+if (shuffleBtn) shuffleBtn.onclick = shuffleTiles;
+const submitBtn = $("submitBtn");
+if (submitBtn) submitBtn.onclick = checkSelection;
 
 // -- Bootstrap --
 (async function bootstrap() {
@@ -321,7 +358,6 @@ $("submitBtn").onclick = checkSelection;
     init();
   } catch (e) {
     console.error(e);
-    // Show the exact error on screen + load demo so the UI works
     setMessage(String(e.message));
     console.warn("Falling back to BUILTIN_DEMO");
     cfg = BUILTIN_DEMO;
@@ -335,4 +371,3 @@ $("submitBtn").onclick = checkSelection;
     }
   }
 })();
-
