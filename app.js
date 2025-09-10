@@ -83,6 +83,63 @@ async function tryFetchJSON(url) {
   }
 }
 
+// ---- Switch to a specific quiz by id (e.g., "practice-easy") ----
+async function switchToQuiz(id) {
+  try {
+    const newCfg = await tryFetchJSON(`${id}.json`); // από root
+    validateConfig(newCfg);
+    cfg = newCfg;
+    applyConfigToUI();
+    init();
+    // κάνε το URL shareable
+    history.replaceState(null, "", `?id=${encodeURIComponent(id)}`);
+    setMessage(`Loaded: ${cfg.title || id}`, true);
+  } catch (e) {
+    console.error(e);
+    setMessage(`Couldn't load "${id}": ${e.message}`);
+  }
+}
+// ---- Simple overlay menu for Practice ----
+function ensurePracticeMenu() {
+  let menu = document.getElementById("practiceMenu");
+  if (menu) {
+    menu.classList.toggle("open");
+    return;
+  }
+  menu = document.createElement("div");
+  menu.id = "practiceMenu";
+  menu.innerHTML = `
+    <div class="pmenu">
+      <div style="font-weight:600;margin-bottom:6px;">Choose a practice</div>
+      <button data-id="practice-easy">Practice — Easy</button>
+      <button data-id="practice-hard">Practice — Hard</button>
+      <button class="ghost" data-id="__close">Close</button>
+    </div>
+  `;
+  document.body.appendChild(menu);
+
+  menu.addEventListener("click", (e) => {
+    const id = e.target?.dataset?.id;
+    if (!id) return;
+    if (id === "__close") {
+      menu.classList.remove("open");
+      return;
+    }
+    switchToQuiz(id);
+    menu.classList.remove("open");
+  });
+
+  requestAnimationFrame(() => menu.classList.add("open"));
+}
+
+// Bind the footer links
+const practiceLink = $("practice");
+if (practiceLink) practiceLink.onclick = ensurePracticeMenu;
+
+const archiveLink = $("archive");
+if (archiveLink) archiveLink.onclick = () => { location.search = ""; }; // γυρνά στο daily (ή fallback)
+
+
 async function loadQuizConfig() {
   // 1) ?id=foo  -> foo.json
   const params = new URLSearchParams(location.search);
@@ -278,3 +335,4 @@ $("submitBtn").onclick = checkSelection;
     }
   }
 })();
+
