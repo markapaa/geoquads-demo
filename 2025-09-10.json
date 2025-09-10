@@ -7,9 +7,10 @@
   "showOneAway": true,
   "groups": [
     { "name": "Longest coastlines", "items": ["Norway","Canada","Indonesia","Russia"], "color": "#E8FFF3" },
-    { "name": "Capitals starting with W", "items": ["Warsaw","Wellington","Windhoek","Washington"], "color": "#E8F1FF" },
+    { "name": "Capitals starting with W", "items": ["Poland","New Zealand","Namibia","USA"], "color": "#E8F1FF" },
     { "name": "Portuguese speaking", "items": ["Angola","Mozambique","Brazil","Portugal"], "color": "#FFF7E6" },
     { "name": "Countries in the Andes", "items": ["Argentina","Bolivia","Chile","Colombia"], "color": "#FFECEC" }
   ],
   "ui": { "accent": "#4F46E5", "locale": "el-GR" }
 }
+
