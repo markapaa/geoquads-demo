@@ -32,6 +32,41 @@
     .footer{margin-top:14px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
     .linkish{color:var(--accent);text-decoration:underline;cursor:pointer}
     @media (max-width:520px){.grid{grid-template-columns:repeat(2,1fr)}}
+    #practiceMenu {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.15);
+  z-index: 50;
+}
+#practiceMenu.open { display: flex; }
+#practiceMenu .pmenu {
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  min-width: 260px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+#practiceMenu .pmenu button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #e5e7eb);
+  background: var(--card, #fff);
+  cursor: pointer;
+}
+#practiceMenu .pmenu button:hover {
+  background: var(--accent-weak, #e0e7ff);
+}
+#practiceMenu .pmenu .ghost {
+  background: transparent;
+}
+
   </style>
 </head>
 <body>
@@ -78,3 +113,4 @@
   <script src="app.js?v=9" defer></script>
 </body>
 </html>
+
