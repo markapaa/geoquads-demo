@@ -6,26 +6,10 @@
   "lives": 4,
   "showOneAway": true,
   "groups": [
-    {
-      "name": "Landlocked countries",
-      "items": ["Nepal", "Bolivia", "Switzerland", "Ethiopia"],
-      "color": "#F0EFFF"
-    },
-    {
-      "name": "Capitals starting with B",
-      "items": ["Brussels", "Brasilia", "Bangkok", "Budapest"],
-      "color": "#FFF2E8"
-    },
-    {
-      "name": "Largest islands (by area)",
-      "items": ["Greenland", "New Guinea", "Borneo", "Madagascar"],
-      "color": "#E6FFF5"
-    },
-    {
-      "name": "Countries crossed by the Equator",
-      "items": ["Ecuador", "Colombia", "Kenya", "Indonesia"],
-      "color": "#FFECEC"
-    }
+    { "name": "Landlocked countries", "items": ["Nepal", "Bolivia", "Switzerland", "Ethiopia"] },
+    { "name": "Capitals starting with B", "items": ["Brussels", "Brasilia", "Bangkok", "Budapest"] },
+    { "name": "Largest islands (by area)", "items": ["Greenland", "New Guinea", "Borneo", "Madagascar"] },
+    { "name": "Countries crossed by the Equator", "items": ["Ecuador", "Colombia", "Kenya", "Indonesia"] }
   ],
   "ui": { "accent": "#4F46E5", "locale": "en-US" }
 }
