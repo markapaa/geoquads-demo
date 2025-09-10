@@ -63,33 +63,35 @@ function validateConfig(config) {
 }
 
 // -- Load per-quiz JSON (ROOT paths) --
+async function tryFetchJSON(url) {
+  const res = await fetch(url);
+  console.log("fetch", url, res.status);
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+  try {
+    return await res.json();
+  } catch (e) {
+    throw new Error(`JSON parse error for ${url}: ${e.message}`);
+  }
+}
+
 async function loadQuizConfig() {
-  // 1) ?id=foo  -> fetch "foo.json" from root
   const params = new URLSearchParams(location.search);
   const id = params.get("id");
   if (id) {
-    const url = `${id}.json`;
-    const res = await fetch(url);
-    console.log("Trying param quiz:", url, res.status);
-    if (res.ok) return res.json();
+    try { return await tryFetchJSON(`${id}.json`); }
+    catch (e) { console.warn(e.message); }
   }
 
-  // 2) Daily by local date -> fetch "YYYY-MM-DD.json" from root
   const d = new Date();
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth() + 1).padStart(2, "0");
   const dd = String(d.getDate()).padStart(2, "0");
-  const dailyFile = `${yyyy}-${mm}-${dd}.json`;
-  const r2 = await fetch(dailyFile);
-  console.log("Trying daily quiz:", dailyFile, r2.status);
-  if (r2.ok) return r2.json();
 
-  // 3) Fallback -> "practice-easy.json" in root
-  const r3 = await fetch("practice-easy.json");
-  console.log("Trying fallback quiz: practice-easy.json", r3.status);
-  if (r3.ok) return r3.json();
+  try { return await tryFetchJSON(`${yyyy}-${mm}-${dd}.json`); }
+  catch (e) { console.warn(e.message); }
 
-  throw new Error("No suitable quiz JSON found in root.");
+  // fallback (θα ρίξει σαφές error αν αποτύχει)
+  return await tryFetchJSON("practice-easy.json");
 }
 
 // -- Apply config to UI --
@@ -152,7 +154,7 @@ function renderGrid() {
   grid.innerHTML = "";
   tiles.forEach((t, idx) => {
     const cell = document.createElement("div");
-    cell.className = "cell" + (selected.has(idx) ? "selected " : "");
+    cell.className = "cell" + (selected.has(idx) ? " selected" : "");
     cell.textContent = t.label;
     cell.tabIndex = 0;
     cell.onclick = () => toggleSelect(idx);
@@ -260,6 +262,7 @@ function init() {
   setMessage("");
 }
 
+// Bind controls
 $("clearBtn").onclick = clearSelection;
 $("shuffleBtn").onclick = shuffleTiles;
 $("submitBtn").onclick = checkSelection;
