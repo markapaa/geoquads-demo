@@ -114,6 +114,7 @@ function updateDailyLinkVisibility() {
   el.style.display = isPracticeActive() ? "inline" : "none";
 }
 async function switchToQuiz(id) {
+  document.body.classList.add("loading");
   try {
     const newCfg = await tryFetchJSON(`${id}.json`);
     validateConfig(newCfg);
@@ -125,10 +126,13 @@ async function switchToQuiz(id) {
   } catch (e) {
     console.error(e);
     setMessage(`Couldn't load "${id}": ${e.message}`);
+  } finally {
+    document.body.classList.remove("loading");
   }
   updateDailyLinkVisibility();
 }
 async function switchToDaily() {
+  document.body.classList.add("loading");
   const d = new Date();
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth() + 1).padStart(2, "0");
@@ -146,6 +150,8 @@ async function switchToDaily() {
   } catch (e) {
     console.warn(`Daily not found (${dailyFile}), falling back to practice-easy.`, e.message);
     await switchToQuiz("practice-easy");
+  } finally {
+    document.body.classList.remove("loading");
   }
   updateDailyLinkVisibility();
 }
@@ -205,6 +211,10 @@ function applyConfigToUI() {
   MAX_MISTAKES = Number.isInteger(cfg.lives) ? cfg.lives : 4;
   SHOW_ONE_AWAY = cfg.showOneAway !== false;
 
+  // ενημέρωσε δυναμικά το max lives στο UI
+  const maxLivesEl = $("maxLives");
+  if (maxLivesEl) maxLivesEl.textContent = MAX_MISTAKES;
+
   if (cfg.ui?.accent) {
     document.documentElement.style.setProperty("--accent", cfg.ui.accent);
     document.documentElement.style.setProperty("--accent-weak", "#e0e7ff");
@@ -241,6 +251,8 @@ function renderGrid() {
     cell.className = "cell" + (selected.has(idx) ? " selected" : "");
     cell.textContent = t.label;
     cell.tabIndex = 0;
+    cell.setAttribute("role", "button");
+    cell.setAttribute("aria-pressed", selected.has(idx) ? "true" : "false");
     cell.onclick = () => toggleSelect(idx);
     cell.onkeydown = (e) => {
       if (e.key === " " || e.key === "Enter") {
@@ -253,8 +265,17 @@ function renderGrid() {
   updateSubmitState();
 }
 function updateSubmitState() {
+  const isOver = isGameOver();
+
   const btn = $("submitBtn");
-  if (btn) btn.disabled = selected.size !== 4 || isGameOver();
+  if (btn) btn.disabled = selected.size !== 4 || isOver;
+
+  const clearBtn = $("clearBtn");
+  if (clearBtn) clearBtn.disabled = isOver;
+
+  const shuffleBtn = $("shuffleBtn");
+  if (shuffleBtn) shuffleBtn.disabled = isOver;
+
   const livesEl = $("mistakes");
   if (livesEl) livesEl.textContent = mistakes;
 }
