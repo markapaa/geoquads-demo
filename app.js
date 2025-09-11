@@ -1,4 +1,33 @@
-// ========= GeoQuads — Loader (root JSON paths) =========
+// ========= GeoQuads — Loader with Archive Navigation (root JSON paths) =========
+
+// -- Constants for Archive --
+const FIRST_DAILY = new Date(2025, 8, 10); // 2025-09-10  (μήνες 0-based)
+function ymd(d) {
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+function todayStr() { return ymd(new Date()); }
+function yesterdayStr() {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return ymd(d);
+}
+function strToDate(s) {
+  const [Y,M,D] = s.split("-").map(Number);
+  return new Date(Y, M-1, D);
+}
+function clampArchiveBounds(dateStr) {
+  // returns { hasPrev, hasNext } respecting FIRST_DAILY..yesterday
+  const d = strToDate(dateStr);
+  const first = FIRST_DAILY;
+  const last = strToDate(yesterdayStr());
+  return {
+    hasPrev: d > first,
+    hasNext: d < last
+  };
+}
 
 // -- State --
 let tiles = [];
@@ -84,42 +113,117 @@ async function tryFetchJSON(url) {
   }
 }
 
-async function loadQuizConfig() {
-  // 1) ?id=foo  -> foo.json
-  const params = new URLSearchParams(location.search);
-  const id = params.get("id");
-  if (id) {
-    try { return await tryFetchJSON(`${id}.json`); }
-    catch (e) { console.warn(e.message); }
-  }
-  // 2) daily -> YYYY-MM-DD.json
-  const d = new Date();
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
-  try { return await tryFetchJSON(`${yyyy}-${mm}-${dd}.json`); }
-  catch (e) { console.warn(e.message); }
-  // 3) fallback -> practice-easy.json (will throw if fails)
-  return await tryFetchJSON("practice-easy.json");
-}
-
-// ---- Practice / Daily helpers ----
+// ---- Practice / Daily / Archive helpers ----
 function isPracticeActive() {
   const id = new URLSearchParams(location.search).get("id");
   return !!(id && id.startsWith("practice-"));
 }
+function activeArchiveDate() {
+  const d = new URLSearchParams(location.search).get("date");
+  return d || null;
+}
+function isArchiveActive() {
+  return !!activeArchiveDate();
+}
 function updateDailyLinkVisibility() {
   const el = $("daily");
   if (!el) return;
-  el.style.display = isPracticeActive() ? "inline" : "none";
+  el.style.display = (isPracticeActive() || isArchiveActive()) ? "inline" : "none";
 }
+
+// Create nav bar for archive (Prev | DateLabel | Next)
+function ensureDayNav() {
+  let nav = $("dayNav");
+  if (nav) return nav;
+  const header = document.querySelector("header");
+  nav = document.createElement("div");
+  nav.id = "dayNav";
+  nav.innerHTML = `
+    <div id="prevDay" class="linkish" style="visibility:hidden;cursor:pointer;">◀ Previous</div>
+    <div id="dayLabel" class="sub"></div>
+    <div id="nextDay" class="linkish" style="visibility:hidden;cursor:pointer;">Next ▶</div>
+  `;
+  // basic styling via JS (χωρίς να πειράξουμε το CSS αρχείο)
+  nav.style.display = "none";
+  nav.style.margin = "6px 0 10px";
+  nav.style.display = "grid";
+  nav.style.gridTemplateColumns = "1fr auto 1fr";
+  nav.style.alignItems = "center";
+  nav.style.gap = "8px";
+
+  // place under header
+  header.parentNode.insertBefore(nav, header.nextSibling);
+
+  // bind once (handlers will compute next/prev each time)
+  $("prevDay").onclick = () => {
+    const cur = activeArchiveDate();
+    if (!cur) return;
+    const d = strToDate(cur);
+    d.setDate(d.getDate() - 1);
+    const candidate = ymd(d);
+    goToArchiveDate(candidate);
+  };
+  $("nextDay").onclick = () => {
+    const cur = activeArchiveDate();
+    if (!cur) return;
+    const d = strToDate(cur);
+    d.setDate(d.getDate() + 1);
+    const candidate = ymd(d);
+    goToArchiveDate(candidate);
+  };
+
+  return nav;
+}
+function updateDayNav(dateStr) {
+  const nav = ensureDayNav();
+  const prevBtn = $("prevDay");
+  const nextBtn = $("nextDay");
+  const label = $("dayLabel");
+
+  if (!dateStr) { // not in archive
+    nav.style.display = "none";
+    return;
+  }
+  // show nav + compute bounds
+  nav.style.display = "grid";
+  const { hasPrev, hasNext } = clampArchiveBounds(dateStr);
+  prevBtn.style.visibility = hasPrev ? "visible" : "hidden";
+  nextBtn.style.visibility = hasNext ? "visible" : "hidden";
+  label.textContent = `Daily: ${dateStr}`;
+}
+async function goToArchiveDate(dateStr) {
+  // clamp to valid archive bounds
+  const first = ymd(FIRST_DAILY);
+  const last = yesterdayStr();
+  if (dateStr < first) dateStr = first;
+  if (dateStr > last) dateStr = last;
+
+  document.body.classList.add("loading");
+  try {
+    const newCfg = await tryFetchJSON(`${dateStr}.json`);
+    validateConfig(newCfg);
+    cfg = newCfg;
+    applyConfigToUI(dateStr); // pass date override to show in header
+    init();
+    history.replaceState(null, "", `?date=${encodeURIComponent(dateStr)}`);
+    setMessage(`Loaded archive daily: ${dateStr}`, true);
+  } catch (e) {
+    console.error(e);
+    setMessage(`Couldn't load daily ${dateStr}: ${e.message}`);
+  } finally {
+    document.body.classList.remove("loading");
+  }
+  updateDailyLinkVisibility();
+  updateDayNav(dateStr);
+}
+
 async function switchToQuiz(id) {
   document.body.classList.add("loading");
   try {
     const newCfg = await tryFetchJSON(`${id}.json`);
     validateConfig(newCfg);
     cfg = newCfg;
-    applyConfigToUI();
+    applyConfigToUI(null); // not archive
     init();
     history.replaceState(null, "", `?id=${encodeURIComponent(id)}`);
     setMessage(`Loaded: ${cfg.title || id}`, true);
@@ -130,22 +234,18 @@ async function switchToQuiz(id) {
     document.body.classList.remove("loading");
   }
   updateDailyLinkVisibility();
+  updateDayNav(null);
 }
 async function switchToDaily() {
   document.body.classList.add("loading");
-  const d = new Date();
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
-  const dailyFile = `${yyyy}-${mm}-${dd}.json`;
-
+  const dailyFile = `${todayStr()}.json`;
   try {
     const newCfg = await tryFetchJSON(dailyFile);
     validateConfig(newCfg);
     cfg = newCfg;
-    applyConfigToUI();
+    applyConfigToUI(null);
     init();
-    history.replaceState(null, "", location.pathname); // καθάρισε ?id
+    history.replaceState(null, "", location.pathname); // καθάρισε ?id / ?date
     setMessage(`Back to daily: ${cfg.title || dailyFile}`, true);
   } catch (e) {
     console.warn(`Daily not found (${dailyFile}), falling back to practice-easy.`, e.message);
@@ -154,42 +254,49 @@ async function switchToDaily() {
     document.body.classList.remove("loading");
   }
   updateDailyLinkVisibility();
+  updateDayNav(null);
 }
 
-// ---- Practice menu ----
-function ensurePracticeMenu() {
-  let menu = document.getElementById("practiceMenu");
-  if (menu) { menu.classList.toggle("open"); return; }
+// -- Loader (id/date/auto) --
+async function loadQuizConfig() {
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+  const dateParam = params.get("date");
 
-  menu = document.createElement("div");
-  menu.id = "practiceMenu";
-  menu.innerHTML = `
-    <div class="pmenu">
-      <div style="font-weight:600;margin-bottom:6px;">Choose a practice</div>
-      <button data-id="practice-easy">Practice — Easy</button>
-      <button data-id="practice-hard">Practice — Hard</button>
-      <button class="ghost" data-id="__close">Close</button>
-    </div>
-  `;
-  document.body.appendChild(menu);
+  // 1) Practice by id
+  if (id) {
+    try { return await tryFetchJSON(`${id}.json`); }
+    catch (e) { console.warn(e.message); }
+  }
 
-  menu.addEventListener("click", (e) => {
-    const id = e.target?.dataset?.id;
-    if (!id) return;
-    if (id === "__close") { menu.classList.remove("open"); return; }
-    switchToQuiz(id);
-    menu.classList.remove("open");
-  });
+  // 2) Archive by ?date=YYYY-MM-DD
+  if (dateParam) {
+    try { return await tryFetchJSON(`${dateParam}.json`); }
+    catch (e) { console.warn(e.message); }
+  }
 
-  requestAnimationFrame(() => menu.classList.add("open"));
+  // 3) Today daily
+  try { return await tryFetchJSON(`${todayStr()}.json`); }
+  catch (e) { console.warn(e.message); }
+
+  // 4) Fallback
+  return await tryFetchJSON("practice-easy.json");
 }
 
 // -- Apply UI from cfg --
-function applyConfigToUI() {
+function applyConfigToUI(archiveDateStr = null) {
   document.title = cfg.title || "GeoQuads";
   const locale = cfg.ui?.locale || "en-US";
-  const todayStr = new Date().toLocaleDateString(locale);
-  const todayEl = $("today"); if (todayEl) todayEl.textContent = `Today: ${todayStr}`;
+
+  // Header subtitle: show either "Today: ..." or "Daily: YYYY-MM-DD"
+  const todayEl = $("today");
+  if (todayEl) {
+    if (archiveDateStr) {
+      todayEl.textContent = `Daily: ${archiveDateStr}`;
+    } else {
+      todayEl.textContent = `Today: ${new Date().toLocaleDateString(locale)}`;
+    }
+  }
 
   const helpEl = $("help");
   if (helpEl) {
@@ -211,7 +318,7 @@ function applyConfigToUI() {
   MAX_MISTAKES = Number.isInteger(cfg.lives) ? cfg.lives : 4;
   SHOW_ONE_AWAY = cfg.showOneAway !== false;
 
-  // ενημέρωσε δυναμικά το max lives στο UI
+  // δυναμικά max lives
   const maxLivesEl = $("maxLives");
   if (maxLivesEl) maxLivesEl.textContent = MAX_MISTAKES;
 
@@ -221,12 +328,15 @@ function applyConfigToUI() {
   }
 
   updateDailyLinkVisibility();
+  updateDayNav(archiveDateStr);
 }
 
 // -- Build / render --
 function buildTiles() {
   const base = [];
-  cfg.groups.forEach((g, gi) => g.items.forEach((label, idx) => base.push({ label, groupIndex: gi, id: `${gi}-${idx}` })));
+  cfg.groups.forEach((g, gi) =>
+    g.items.forEach((label, idx) => base.push({ label, groupIndex: gi, id: `${gi}-${idx}` }))
+  );
   return shuffleArray(base);
 }
 function renderSolvedBars() {
@@ -357,7 +467,7 @@ function init() {
 const practiceLink = $("practice");
 if (practiceLink) practiceLink.onclick = ensurePracticeMenu;
 const archiveLink = $("archive");
-if (archiveLink) archiveLink.onclick = () => { location.search = ""; }; // back to daily route
+if (archiveLink) archiveLink.onclick = () => { goToArchiveDate(yesterdayStr()); }; // κατευθείαν στη χθεσινή
 const dailyLink = $("daily");
 if (dailyLink) dailyLink.onclick = switchToDaily;
 
@@ -371,12 +481,23 @@ if (submitBtn) submitBtn.onclick = checkSelection;
 // -- Bootstrap --
 (async function bootstrap() {
   try {
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id");
+    const dateParam = params.get("date");
+
     const loaded = await loadQuizConfig();
     validateConfig(loaded);
     cfg = loaded;
-    console.log("Loaded quiz config:", cfg.id || "(no id)");
-    applyConfigToUI();
+
+    // apply UI with proper “date” label if archive
+    applyConfigToUI(dateParam || null);
     init();
+
+    // show nav state (if archive)
+    updateDayNav(dateParam || null);
+    updateDailyLinkVisibility();
+
+    console.log("Loaded quiz config:", cfg.id || "(no id)");
   } catch (e) {
     console.error(e);
     setMessage(String(e.message));
@@ -384,8 +505,9 @@ if (submitBtn) submitBtn.onclick = checkSelection;
     cfg = BUILTIN_DEMO;
     try {
       validateConfig(cfg);
-      applyConfigToUI();
+      applyConfigToUI(null);
       init();
+      updateDayNav(null);
     } catch (ee) {
       console.error("BUILTIN_DEMO failed:", ee);
       alert("Fatal error: demo config invalid.");
