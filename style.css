@@ -45,8 +45,14 @@ h1 {
 .chip.spoiler { filter: blur(3px); }
 .chip.revealed { filter: none; background: var(--accent-weak); }
 .help {
-  cursor: pointer; padding: 6px 10px; border-radius: 999px;
-  border: 1px solid var(--border); background: var(--card);
+  cursor: pointer;
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: bold;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--card);
+  margin-left: auto; /* το σπρώχνει δεξιά */
 }
 
 /* Panel & solved bars */
@@ -192,5 +198,6 @@ h1 {
   user-select: none;
 }
 .heart.empty { color: #e5e7eb; }
+
 
 
