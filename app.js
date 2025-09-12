@@ -116,12 +116,13 @@ function ensureDayNav(){
   const header=document.querySelector("header");
   nav=document.createElement("div"); nav.id="dayNav";
   nav.innerHTML = `
-    <div id="dayLabel" class="sub" style="text-align:center;"></div>
-    <div style="display:flex; gap:12px; justify-content:center;">
-      <div id="prevDay" class="linkish" style="cursor:pointer;">◀ Previous</div>
-      <div id="nextDay" class="linkish" style="cursor:pointer;">Next ▶</div>
-    </div>
+    <div id="prevDay" class="linkish" style="cursor:pointer; margin-right:8px;">◀ Previous</div>
+    <div id="dayLabel" class="sub"></div>
+    <div id="nextDay" class="linkish" style="cursor:pointer; margin-left:8px;">Next ▶</div>
   `;
+  nav.style.display = "flex";
+  nav.style.justifyContent = "center";
+  nav.style.alignItems = "center";
 
   nav.style.margin="6px 0 10px"; nav.style.display="grid";
   nav.style.gridTemplateColumns="1fr auto 1fr"; nav.style.alignItems="center"; nav.style.gap="8px";
@@ -445,4 +446,5 @@ function bindUI(){
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
 
