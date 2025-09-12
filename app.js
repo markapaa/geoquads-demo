@@ -165,12 +165,30 @@ async function loadQuizConfig(){
 
 // -- Practice Menu --
 function ensurePracticeMenu(){
-  let menu=document.getElementById("practiceMenu");
-  if(menu){ menu.classList.toggle("open"); return; }
+  let menu = document.getElementById("practiceMenu");
 
-  menu=document.createElement("div");
-  menu.id="practiceMenu";
-  menu.innerHTML=`
+  // helper για show/hide
+  const show = () => { if (menu) menu.style.display = "flex"; };
+  const hide = () => { if (menu) menu.style.display = "none"; };
+
+  if (menu) {
+    // toggle ορατότητας
+    menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "flex" : "none";
+    return;
+  }
+
+  // Δημιουργία overlay
+  menu = document.createElement("div");
+  menu.id = "practiceMenu";
+  menu.style.position = "fixed";
+  menu.style.inset = "0";
+  menu.style.display = "none";           // <-- αρχικά κρυφό
+  menu.style.alignItems = "center";
+  menu.style.justifyContent = "center";
+  menu.style.background = "rgba(0,0,0,0.15)";
+  menu.style.zIndex = "50";
+
+  menu.innerHTML = `
     <div class="pmenu">
       <div style="font-weight:600;margin-bottom:6px;">Choose a practice</div>
       <button data-id="practice-easy">Practice — Easy</button>
@@ -180,25 +198,48 @@ function ensurePracticeMenu(){
   `;
   document.body.appendChild(menu);
 
-  // Inline basic styles (αν δεν υπάρχουν στο CSS)
-  menu.style.position="fixed"; menu.style.inset="0"; menu.style.display="flex";
-  menu.style.alignItems="center"; menu.style.justifyContent="center";
-  menu.style.background="rgba(0,0,0,0.15)"; menu.style.zIndex="50";
-  const box=menu.querySelector(".pmenu");
-  box.style.background="#fff"; box.style.border="1px solid #e5e7eb";
-  box.style.borderRadius="12px"; box.style.padding="16px";
-  box.style.display="flex"; box.style.gap="8px"; box.style.flexDirection="column";
-  box.style.minWidth="260px"; box.style.boxShadow="0 10px 24px rgba(0,0,0,0.08)";
-  const btns=box.querySelectorAll("button"); btns.forEach(b=>{ b.style.padding="10px 14px"; b.style.borderRadius="10px"; b.style.border="1px solid #e5e7eb"; b.style.background="#fff"; b.style.cursor="pointer"; b.onmouseover=()=>b.style.background="#e0e7ff"; b.onmouseout=()=>b.style.background="#fff"; });
+  // Στυλ κουτιού
+  const box = menu.querySelector(".pmenu");
+  box.style.background = "#fff";
+  box.style.border = "1px solid #e5e7eb";
+  box.style.borderRadius = "12px";
+  box.style.padding = "16px";
+  box.style.display = "flex";
+  box.style.gap = "8px";
+  box.style.flexDirection = "column";
+  box.style.minWidth = "260px";
+  box.style.boxShadow = "0 10px 24px rgba(0,0,0,0.08)";
 
-  menu.addEventListener("click",(e)=>{
-    const id=e.target?.dataset?.id;
-    if(!id) return;
-    if(id==="__close"){ menu.classList.remove("open"); return; }
-    switchToQuiz(id);
-    menu.classList.remove("open");
+  const btns = box.querySelectorAll("button");
+  btns.forEach(b => {
+    b.style.padding = "10px 14px";
+    b.style.borderRadius = "10px";
+    b.style.border = "1px solid #e5e7eb";
+    b.style.background = "#fff";
+    b.style.cursor = "pointer";
+    b.onmouseover = () => b.style.background = "#e0e7ff";
+    b.onmouseout  = () => b.style.background = "#fff";
   });
+
+  // Κλείσιμο με click εκτός pmenu
+  menu.addEventListener("click", (e) => {
+    if (e.target === menu) hide();
+  });
+
+  // Clicks στα κουμπιά
+  menu.addEventListener("click", (e) => {
+    const id = e.target?.dataset?.id;
+    if (!id) return;
+    if (id === "__close") { hide(); return; }
+    // Επιλογή practice -> φόρτωσε και κλείσε
+    switchToQuiz(id);
+    hide();
+  });
+
+  // άνοιξε τώρα
+  show();
 }
+
 
 // -- Apply UI from cfg --
 function applyConfigToUI(archiveDateStr=null){
@@ -353,3 +394,4 @@ const submitBtn=$("submitBtn"); if(submitBtn) submitBtn.onclick=checkSelection;
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
