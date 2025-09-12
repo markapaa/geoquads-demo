@@ -1,12 +1,12 @@
-// ========= GeoQuads — Polished Loader (Practice / Daily / Archive + UX polish) =========
+// ========= GeoQuads — Local-Timezone Loader (Practice / Daily / Archive + UX polish) =========
 
-// -- Archive constants --
-const FIRST_DAILY = new Date(2025, 8, 10); // 2025-09-10 (0-based month)
+// -- Archive constants (first daily available) --
+const FIRST_DAILY = new Date(2025, 8, 10); // 2025-09-10 (0-based month: 8=September)
 function ymd(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");return `${y}-${m}-${day}`;}
 function todayStr(){return ymd(new Date());}
-function yesterdayStr(){const d=new Date();d.setDate(d.getDate()-1);return ymd(d);}
-function strToDate(s){const [Y,M,D]=s.split("-").map(Number);return new Date(Y,M-1,D);}
-function clampArchiveBounds(dateStr){const d=strToDate(dateStr), first=FIRST_DAILY, last=strToDate(yesterdayStr());return {hasPrev:d>first, hasNext:d<last};}
+function yesterdayStr(){const d=new Date(); d.setDate(d.getDate()-1); return ymd(d);}
+function strToDate(s){const [Y,M,D]=s.split("-").map(Number); return new Date(Y, M-1, D);}
+function clampArchiveBounds(dateStr){const d=strToDate(dateStr), first=FIRST_DAILY, last=strToDate(yesterdayStr()); return {hasPrev:d>first, hasNext:d<last};}
 
 // -- State --
 let tiles=[]; let selected=new Set(); let solvedGroups=new Set();
@@ -22,26 +22,26 @@ const BUILTIN_DEMO={
     {name:"Landlocked countries",items:["Nepal","Bolivia","Switzerland","Ethiopia"]},
     {name:"Capitals starting with B",items:["Brussels","Brasilia","Bangkok","Budapest"]},
     {name:"Largest islands (by area)",items:["Greenland","New Guinea","Borneo","Madagascar"]},
-    {name:"Countries crossed by the Equator",items:["Ecuador","Colombia","Kenya","Indonesia"]}
+    {name:"Countries crossed by the Equator",items:["Ecuador","Colombia","Kenya","Indonesia"]},
   ],
-  ui:{accent:"#4F46E5",locale:"en-US"}
+  ui:{accent:"#4F46E5",locale:"en-US"},
 };
 
 // -- Helpers --
 const $=(id)=>document.getElementById(id);
-console.log("GeoQuads app.js loaded");
+console.log("GeoQuads app.js (local-timezone) loaded");
 
-function shuffleArray(arr){const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;}
+function shuffleArray(arr){const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a;}
 function setMessage(text,ok=false){const el=$("message"); if(!el) return; el.textContent=text||""; el.className="msg"+(ok?" ok":"");}
 function isGameOver(){return mistakes>=MAX_MISTAKES || solvedGroups.size===4;}
 
-// Inject minimal CSS for effects (celebrate pop + confetti canvas positioning)
+// Effects CSS (celebrate + confetti)
 (function ensureEffectsCSS(){
   if (document.getElementById("effects-css")) return;
   const style=document.createElement("style");
   style.id="effects-css";
   style.textContent=`
-    .celebrate{animation: gq-pop .22s ease;}
+    .celebrate{animation:gq-pop .22s ease;}
     @keyframes gq-pop{from{transform:scale(1)}70%{transform:scale(1.06)}to{transform:scale(1)}}
     .gq-confetti{position:fixed;inset:0;pointer-events:none;z-index:999}
   `;
@@ -80,7 +80,7 @@ function activeArchiveDate(){ const d=new URLSearchParams(location.search).get("
 function isArchiveActive(){ return !!activeArchiveDate(); }
 function updateDailyLinkVisibility(){ const el=$("daily"); if(!el) return; el.style.display=(isPracticeActive()||isArchiveActive())?"inline":"none"; }
 
-// Create nav bar for archive (Prev | DateLabel | Next)
+// Archive day nav (Prev | DateLabel | Next)
 function ensureDayNav(){
   let nav=$("dayNav"); if(nav) return nav;
   const header=document.querySelector("header");
@@ -127,7 +127,6 @@ async function goToArchiveDate(dateStr){
 
 async function switchToQuiz(id){
   document.body.classList.add("loading");
-  // close practice menu if open
   const pm=document.getElementById("practiceMenu"); if(pm) pm.classList.remove("open");
   try{
     const newCfg=await tryFetchFirst([`${id}.json`, `quizzes/${id}.json`]);
@@ -257,28 +256,23 @@ function renderSolvedBars() {
   const container = document.getElementById("solved");
   if (!container) return;
   container.innerHTML = "";
-
-  // Δείξε τις κατηγορίες με τη ΣΕΙΡΑ ΤΟΥΣ (0..3), μόνο όσες έχουν λυθεί
   for (let gi = 0; gi < cfg.groups.length; gi++) {
     if (!solvedGroups.has(gi)) continue;
     const g = cfg.groups[gi];
-
     const bar = document.createElement("div");
-    bar.className = "bar " + `group-${gi}`; // παίρνει χρώμα από CSS (.group-0..3)
-    bar.innerHTML = `
-      <div class="name">${g.name}</div>
-      <div class="items">${g.items.join(" · ")}</div>
-    `;
+    bar.className = "bar " + `group-${gi}`;
+    bar.innerHTML = `<div class="name">${g.name}</div><div class="items">${g.items.join(" · ")}</div>`;
     container.appendChild(bar);
   }
 }
-
 function renderGrid(){
   const grid=$("grid"); if(!grid) return;
-  grid.innerHTML=""; tiles.forEach((t,idx)=>{
+  grid.innerHTML="";
+  tiles.forEach((t,idx)=>{
     const cell=document.createElement("div");
     cell.className="cell"+(selected.has(idx)?" selected":"");
-    cell.textContent=t.label; cell.tabIndex=0;
+    cell.textContent=t.label;
+    cell.tabIndex=0;
     cell.setAttribute("role","button");
     cell.setAttribute("aria-pressed", selected.has(idx)?"true":"false");
     cell.onclick=()=>toggleSelect(idx);
@@ -292,16 +286,13 @@ function updateSubmitState(){
   const btn=$("submitBtn"); if(btn) btn.disabled = selected.size!==4 || isOver;
   const clearBtn=$("clearBtn"); if(clearBtn) clearBtn.disabled=isOver;
   const shuffleBtn=$("shuffleBtn"); if(shuffleBtn) shuffleBtn.disabled=isOver;
-
   const livesEl=$("mistakes"); if(livesEl) livesEl.textContent=mistakes;
-  // renew hearts
   renderHearts();
 }
 
-// -- Hearts (SVG, consistent across devices) --
+// -- Hearts (SVG) --
 function renderHearts(){
-  const cont=$("hearts");
-  if(!cont) return; // αν δεν υπάρχει container, απλά αγνοούμε (παίζει το text-based UI)
+  const cont=$("hearts"); if(!cont) return;
   const total=MAX_MISTAKES;
   const remaining=Math.max(0, total - mistakes);
   cont.innerHTML="";
@@ -323,7 +314,7 @@ function renderHearts(){
   }
 }
 
-// -- Lightweight confetti (on win) --
+// -- Confetti on win --
 function confettiBurst(){
   const canvas=document.createElement("canvas");
   canvas.className="gq-confetti";
@@ -334,13 +325,9 @@ function confettiBurst(){
   const N=120, parts=[];
   const colors=["#7BCDBA","#00CEC8","#00A5A0","#156064","#FFD166","#EF476F","#06D6A0","#118AB2"];
   for(let i=0;i<N;i++){
-    parts.push({
-      x:w/2, y:h*0.25, vx:(Math.random()*2-1)*4, vy:(Math.random()*-2-3),
-      g:0.12+Math.random()*0.08, s:3+Math.random()*3, c:colors[i%colors.length], a:1
-    });
+    parts.push({ x:w/2, y:h*0.25, vx:(Math.random()*2-1)*4, vy:(Math.random()*-2-3), g:0.12+Math.random()*0.08, s:3+Math.random()*3, c:colors[i%colors.length], a:1 });
   }
-  let t=0; const maxT=1200;
-  const start=performance.now();
+  const start=performance.now(), maxT=1200;
   function tick(now){
     const dt=now-start;
     ctx.clearRect(0,0,w,h);
@@ -399,19 +386,13 @@ function isOneAway(chosen){ const counts={}; chosen.forEach(c=>counts[c.groupInd
 function endGame(won){
   cfg.groups.forEach((_,gi)=>{ if(!solvedGroups.has(gi)) solvedGroups.add(gi); });
   renderSolvedBars(); setMessage(won?"Great job! All categories solved.":"Game over. See the categories above."); updateSubmitState();
-
-  // Stats
   updateStats(won);
-
-  // Confetti on win
   if (won) confettiBurst();
 }
 
 // -- Stats (localStorage) --
 const STATS_KEY="gq-stats";
-function readStats(){
-  try{ return JSON.parse(localStorage.getItem(STATS_KEY)||"{}"); }catch{ return {}; }
-}
+function readStats(){ try{ return JSON.parse(localStorage.getItem(STATS_KEY)||"{}"); }catch{ return {}; } }
 function writeStats(s){ localStorage.setItem(STATS_KEY, JSON.stringify(s)); }
 function updateStats(won){
   const s=readStats();
@@ -428,7 +409,7 @@ function showStats(){
   alert(msg);
 }
 
-// -- Share (Web Share API fallback to clipboard) --
+// -- Share (Web Share API fallback) --
 async function shareResult(){
   const solved = solvedGroups.size;
   const text = `I played GeoQuads! ${solved}/4 groups, mistakes: ${mistakes}. Try today's: ${location.origin}${location.pathname}`;
@@ -438,7 +419,7 @@ async function shareResult(){
   }catch{}
 }
 
-// -- Countdown --
+// -- Countdown (to local midnight) --
 function updateCountdown(){
   const el=$("countdown"); if(!el) return;
   const now=new Date(); const nextMidnight=new Date(now); nextMidnight.setHours(24,0,0,0);
@@ -495,4 +476,3 @@ document.addEventListener("keydown",(e)=>{
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
-
