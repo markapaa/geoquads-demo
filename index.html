@@ -5,89 +5,115 @@
   <title>GeoQuads</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <!-- Icons / Manifest (optional: add real files later) -->
-  <link rel="icon" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/icon-192.png">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#4f46e5">
-
-  <!-- Social cards -->
-  <meta property="og:title" content="GeoQuads — Daily geography puzzle">
-  <meta property="og:description" content="Group 16 items into 4 geography sets. New puzzle daily.">
-  <meta property="og:image" content="/og.png">
-  <meta name="twitter:card" content="summary_large_image">
+  <!-- SEO / Social -->
+  <meta name="description" content="GeoQuads — a daily geography Connections-style puzzle. Find 4 groups of 4. New puzzle every day." />
+  <meta property="og:title" content="GeoQuads — Daily Geography Puzzle" />
+  <meta property="og:description" content="Find 4 groups of 4. New puzzle every day. Can you solve today’s GeoQuads?" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="og.png" />
+  <meta name="theme-color" content="#156064" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div>
-        <h1>GeoQuads</h1>
+      <div class="brand">
+        <!-- Μικρό wordmark με «πυξίδα» στο Q -->
+        <h1 aria-label="GeoQuads">
+          Geo<span class="qmark">
+            Q
+            <svg class="compass" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 6 L15 15 L9 9 Z" fill="currentColor"/>
+            </svg>
+          </span>uads
+        </h1>
         <div class="sub" id="today"></div>
       </div>
+
       <div class="corner-actions">
+        <button id="stats" class="chip" title="Your stats">📊 Stats</button>
+        <button id="share" class="chip" title="Share result">🔗 Share</button>
+        <button id="soundToggle" class="chip" aria-pressed="false" title="Sound on/off">🔈 Sound</button>
         <div id="spoiler" class="chip spoiler" title="Click to reveal a hint">
           Spoiler: Think categories like capitals / rivers.
         </div>
-        <div class="help" id="help">?</div>
+        <div class="help" id="help" title="How to play">?</div>
       </div>
     </header>
 
-    <!-- Archive day nav appears here (JS injects) -->
+    <!-- Archive day navigation gets injected below header by JS -->
 
     <div id="solved" class="solved"></div>
 
     <div class="panel">
       <div id="grid" class="grid"></div>
 
-      <!-- Controls (centered) -->
       <div class="controls">
         <button id="clearBtn" class="btn-secondary">Clear</button>
 
-        <!-- Fancy blue Submit -->
-        <span class="button-border">
-          <span class="button-base">
+        <!-- Fancy Submit (μπλε) -->
+        <div class="button-border">
+          <div class="button-base">
             <button id="submitBtn" class="button" disabled>Submit</button>
-          </span>
-        </span>
+          </div>
+        </div>
 
         <button id="shuffleBtn" class="btn-secondary">Shuffle</button>
       </div>
 
-      <!-- Status row: message + lives (hearts + numeric fallback) -->
       <div class="status">
-        <div id="message" class="msg"></div>
+        <div id="message" class="msg" aria-live="polite"></div>
         <div class="lives">
-          <span id="hearts" class="hearts" aria-hidden="true"></span>
-          <span class="lives-numbers">
-            Mistakes: <span id="mistakes">0</span>/<span id="maxLives">4</span>
-          </span>
+          <span class="label">Lives:</span>
+          <span id="hearts" class="hearts" aria-label="Remaining lives"></span>
+          <span class="muted">(max <span id="maxLives">4</span>)</span>
         </div>
       </div>
     </div>
 
+    <!-- Mini heatmap (streak/ιστορικό) -->
+    <div class="heatmap">
+      <div class="hm-title">Your calendar</div>
+      <div id="miniCal" class="hm-grid" aria-hidden="true"></div>
+    </div>
+
     <div class="footer">
       <div>⏱️ Next daily in: <span id="countdown">--:--:--</span></div>
-      <div class="footer-links">
+      <div>
         <span class="linkish" id="practice">Practice</span> ·
         <span class="linkish" id="daily" style="display:none">Daily</span> ·
-        <span class="linkish" id="archive">Archive</span> ·
-        <span class="linkish" id="share">Share</span> ·
-        <span class="linkish" id="stats">Stats</span>
+        <span class="linkish" id="archive">Archive</span>
       </div>
     </div>
   </div>
 
-  <!-- Practice overlay menu (JS toggles .open) -->
-  <div id="practiceMenu" aria-hidden="true">
-    <div class="pmenu" role="dialog" aria-modal="true" aria-label="Practice menu">
+  <!-- Practice menu overlay -->
+  <div id="practiceMenu" hidden>
+    <div class="pmenu">
       <div class="pmenu-title">Choose a practice</div>
       <button data-id="practice-easy">Practice — Easy</button>
       <button data-id="practice-hard">Practice — Hard</button>
       <button class="ghost" data-id="__close">Close</button>
     </div>
   </div>
+
+  <!-- Onboarding (1η φορά μόνο) -->
+  <div id="onboard" hidden>
+    <div class="onboard-card">
+      <h2>Welcome to GeoQuads 👋</h2>
+      <ol>
+        <li>Select <b>4</b> tiles that belong together.</li>
+        <li>Press <b>Submit</b>. You have <b>4 lives</b>.</li>
+        <li>Finish all <b>4 groups</b> to win!</li>
+      </ol>
+      <button id="onboardStart" class="btn-primary">Got it — Start</button>
+    </div>
+  </div>
+
+  <!-- Hidden canvas for Share-as-Image -->
+  <canvas id="shareCanvas" width="900" height="480" style="display:none"></canvas>
 
   <script src="app.js" defer></script>
 </body>
