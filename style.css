@@ -6,7 +6,7 @@
 * { box-sizing:border-box; }
 body {
   margin:0; padding:16px;
-  font-family:system-ui,Arial,sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   color:var(--ink); background:var(--bg);
 }
 
@@ -96,3 +96,4 @@ button:disabled { opacity:.5; cursor:not-allowed; }
 }
 #practiceMenu .pmenu button:hover { background: var(--accent-weak, #e0e7ff); }
 #practiceMenu .pmenu .ghost { background: transparent; }
+
