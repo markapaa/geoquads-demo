@@ -4,6 +4,19 @@
   <meta charset="UTF-8" />
   <title>GeoQuads</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- Icons / Manifest (optional: add real files later) -->
+  <link rel="icon" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+
+  <!-- Social cards -->
+  <meta property="og:title" content="GeoQuads — Daily geography puzzle">
+  <meta property="og:description" content="Group 16 items into 4 geography sets. New puzzle daily.">
+  <meta property="og:image" content="/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -21,47 +34,55 @@
       </div>
     </header>
 
-    <!-- Το navigation της αρχειοθήκης (prev/date/next) το προσθέτει το app.js δυναμικά -->
+    <!-- Archive day nav appears here (JS injects) -->
 
     <div id="solved" class="solved"></div>
 
     <div class="panel">
       <div id="grid" class="grid"></div>
 
+      <!-- Controls (centered) -->
       <div class="controls">
         <button id="clearBtn" class="btn-secondary">Clear</button>
 
-        <div class="button-border">
-          <div class="button-base">
+        <!-- Fancy blue Submit -->
+        <span class="button-border">
+          <span class="button-base">
             <button id="submitBtn" class="button" disabled>Submit</button>
-          </div>
-        </div>
+          </span>
+        </span>
 
         <button id="shuffleBtn" class="btn-secondary">Shuffle</button>
       </div>
 
-<div class="status">
-  <div id="message" class="msg"></div>
-  <div class="lives">
-    <span id="hearts" class="hearts" aria-live="polite" title="Lives"></span>
-  </div>
-</div>
+      <!-- Status row: message + lives (hearts + numeric fallback) -->
+      <div class="status">
+        <div id="message" class="msg"></div>
+        <div class="lives">
+          <span id="hearts" class="hearts" aria-hidden="true"></span>
+          <span class="lives-numbers">
+            Mistakes: <span id="mistakes">0</span>/<span id="maxLives">4</span>
+          </span>
+        </div>
+      </div>
     </div>
 
     <div class="footer">
       <div>⏱️ Next daily in: <span id="countdown">--:--:--</span></div>
-      <div>
+      <div class="footer-links">
         <span class="linkish" id="practice">Practice</span> ·
         <span class="linkish" id="daily" style="display:none">Daily</span> ·
-        <span class="linkish" id="archive">Archive</span>
+        <span class="linkish" id="archive">Archive</span> ·
+        <span class="linkish" id="share">Share</span> ·
+        <span class="linkish" id="stats">Stats</span>
       </div>
     </div>
   </div>
 
-  <!-- Το practice overlay δημιουργείται/ανοίγει από το app.js όταν πατήσεις “Practice” -->
-  <div id="practiceMenu">
-    <div class="pmenu">
-      <div style="font-weight:600;margin-bottom:6px;">Choose a practice</div>
+  <!-- Practice overlay menu (JS toggles .open) -->
+  <div id="practiceMenu" aria-hidden="true">
+    <div class="pmenu" role="dialog" aria-modal="true" aria-label="Practice menu">
+      <div class="pmenu-title">Choose a practice</div>
       <button data-id="practice-easy">Practice — Easy</button>
       <button data-id="practice-hard">Practice — Hard</button>
       <button class="ghost" data-id="__close">Close</button>
@@ -71,4 +92,3 @@
   <script src="app.js" defer></script>
 </body>
 </html>
-
