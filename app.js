@@ -42,16 +42,30 @@ function isGameOver(){return mistakes>=MAX_MISTAKES || solvedGroups.size===4;}
 function renderHearts() {
   const cont = $("hearts");
   if (!cont) return;
+
   const total = MAX_MISTAKES;
   const remaining = Math.max(0, total - mistakes);
   cont.innerHTML = "";
+
+  const fullSVG = `
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path fill="currentColor"
+        d="M12 21s-6.7-4.35-9.33-7.6C.85 11.32 1.01 8.4 3 6.7 4.6 5.36 7 5.5 8.5 7c.5.5 1 .99 1.5 1.5.5-.51 1-.99 1.5-1.5C13 5.5 15.4 5.36 17 6.7c1.99 1.7 2.15 4.62.33 6.7C18.7 16.65 12 21 12 21z"/>
+    </svg>`;
+  const emptySVG = `
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path fill="currentColor" opacity="0.25"
+        d="M12 21s-6.7-4.35-9.33-7.6C.85 11.32 1.01 8.4 3 6.7 4.6 5.36 7 5.5 8.5 7c.5.5 1 .99 1.5 1.5.5-.51 1-.99 1.5-1.5C13 5.5 15.4 5.36 17 6.7c1.99 1.7 2.15 4.62.33 6.7C18.7 16.65 12 21 12 21z"/>
+    </svg>`;
+
   for (let i = 0; i < total; i++) {
     const span = document.createElement("span");
     span.className = "heart" + (i < remaining ? "" : " empty");
-    span.textContent = "❤"; // εύκολα αντικαθίσταται με SVG αργότερα
+    span.innerHTML = i < remaining ? fullSVG : emptySVG;
     cont.appendChild(span);
   }
 }
+
 
 // -- Validation --
 function normalizeLabel(s){return String(s).trim();}
@@ -361,3 +375,4 @@ const submitBtn=$("submitBtn"); if(submitBtn) submitBtn.onclick=checkSelection;
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
