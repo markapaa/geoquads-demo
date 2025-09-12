@@ -270,6 +270,11 @@ function applyConfigToUI(archiveDateStr=null){
   updateDailyLinkVisibility();
   updateDayNav(archiveDateStr);
   renderHearts();
+  updateDailyLinkVisibility();
+  updateDayNav(archiveDateStr);
+
+  // render/refresh mini calendar
+  renderMiniCal();
 }
 
 // -- Build / render --
@@ -513,6 +518,7 @@ function bindUI(){
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
 
 
 
