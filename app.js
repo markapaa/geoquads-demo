@@ -1,4 +1,4 @@
-// ========= GeoQuads — RECOVERY build (stable) =========
+// ========= GeoQuads — RECOVERY build (stable, with Sound/Stats/Share wired) =========
 
 // -- Dates / archive helpers --
 const FIRST_DAILY = new Date(2025, 8, 10); // 2025-09-10 (0-based month)
@@ -13,12 +13,12 @@ function clampArchiveBounds(dateStr){const d=strToDate(dateStr),first=FIRST_DAIL
 // -- State --
 let tiles=[]; let selected=new Set(); let solvedGroups=new Set();
 let mistakes=0; let MAX_MISTAKES=4; let SHOW_ONE_AWAY=true; let cfg=null;
+
 // -- Sound state (on/off persisted) --
 let SOUND_ON = (() => {
   try { return JSON.parse(localStorage.getItem("gq-sound") ?? "true"); }
   catch { return true; }
 })();
-
 function setSoundOn(on) {
   SOUND_ON = !!on;
   localStorage.setItem("gq-sound", JSON.stringify(SOUND_ON));
@@ -28,7 +28,6 @@ function setSoundOn(on) {
     b.textContent = SOUND_ON ? "🔊 Sound" : "🔈 Sound";
   }
 }
-
 // Tiny WebAudio beeps (no files)
 let _audioCtx;
 function _ensureCtx() {
@@ -60,7 +59,6 @@ const sfx = {
   wrong: () => { beep({freq: 220, dur: 0.12, type: "sawtooth"}); },
   win: () => { [880,1046,1318].forEach((f,i)=>setTimeout(()=>beep({freq:f,dur:0.1,type:"triangle"}), i*120)); }
 };
-
 
 // -- Built-in demo (safe fallback) --
 const BUILTIN_DEMO={
@@ -296,22 +294,25 @@ function renderHearts(){
 // -- Game logic --
 function toggleSelect(idx){
   if(isGameOver()) return;
-  if(selected.has(idx)) selected.delete(idx); else if(selected.size<4) selected.add(idx);
+  if(selected.has(idx)) { selected.delete(idx); sfx.deselect(); }
+  else if(selected.size<4) { selected.add(idx); sfx.select(); }
   setMessage(""); renderGrid();
 }
 function clearSelection(){ selected.clear(); setMessage(""); renderGrid(); }
-function shuffleTiles(){ if(isGameOver()) return; tiles=shuffleArray(tiles); selected.clear(); setMessage(""); renderGrid(); }
+function shuffleTiles(){ if(isGameOver()) return; tiles=shuffleArray(tiles); selected.clear(); setMessage(""); sfx.shuffle(); renderGrid(); }
 function checkSelection(){
   if(selected.size!==4 || isGameOver()) return;
   const chosen=[...selected].map(i=>tiles[i]); const g0=chosen[0].groupIndex;
   const allSame=chosen.every(c=>c.groupIndex===g0);
   if(allSame){
+    sfx.correct();
     solvedGroups.add(g0); setMessage("Correct! You found a category.",true);
     const toRemove=new Set(cfg.groups[g0].items);
     tiles=tiles.filter(t=>!toRemove.has(t.label)); selected.clear();
     renderSolvedBars(); renderGrid();
     if(solvedGroups.size===4) endGame(true);
   }else{
+    sfx.wrong();
     if(SHOW_ONE_AWAY && isOneAway(chosen)) setMessage("One away! You're one word off.");
     else setMessage("Not quite — try again.");
     mistakes++; selected.clear(); renderGrid();
@@ -322,6 +323,9 @@ function isOneAway(chosen){ const counts={}; chosen.forEach(c=>counts[c.groupInd
 function endGame(won){
   cfg.groups.forEach((_,gi)=>{ if(!solvedGroups.has(gi)) solvedGroups.add(gi); });
   renderSolvedBars(); setMessage(won?"Great job! All categories solved.":"Game over. See the categories above."); updateSubmitState();
+  // stats + win sfx
+  updateStats(won);
+  if (won) sfx.win();
 }
 
 // -- Stats (localStorage) --
@@ -357,7 +361,6 @@ async function shareResult(){
   } catch {}
 }
 
-
 // -- Countdown --
 function updateCountdown(){
   const el=$("countdown"); if(!el) return;
@@ -378,8 +381,12 @@ function init(){
 
 // -- Bindings (mounted after DOM ready) --
 function bindUI(){
-  $("practice")?.addEventListener("click", ()=>{ const m=$("practiceMenu"); if(!m) return; m.hidden=false; m.classList.add("open"); });
-  // mount practice menu buttons (if menu exists in DOM)
+  // Practice overlay open
+  $("practice")?.addEventListener("click", ()=>{
+    const m=$("practiceMenu"); if(!m) return;
+    m.hidden=false; m.classList.add("open");
+  });
+  // Practice overlay inner buttons
   const pm = $("practiceMenu");
   if (pm){
     pm.addEventListener("click",(e)=>{
@@ -396,8 +403,22 @@ function bindUI(){
   $("shuffleBtn")?.addEventListener("click", shuffleTiles);
   $("submitBtn")?.addEventListener("click", checkSelection);
 
-  // keyboard
-  document.addEventListener("keydown",(e)=>{ if(e.repeat) return; if(e.key==="Enter") $("submitBtn")?.click(); if(e.key==="Escape") $("clearBtn")?.click(); if(e.key.toLowerCase()==="r") $("shuffleBtn")?.click(); });
+  // Top-right: stats / share / sound
+  $("stats")?.addEventListener("click", showStats);
+  $("share")?.addEventListener("click", shareResult);
+  const soundBtn = $("soundToggle");
+  if (soundBtn){
+    setSoundOn(SOUND_ON); // set initial label/state
+    soundBtn.addEventListener("click", ()=> setSoundOn(!SOUND_ON));
+  }
+
+  // keyboard shortcuts (desktop)
+  document.addEventListener("keydown",(e)=>{
+    if(e.repeat) return;
+    if(e.key==="Enter") $("submitBtn")?.click();
+    if(e.key==="Escape") $("clearBtn")?.click();
+    if(e.key.toLowerCase()==="r") $("shuffleBtn")?.click();
+  });
 }
 
 // -- Bootstrap --
@@ -421,4 +442,3 @@ function bindUI(){
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
-
