@@ -28,13 +28,40 @@ header {
   display: flex; align-items: center; justify-content: space-between;
   gap: 12px; margin-bottom: 12px;
 }
+/* Brand wordmark */
 h1 {
   margin: 0;
   font-size: 28px;
-  white-space: nowrap; /* ✅ μην σπάει το GeoQuads */
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
-.sub { color: var(--muted); font-size: 14px; }
-.corner-actions { display: flex; align-items: center; gap: 8px; }
+
+.qmark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Μικρότερο το γράμμα Q + η πυξίδα */
+.qmark svg.compass {
+  width: 14px;   /* μικρότερο μέγεθος */
+  height: 14px;
+  position: absolute;
+  right: -8px;   /* τοποθέτηση μέσα στο Q */
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+}
+
+/* Προαιρετικά κάνε το ίδιο το Q λίγο μεγαλύτερο για να «χωρέσει» */
+.qmark {
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 1;
+}
+
 
 /* Chips & help */
 .chip {
@@ -191,3 +218,4 @@ h1 {
   user-select: none;
 }
 .heart.empty { color: #e5e7eb; }
+
