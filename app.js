@@ -1,4 +1,4 @@
-// ========= GeoQuads — Loader with Archive Navigation (+root & /quizzes fallbacks) =========
+// ========= GeoQuads — Loader with Archive Navigation (ROOT JSON only) =========
 
 // -- Constants for Archive --
 const FIRST_DAILY = new Date(2025, 8, 10); // 2025-09-10 (0-based month)
@@ -6,10 +6,7 @@ function ymd(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0")
 function todayStr(){return ymd(new Date());}
 function yesterdayStr(){const d=new Date();d.setDate(d.getDate()-1);return ymd(d);}
 function strToDate(s){const [Y,M,D]=s.split("-").map(Number);return new Date(Y,M-1,D);}
-function clampArchiveBounds(dateStr){
-  const d=strToDate(dateStr), first=FIRST_DAILY, last=strToDate(yesterdayStr());
-  return { hasPrev: d>first, hasNext: d<last };
-}
+function clampArchiveBounds(dateStr){const d=strToDate(dateStr),first=FIRST_DAILY,last=strToDate(yesterdayStr());return{hasPrev:d>first,hasNext:d<last};}
 
 // -- State --
 let tiles=[]; let selected=new Set(); let solvedGroups=new Set();
@@ -32,7 +29,7 @@ const BUILTIN_DEMO={
 
 // -- Helpers --
 const $=(id)=>document.getElementById(id);
-console.log("GeoQuads app.js loaded");
+console.log("GeoQuads app.js (root-only) loaded");
 
 function shuffleArray(arr){const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;}
 function setMessage(text,ok=false){const el=$("message"); if(!el) return; el.textContent=text||""; el.className="msg"+(ok?" ok":"");}
@@ -50,19 +47,14 @@ function validateConfig(config){
   return true;
 }
 
-// -- Fetch helpers (root paths) --
+// -- Fetch helper (ROOT only, cache-busting) --
 async function tryFetchJSON(url){
-  const res=await fetch(url); console.log("fetch",url,res.status);
+  const bust=(url.includes("?")?"&":"?")+"t="+Date.now();
+  const res=await fetch(url+bust,{cache:"no-store"});
+  console.log("fetch",url,res.status);
   if(!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  try{ return await res.json(); }catch(e){ throw new Error(`JSON parse error for ${url}: ${e.message}`); }
-}
-// Try multiple candidate URLs (root & /quizzes)
-async function tryFetchFirst(urls){
-  for(const u of urls){
-    try { return await tryFetchJSON(u); }
-    catch(e){ console.warn("miss:",u,e.message); }
-  }
-  throw new Error("No candidate URL succeeded: "+urls.join(", "));
+  try { return await res.json(); }
+  catch(e){ throw new Error(`JSON parse error for ${url}: ${e.message}`); }
 }
 
 // ---- Practice / Daily / Archive helpers ----
@@ -105,7 +97,7 @@ async function goToArchiveDate(dateStr){
 
   document.body.classList.add("loading");
   try{
-    const newCfg=await tryFetchFirst([`${dateStr}.json`, `quizzes/${dateStr}.json`]);
+    const newCfg=await tryFetchJSON(`${dateStr}.json`);
     validateConfig(newCfg); cfg=newCfg;
     applyConfigToUI(dateStr); init();
     history.replaceState(null,"",`?date=${encodeURIComponent(dateStr)}`);
@@ -118,7 +110,7 @@ async function goToArchiveDate(dateStr){
 async function switchToQuiz(id){
   document.body.classList.add("loading");
   try{
-    const newCfg=await tryFetchFirst([`${id}.json`, `quizzes/${id}.json`]);
+    const newCfg=await tryFetchJSON(`${id}.json`);
     validateConfig(newCfg); cfg=newCfg;
     applyConfigToUI(null); init();
     history.replaceState(null,"",`?id=${encodeURIComponent(id)}`);
@@ -132,7 +124,7 @@ async function switchToDaily(){
   const t=todayStr(), y=yesterdayStr();
   try{
     try{
-      const newCfg=await tryFetchFirst([`${t}.json`, `quizzes/${t}.json`]);
+      const newCfg=await tryFetchJSON(`${t}.json`);
       validateConfig(newCfg); cfg=newCfg;
       applyConfigToUI(null); init();
       history.replaceState(null,"",location.pathname);
@@ -140,7 +132,7 @@ async function switchToDaily(){
       updateDayNav(null);
     }catch(eToday){
       console.warn(`Daily not found (${t}), trying yesterday (${y})`);
-      const newCfg=await tryFetchFirst([`${y}.json`, `quizzes/${y}.json`]);
+      const newCfg=await tryFetchJSON(`${y}.json`);
       validateConfig(newCfg); cfg=newCfg;
       applyConfigToUI(y); init();
       history.replaceState(null,"",`?date=${encodeURIComponent(y)}`);
@@ -158,17 +150,54 @@ async function loadQuizConfig(){
   const id=params.get("id");
   const dateParam=params.get("date");
 
-  if(id){ return await tryFetchFirst([`${id}.json`, `quizzes/${id}.json`]); }
-  if(dateParam){ return await tryFetchFirst([`${dateParam}.json`, `quizzes/${dateParam}.json`]); }
+  if(id){ return await tryFetchJSON(`${id}.json`); }
+  if(dateParam){ return await tryFetchJSON(`${dateParam}.json`); }
 
-  try{ return await tryFetchFirst([`${todayStr()}.json`, `quizzes/${todayStr()}.json`]); }
+  try{ return await tryFetchJSON(`${todayStr()}.json`); }
   catch(eToday){
     console.warn(eToday.message);
-    try{ return await tryFetchFirst([`${yesterdayStr()}.json`, `quizzes/${yesterdayStr()}.json`]); }
+    try{ return await tryFetchJSON(`${yesterdayStr()}.json`); }
     catch(eY){ console.warn(eY.message); }
   }
 
-  return await tryFetchFirst(["practice-easy.json", "quizzes/practice-easy.json"]);
+  return await tryFetchJSON("practice-easy.json");
+}
+
+// -- Practice Menu --
+function ensurePracticeMenu(){
+  let menu=document.getElementById("practiceMenu");
+  if(menu){ menu.classList.toggle("open"); return; }
+
+  menu=document.createElement("div");
+  menu.id="practiceMenu";
+  menu.innerHTML=`
+    <div class="pmenu">
+      <div style="font-weight:600;margin-bottom:6px;">Choose a practice</div>
+      <button data-id="practice-easy">Practice — Easy</button>
+      <button data-id="practice-hard">Practice — Hard</button>
+      <button class="ghost" data-id="__close">Close</button>
+    </div>
+  `;
+  document.body.appendChild(menu);
+
+  // Inline basic styles (αν δεν υπάρχουν στο CSS)
+  menu.style.position="fixed"; menu.style.inset="0"; menu.style.display="flex";
+  menu.style.alignItems="center"; menu.style.justifyContent="center";
+  menu.style.background="rgba(0,0,0,0.15)"; menu.style.zIndex="50";
+  const box=menu.querySelector(".pmenu");
+  box.style.background="#fff"; box.style.border="1px solid #e5e7eb";
+  box.style.borderRadius="12px"; box.style.padding="16px";
+  box.style.display="flex"; box.style.gap="8px"; box.style.flexDirection="column";
+  box.style.minWidth="260px"; box.style.boxShadow="0 10px 24px rgba(0,0,0,0.08)";
+  const btns=box.querySelectorAll("button"); btns.forEach(b=>{ b.style.padding="10px 14px"; b.style.borderRadius="10px"; b.style.border="1px solid #e5e7eb"; b.style.background="#fff"; b.style.cursor="pointer"; b.onmouseover=()=>b.style.background="#e0e7ff"; b.onmouseout=()=>b.style.background="#fff"; });
+
+  menu.addEventListener("click",(e)=>{
+    const id=e.target?.dataset?.id;
+    if(!id) return;
+    if(id==="__close"){ menu.classList.remove("open"); return; }
+    switchToQuiz(id);
+    menu.classList.remove("open");
+  });
 }
 
 // -- Apply UI from cfg --
