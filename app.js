@@ -1,54 +1,44 @@
-// ========= GeoQuads — Local-Timezone Loader (Practice / Daily / Archive + UX polish) =========
+// ========= GeoQuads — Polished Loader (UX, Stats, Share, Sounds, SEO-safe) =========
 
-// -- Archive constants (first daily available) --
-const FIRST_DAILY = new Date(2025, 8, 10); // 2025-09-10 (0-based month: 8=September)
+// --- Archive constants (όπως πριν) ---
+const FIRST_DAILY = new Date(2025, 8, 10);
+const $ = (id) => document.getElementById(id);
+const STATS_KEY = "gq-stats";
+const ONBOARD_KEY = "gq-onboard";
+const SND_KEY = "gq-sound";
+let SOUND_ON = (localStorage.getItem(SND_KEY) ?? "1") === "1";
+
 function ymd(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");return `${y}-${m}-${day}`;}
 function todayStr(){return ymd(new Date());}
-function yesterdayStr(){const d=new Date(); d.setDate(d.getDate()-1); return ymd(d);}
-function strToDate(s){const [Y,M,D]=s.split("-").map(Number); return new Date(Y, M-1, D);}
-function clampArchiveBounds(dateStr){const d=strToDate(dateStr), first=FIRST_DAILY, last=strToDate(yesterdayStr()); return {hasPrev:d>first, hasNext:d<last};}
+function yesterdayStr(){const d=new Date();d.setDate(d.getDate()-1);return ymd(d);}
+function strToDate(s){const [Y,M,D]=s.split("-").map(Number);return new Date(Y,M-1,D);}
+function clampArchiveBounds(dateStr){const d=strToDate(dateStr), first=FIRST_DAILY, last=strToDate(yesterdayStr());return {hasPrev:d>first, hasNext:d<last};}
 
-// -- State --
+// --- State ---
 let tiles=[]; let selected=new Set(); let solvedGroups=new Set();
 let mistakes=0; let MAX_MISTAKES=4; let SHOW_ONE_AWAY=true; let cfg=null;
 
-// -- Built-in demo (fallback) --
-const BUILTIN_DEMO={
-  id:"builtin-demo", title:"GeoQuads — Demo",
-  spoiler:"Think capitals vs islands vs geography lines.",
-  help:"Pick 4 items per category. You have 4 mistakes.",
-  lives:4, showOneAway:true,
-  groups:[
-    {name:"Landlocked countries",items:["Nepal","Bolivia","Switzerland","Ethiopia"]},
-    {name:"Capitals starting with B",items:["Brussels","Brasilia","Bangkok","Budapest"]},
-    {name:"Largest islands (by area)",items:["Greenland","New Guinea","Borneo","Madagascar"]},
-    {name:"Countries crossed by the Equator",items:["Ecuador","Colombia","Kenya","Indonesia"]},
-  ],
-  ui:{accent:"#4F46E5",locale:"en-US"},
+// --- Built-in demo ---
+const BUILTIN_DEMO={id:"builtin-demo",title:"GeoQuads — Demo",spoiler:"Think capitals vs islands vs geography lines.",help:"Pick 4 items per category. You have 4 mistakes.",lives:4,showOneAway:true,groups:[
+  {name:"Landlocked countries",items:["Nepal","Bolivia","Switzerland","Ethiopia"]},
+  {name:"Capitals starting with B",items:["Brussels","Brasilia","Bangkok","Budapest"]},
+  {name:"Largest islands (by area)",items:["Greenland","New Guinea","Borneo","Madagascar"]},
+  {name:"Countries crossed by the Equator",items:["Ecuador","Colombia","Kenya","Indonesia"]}
+],ui:{accent:"#156064",locale:"en-US"}};
+
+// --- Sounds (optional) ---
+const sfx = {
+  click: new Audio("sfx/click.mp3"),
+  good:  new Audio("sfx/correct.mp3"),
+  bad:   new Audio("sfx/wrong.mp3"),
 };
+for(const k of Object.keys(sfx)){ sfx[k].preload="auto"; sfx[k].volume=0.25; }
+function play(name){ try{ if(SOUND_ON) sfx[name]?.currentTime=0, sfx[name]?.play(); }catch{} }
 
-// -- Helpers --
-const $=(id)=>document.getElementById(id);
-console.log("GeoQuads app.js (local-timezone) loaded");
-
-function shuffleArray(arr){const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a;}
+// --- Helpers & validation ---
+function shuffleArray(arr){const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;}
 function setMessage(text,ok=false){const el=$("message"); if(!el) return; el.textContent=text||""; el.className="msg"+(ok?" ok":"");}
 function isGameOver(){return mistakes>=MAX_MISTAKES || solvedGroups.size===4;}
-
-// Effects CSS (celebrate + confetti)
-(function ensureEffectsCSS(){
-  if (document.getElementById("effects-css")) return;
-  const style=document.createElement("style");
-  style.id="effects-css";
-  style.textContent=`
-    .celebrate{animation:gq-pop .22s ease;}
-    @keyframes gq-pop{from{transform:scale(1)}70%{transform:scale(1.06)}to{transform:scale(1)}}
-    .gq-confetti{position:fixed;inset:0;pointer-events:none;z-index:999}
-  `;
-  document.head.appendChild(style);
-})();
-
-// -- Validation --
 function normalizeLabel(s){return String(s).trim();}
 function validateConfig(config){
   if(!config?.groups || config.groups.length!==4) throw new Error("Invalid quiz: must have exactly 4 groups.");
@@ -60,38 +50,23 @@ function validateConfig(config){
   return true;
 }
 
-// -- Fetch helpers (root and /quizzes; no-store to avoid stale daily) --
+// --- Fetch (no-store to avoid stale) ---
 async function tryFetchJSON(url){
-  // πρόσθεσε cache-buster param για να μη μένει “κολλημένο” (ειδικά σε 404)
-  const bust = `gq=${Date.now()}`;
-  const sep = url.includes("?") ? "&" : "?";
-  const finalUrl = `${url}${sep}${bust}`;
-
-  const res = await fetch(finalUrl, { cache: "no-store" });
-  console.log("fetch", finalUrl, res.status);
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${finalUrl}`);
-  try {
-    return await res.json();
-  } catch (e) {
-    throw new Error(`JSON parse error for ${finalUrl}: ${e.message}`);
-  }
+  const res=await fetch(url,{cache:"no-store"}); console.log("fetch",url,res.status);
+  if(!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+  try{ return await res.json(); }catch(e){ throw new Error(`JSON parse error for ${url}: ${e.message}`); }
 }
-
 async function tryFetchFirst(urls){
-  for(const u of urls){
-    try { return await tryFetchJSON(u); }
-    catch(e){ console.warn("miss:",u,e.message); }
-  }
+  for(const u of urls){ try{ return await tryFetchJSON(u); } catch(e){ console.warn("miss:",u,e.message); } }
   throw new Error("No candidate URL succeeded: "+urls.join(", "));
 }
 
-// ---- Practice / Daily / Archive helpers ----
+// --- Practice / Daily / Archive helpers (όπως είχες) ---
 function isPracticeActive(){ const id=new URLSearchParams(location.search).get("id"); return !!(id && id.startsWith("practice-")); }
 function activeArchiveDate(){ const d=new URLSearchParams(location.search).get("date"); return d||null; }
 function isArchiveActive(){ return !!activeArchiveDate(); }
 function updateDailyLinkVisibility(){ const el=$("daily"); if(!el) return; el.style.display=(isPracticeActive()||isArchiveActive())?"inline":"none"; }
 
-// Archive day nav (Prev | DateLabel | Next)
 function ensureDayNav(){
   let nav=$("dayNav"); if(nav) return nav;
   const header=document.querySelector("header");
@@ -123,7 +98,6 @@ async function goToArchiveDate(dateStr){
   const first=ymd(FIRST_DAILY), last=yesterdayStr();
   if(dateStr<first) dateStr=first;
   if(dateStr>last) dateStr=last;
-
   document.body.classList.add("loading");
   try{
     const newCfg=await tryFetchFirst([`${dateStr}.json`, `quizzes/${dateStr}.json`]);
@@ -138,7 +112,7 @@ async function goToArchiveDate(dateStr){
 
 async function switchToQuiz(id){
   document.body.classList.add("loading");
-  const pm=document.getElementById("practiceMenu"); if(pm) pm.classList.remove("open");
+  const pm=document.getElementById("practiceMenu"); if(pm) pm.classList.remove("open"); // close
   try{
     const newCfg=await tryFetchFirst([`${id}.json`, `quizzes/${id}.json`]);
     validateConfig(newCfg); cfg=newCfg;
@@ -175,49 +149,51 @@ async function switchToDaily(){
   updateDailyLinkVisibility();
 }
 
-// -- Loader (id/date/auto) --
+// --- Loader ---
 async function loadQuizConfig(){
   const params=new URLSearchParams(location.search);
   const id=params.get("id");
   const dateParam=params.get("date");
-
   if(id){ return await tryFetchFirst([`${id}.json`, `quizzes/${id}.json`]); }
   if(dateParam){ return await tryFetchFirst([`${dateParam}.json`, `quizzes/${dateParam}.json`]); }
-
   try{ return await tryFetchFirst([`${todayStr()}.json`, `quizzes/${todayStr()}.json`]); }
   catch(eToday){
     console.warn(eToday.message);
     try{ return await tryFetchFirst([`${yesterdayStr()}.json`, `quizzes/${yesterdayStr()}.json`]); }
     catch(eY){ console.warn(eY.message); }
   }
-
   return await tryFetchFirst(["practice-easy.json","quizzes/practice-easy.json"]);
 }
 
-// -- Practice menu (overlay) --
-function ensurePracticeMenu(){
-  let menu=document.getElementById("practiceMenu");
-  if(menu){ menu.classList.toggle("open"); return; }
-  menu=document.createElement("div");
-  menu.id="practiceMenu";
-  menu.innerHTML=`
-    <div class="pmenu">
-      <div style="font-weight:600;margin-bottom:6px;">Choose a practice</div>
-      <button data-id="practice-easy">Practice — Easy</button>
-      <button data-id="practice-hard">Practice — Hard</button>
-      <button class="ghost" data-id="__close">Close</button>
-    </div>
-  `;
-  document.body.appendChild(menu);
+// --- Practice menu (overlay) ---
+(function mountPracticeMenu(){
+  const btn = $("practice");
+  const menu = $("practiceMenu");
+  if (!btn || !menu) return;
+  btn.onclick = () => { menu.classList.toggle("open"); menu.hidden = !menu.classList.contains("open"); };
   menu.addEventListener("click",(e)=>{
     const id=e.target?.dataset?.id; if(!id) return;
-    if(id==="__close"){ menu.classList.remove("open"); return; }
+    if(id==="__close"){ menu.classList.remove("open"); menu.hidden = true; return; }
     switchToQuiz(id);
   });
-  requestAnimationFrame(()=>menu.classList.add("open"));
+})();
+
+// --- Onboarding (1η φορά) ---
+function maybeShowOnboarding(){
+  if (localStorage.getItem(ONBOARD_KEY)==="1") return;
+  const ob = $("onboard");
+  const start = $("onboardStart");
+  if (!ob || !start) return;
+  ob.hidden = false;
+  ob.classList.add("open");
+  start.onclick = () => {
+    localStorage.setItem(ONBOARD_KEY,"1");
+    ob.classList.remove("open");
+    ob.hidden = true;
+  };
 }
 
-// -- Apply UI from cfg --
+// --- Apply UI from cfg ---
 function applyConfigToUI(archiveDateStr=null){
   document.title = cfg.title || "GeoQuads";
   const locale=cfg.ui?.locale || "en-US";
@@ -248,31 +224,31 @@ function applyConfigToUI(archiveDateStr=null){
 
   if(cfg.ui?.accent){
     document.documentElement.style.setProperty("--accent", cfg.ui.accent);
-    document.documentElement.style.setProperty("--accent-weak", "#e0e7ff");
+    document.documentElement.style.setProperty("--accent-weak", "#e0f7f7");
   }
 
   updateDailyLinkVisibility();
   updateDayNav(archiveDateStr);
-
-  // Initial hearts render (if υπάρχει container)
   renderHearts();
+  renderHeatmap();
+  updateSoundButton();
+  maybeShowOnboarding();
 }
 
-// -- Build / render --
+// --- Build / render ---
 function buildTiles(){
   const base=[]; cfg.groups.forEach((g,gi)=>g.items.forEach((label,idx)=>base.push({label,groupIndex:gi,id:`${gi}-${idx}`})));
   return shuffleArray(base);
 }
-function renderSolvedBars() {
-  const container = document.getElementById("solved");
-  if (!container) return;
-  container.innerHTML = "";
-  for (let gi = 0; gi < cfg.groups.length; gi++) {
-    if (!solvedGroups.has(gi)) continue;
-    const g = cfg.groups[gi];
-    const bar = document.createElement("div");
-    bar.className = "bar " + `group-${gi}`;
-    bar.innerHTML = `<div class="name">${g.name}</div><div class="items">${g.items.join(" · ")}</div>`;
+function renderSolvedBars(){
+  const container=$("solved"); if(!container) return;
+  container.innerHTML="";
+  for(let gi=0; gi<cfg.groups.length; gi++){
+    if(!solvedGroups.has(gi)) continue;
+    const g=cfg.groups[gi];
+    const bar=document.createElement("div");
+    bar.className="bar group-"+gi;
+    bar.innerHTML=`<div class="name">${g.name}</div><div class="items">${g.items.join(" · ")}</div>`;
     container.appendChild(bar);
   }
 }
@@ -282,11 +258,10 @@ function renderGrid(){
   tiles.forEach((t,idx)=>{
     const cell=document.createElement("div");
     cell.className="cell"+(selected.has(idx)?" selected":"");
-    cell.textContent=t.label;
-    cell.tabIndex=0;
+    cell.textContent=t.label; cell.tabIndex=0;
     cell.setAttribute("role","button");
     cell.setAttribute("aria-pressed", selected.has(idx)?"true":"false");
-    cell.onclick=()=>toggleSelect(idx);
+    cell.onclick=()=>{ play("click"); toggleSelect(idx); };
     cell.onkeydown=(e)=>{ if(e.key===" "||e.key==="Enter"){ e.preventDefault(); toggleSelect(idx); } };
     grid.appendChild(cell);
   });
@@ -297,35 +272,59 @@ function updateSubmitState(){
   const btn=$("submitBtn"); if(btn) btn.disabled = selected.size!==4 || isOver;
   const clearBtn=$("clearBtn"); if(clearBtn) clearBtn.disabled=isOver;
   const shuffleBtn=$("shuffleBtn"); if(shuffleBtn) shuffleBtn.disabled=isOver;
-  const livesEl=$("mistakes"); if(livesEl) livesEl.textContent=mistakes;
   renderHearts();
 }
 
-// -- Hearts (SVG) --
+// --- Hearts (SVG) ---
 function renderHearts(){
   const cont=$("hearts"); if(!cont) return;
-  const total=MAX_MISTAKES;
-  const remaining=Math.max(0, total - mistakes);
+  const total=MAX_MISTAKES, remaining=Math.max(0,total-mistakes);
   cont.innerHTML="";
-  const fullSVG = `
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-      <path fill="currentColor"
-        d="M12 21.35l-1.45-1.32C6.1 15.36 3 12.54 3 9.28 3 7.01 4.86 5 7.24 5c1.41 0 2.75.66 3.6 1.72.85-1.06 2.19-1.72 3.6-1.72C17.14 5 19 7.01 19 9.28c0 3.26-3.1 6.08-7.55 10.75L12 21.35z"/>
-    </svg>`;
-  const emptySVG = `
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-      <path fill="none" stroke="currentColor" stroke-width="2"
-        d="M12 21.35l-1.45-1.32C6.1 15.36 3 12.54 3 9.28 3 7.01 4.86 5 7.24 5c1.41 0 2.75.66 3.6 1.72.85-1.06 2.19-1.72 3.6-1.72C17.14 5 19 7.01 19 9.28c0 3.26-3.1 6.08-7.55 10.75L12 21.35z"/>
-    </svg>`;
+  const full=`<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 21.35l-1.45-1.32C6.1 15.36 3 12.54 3 9.28 3 7.01 4.86 5 7.24 5c1.41 0 2.75.66 3.6 1.72.85-1.06 2.19-1.72 3.6-1.72C17.14 5 19 7.01 19 9.28c0 3.26-3.1 6.08-7.55 10.75L12 21.35z"/></svg>`;
+  const empty=`<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21.35l-1.45-1.32C6.1 15.36 3 12.54 3 9.28 3 7.01 4.86 5 7.24 5c1.41 0 2.75.66 3.6 1.72.85-1.06 2.19-1.72 3.6-1.72C17.14 5 19 7.01 19 9.28c0 3.26-3.1 6.08-7.55 10.75L12 21.35z"/></svg>`;
   for(let i=0;i<total;i++){
     const span=document.createElement("span");
     span.className="heart"+(i<remaining?"":" empty");
-    span.innerHTML = (i<remaining)? fullSVG : emptySVG;
+    span.innerHTML = (i<remaining)? full : empty;
     cont.appendChild(span);
   }
 }
 
-// -- Confetti on win --
+// --- Heatmap (last 28 days) ---
+function readStats(){ try{ return JSON.parse(localStorage.getItem(STATS_KEY)||"{}"); }catch{ return {}; } }
+function writeStats(s){ localStorage.setItem(STATS_KEY, JSON.stringify(s)); }
+function renderHeatmap(){
+  const el=$("miniCal"); if(!el) return;
+  el.innerHTML="";
+  const s=readStats(); const hist=s.history||{};
+  // τελευταία 28 μέρες
+  for(let i=27;i>=0;i--){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    const key=ymd(d); const v=hist[key]; // 'W', 'L' ή undefined
+    const cell=document.createElement("div");
+    cell.className="hm-cell"+(v==="W"?" win":v==="L"?" fail":"");
+    el.appendChild(cell);
+  }
+}
+
+// --- Achievements (απλές συνθήκες) ---
+function checkAchievements(won){
+  const s=readStats();
+  const unlocked = s.ach || {};
+  const newly = [];
+
+  if ((s.streak||0) >= 3 && !unlocked["streak3"]) { unlocked["streak3"]=1; newly.push("🔥 3-day streak"); }
+  if (won && (mistakes===0) && !unlocked["flawless"]) { unlocked["flawless"]=1; newly.push("💎 Flawless win"); }
+  if ((s.wins||0) >= 10 && !unlocked["win10"]) { unlocked["win10"]=1; newly.push("🏅 10 wins"); }
+
+  if (newly.length){
+    s.ach = unlocked;
+    writeStats(s);
+    alert("New achievements unlocked:\n- " + newly.join("\n- "));
+  }
+}
+
+// --- Lightweight confetti ---
 function confettiBurst(){
   const canvas=document.createElement("canvas");
   canvas.className="gq-confetti";
@@ -336,7 +335,7 @@ function confettiBurst(){
   const N=120, parts=[];
   const colors=["#7BCDBA","#00CEC8","#00A5A0","#156064","#FFD166","#EF476F","#06D6A0","#118AB2"];
   for(let i=0;i<N;i++){
-    parts.push({ x:w/2, y:h*0.25, vx:(Math.random()*2-1)*4, vy:(Math.random()*-2-3), g:0.12+Math.random()*0.08, s:3+Math.random()*3, c:colors[i%colors.length], a:1 });
+    parts.push({x:w/2,y:h*0.25,vx:(Math.random()*2-1)*4,vy:(Math.random()*-2-3),g:0.12+Math.random()*0.08,s:3+Math.random()*3,c:colors[i%colors.length],a:1});
   }
   const start=performance.now(), maxT=1200;
   function tick(now){
@@ -344,9 +343,7 @@ function confettiBurst(){
     ctx.clearRect(0,0,w,h);
     for(const p of parts){
       p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.a-=0.006;
-      ctx.globalAlpha=Math.max(0,p.a);
-      ctx.fillStyle=p.c;
-      ctx.fillRect(p.x,p.y,p.s,p.s);
+      ctx.globalAlpha=Math.max(0,p.a); ctx.fillStyle=p.c; ctx.fillRect(p.x,p.y,p.s,p.s);
     }
     if(dt<maxT && parts.some(p=>p.a>0 && p.y<h+20)) requestAnimationFrame(tick);
     else document.body.removeChild(canvas);
@@ -354,12 +351,18 @@ function confettiBurst(){
   requestAnimationFrame(tick);
 }
 
-// -- Game logic --
+// --- Game logic ---
 function markSelectedCelebrate(){
   const grid=$("grid"); if(!grid) return;
   const cells=grid.querySelectorAll(".cell");
   [...selected].forEach(i=>{ const el=cells[i]; if(el) el.classList.add("celebrate"); });
   setTimeout(()=>{ [...selected].forEach(i=>{ const el=cells[i]; if(el) el.classList.remove("celebrate"); }); }, 260);
+}
+function shakeSelection(){
+  const grid=$("grid"); if(!grid) return;
+  const cells=grid.querySelectorAll(".cell");
+  [...selected].forEach(i=>{ const el=cells[i]; if(el) el.classList.add("shake"); });
+  setTimeout(()=>{ [...selected].forEach(i=>{ const el=cells[i]; if(el) el.classList.remove("shake"); }); }, 260);
 }
 
 function toggleSelect(idx){
@@ -377,17 +380,17 @@ function checkSelection(){
   if(allSame){
     markSelectedCelebrate();
     if (navigator.vibrate) navigator.vibrate(40);
+    play("good");
     solvedGroups.add(g0); setMessage("Correct! You found a category.",true);
     const toRemove=new Set(cfg.groups[g0].items);
     tiles=tiles.filter(t=>!toRemove.has(t.label)); selected.clear();
     renderSolvedBars(); renderGrid();
-    if(solvedGroups.size===4){
-      endGame(true);
-    }
+    if(solvedGroups.size===4) endGame(true);
   }else{
     if(SHOW_ONE_AWAY && isOneAway(chosen)) setMessage("One away! You're one word off.");
     else setMessage("Not quite — try again.");
     mistakes++; if (navigator.vibrate) navigator.vibrate(80);
+    play("bad"); shakeSelection();
     selected.clear(); renderGrid();
     if(mistakes>=MAX_MISTAKES) endGame(false);
   }
@@ -397,40 +400,129 @@ function isOneAway(chosen){ const counts={}; chosen.forEach(c=>counts[c.groupInd
 function endGame(won){
   cfg.groups.forEach((_,gi)=>{ if(!solvedGroups.has(gi)) solvedGroups.add(gi); });
   renderSolvedBars(); setMessage(won?"Great job! All categories solved.":"Game over. See the categories above."); updateSubmitState();
+
   updateStats(won);
+  checkAchievements(won);
   if (won) confettiBurst();
 }
 
-// -- Stats (localStorage) --
-const STATS_KEY="gq-stats";
-function readStats(){ try{ return JSON.parse(localStorage.getItem(STATS_KEY)||"{}"); }catch{ return {}; } }
-function writeStats(s){ localStorage.setItem(STATS_KEY, JSON.stringify(s)); }
+// --- Stats, Share, Sound ---
 function updateStats(won){
   const s=readStats();
+  const key=todayStr();
   s.played=(s.played||0)+1;
   if (won){ s.wins=(s.wins||0)+1; s.streak=(s.streak||0)+1; s.bestStreak=Math.max(s.bestStreak||0, s.streak); }
   else { s.streak=0; }
+  // ιστορικό για heatmap
+  s.history = s.history || {};
+  if (!s.history[key]) s.history[key] = won ? "W" : "L";
   writeStats(s);
+  renderHeatmap();
 }
+
 function showStats(){
   const s=readStats();
   const played=s.played||0, wins=s.wins||0, streak=s.streak||0, best=s.bestStreak||0;
   const winrate = played ? Math.round((wins/played)*100) : 0;
-  const msg = `Stats\n— Played: ${played}\n— Wins: ${wins} (${winrate}%)\n— Streak: ${streak}\n— Best streak: ${best}`;
-  alert(msg);
+  const ach = s.ach ? Object.keys(s.ach).length : 0;
+  alert(`Stats
+— Played: ${played}
+— Wins: ${wins} (${winrate}%)
+— Streak: ${streak}
+— Best streak: ${best}
+— Achievements: ${ach}`);
 }
 
-// -- Share (Web Share API fallback) --
 async function shareResult(){
   const solved = solvedGroups.size;
   const text = `I played GeoQuads! ${solved}/4 groups, mistakes: ${mistakes}. Try today's: ${location.origin}${location.pathname}`;
+  // Share-as-image
+  const img = await renderShareImage();
   try{
-    if (navigator.share) { await navigator.share({ title:"GeoQuads", text, url: location.href }); }
-    else { await navigator.clipboard.writeText(text); setMessage("Copied result to clipboard ✅", true); }
+    if (navigator.canShare && navigator.canShare({ files: [img] })) {
+      await navigator.share({ title:"GeoQuads", text, files:[img] });
+      return;
+    }
   }catch{}
+  try{
+    if (navigator.share) { await navigator.share({ title:"GeoQuads", text, url: location.href }); return; }
+  }catch{}
+  try{ await navigator.clipboard.writeText(text); setMessage("Copied result to clipboard ✅", true); }catch{}
 }
 
-// -- Countdown (to local midnight) --
+function updateSoundButton(){
+  const b=$("soundToggle"); if(!b) return;
+  b.setAttribute("aria-pressed", SOUND_ON?"true":"false");
+  b.textContent = SOUND_ON ? "🔊 Sound" : "🔈 Sound";
+}
+function toggleSound(){
+  SOUND_ON = !SOUND_ON;
+  localStorage.setItem(SND_KEY, SOUND_ON ? "1" : "0");
+  updateSoundButton();
+}
+
+// --- Share-as-Image (PNG) ---
+async function renderShareImage(){
+  const cvs = $("shareCanvas");
+  const ctx = cvs.getContext("2d");
+  const W = cvs.width, H = cvs.height;
+
+  // background
+  ctx.fillStyle = "#dff6ff";
+  ctx.fillRect(0,0,W,H);
+
+  // title
+  ctx.fillStyle = "#156064";
+  ctx.font = "bold 28px Century Gothic, Arial, sans-serif";
+  ctx.fillText("GeoQuads — Result", 24, 44);
+
+  // solved bars preview
+  let y = 80;
+  for (let gi=0; gi<cfg.groups.length; gi++){
+    const g = cfg.groups[gi];
+    // category badge
+    const colors = ["#7BCDBA","#00CEC8","#00A5A0","#156064"];
+    ctx.fillStyle = colors[gi];
+    roundRect(ctx, 24, y, W-48, 44, 10);
+    ctx.fill();
+
+    // text
+    ctx.fillStyle = "#0b1e2a";
+    ctx.font = "bold 16px Century Gothic, Arial, sans-serif";
+    ctx.fillText(g.name, 34, y+20);
+    ctx.font = "14px Century Gothic, Arial, sans-serif";
+    ctx.fillText(g.items.join(" · "), 34, y+38);
+
+    y += 54;
+  }
+
+  // summary
+  y += 12;
+  ctx.fillStyle = "#333";
+  ctx.font = "16px Century Gothic, Arial, sans-serif";
+  const solved = solvedGroups.size;
+  ctx.fillText(`Solved: ${solved}/4   Mistakes: ${mistakes}`, 24, y);
+
+  // url
+  ctx.fillStyle = "#0d4a88";
+  ctx.font = "14px Century Gothic, Arial, sans-serif";
+  ctx.fillText(location.origin + location.pathname, 24, H-20);
+
+  // export
+  const blob = await new Promise(res => cvs.toBlob(res, "image/png"));
+  return new File([blob], "geoquads.png", { type: "image/png" });
+}
+function roundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.arcTo(x+w, y, x+w, y+h, r);
+  ctx.arcTo(x+w, y+h, x, y+h, r);
+  ctx.arcTo(x, y+h, x, y, r);
+  ctx.arcTo(x, y, x+w, y, r);
+  ctx.closePath();
+}
+
+// --- Countdown ---
 function updateCountdown(){
   const el=$("countdown"); if(!el) return;
   const now=new Date(); const nextMidnight=new Date(now); nextMidnight.setHours(24,0,0,0);
@@ -442,43 +534,34 @@ function updateCountdown(){
 }
 setInterval(updateCountdown,1000); updateCountdown();
 
-// -- Init --
-function init(){
-  tiles=buildTiles(); selected.clear(); solvedGroups.clear(); mistakes=0;
-  renderSolvedBars(); renderGrid(); setMessage("");
-}
+// --- Init ---
+function buildTiles(){ const base=[]; cfg.groups.forEach((g,gi)=>g.items.forEach((label,idx)=>base.push({label,groupIndex:gi,id:`${gi}-${idx}`}))); return shuffleArray(base); }
+function init(){ tiles=buildTiles(); selected.clear(); solvedGroups.clear(); mistakes=0; renderSolvedBars(); renderGrid(); setMessage(""); }
 
-// Bind controls & footer links
-const practiceLink=$("practice"); if(practiceLink) practiceLink.onclick=ensurePracticeMenu;
-const archiveLink=$("archive"); if(archiveLink) archiveLink.onclick=()=>{ goToArchiveDate(yesterdayStr()); };
-const dailyLink=$("daily"); if(dailyLink) dailyLink.onclick=switchToDaily;
-const shareLink=$("share"); if(shareLink) shareLink.onclick=shareResult;
-const statsLink=$("stats"); if(statsLink) statsLink.onclick=showStats;
+// Bind controls & footer
+$("practice")?.addEventListener("click", ()=>{ const m=$("practiceMenu"); if(!m) return; m.hidden=false; m.classList.add("open"); });
+$("daily")?.addEventListener("click", switchToDaily);
+$("archive")?.addEventListener("click", ()=>{ goToArchiveDate(yesterdayStr()); });
+$("stats")?.addEventListener("click", showStats);
+$("share")?.addEventListener("click", shareResult);
+$("soundToggle")?.addEventListener("click", toggleSound);
 
-const clearBtn=$("clearBtn"); if(clearBtn) clearBtn.onclick=clearSelection;
-const shuffleBtn=$("shuffleBtn"); if(shuffleBtn) shuffleBtn.onclick=shuffleTiles;
-const submitBtn=$("submitBtn"); if(submitBtn) submitBtn.onclick=checkSelection;
+$("clearBtn")?.addEventListener("click", ()=>{ play("click"); clearSelection(); });
+$("shuffleBtn")?.addEventListener("click", ()=>{ play("click"); shuffleTiles(); });
+$("submitBtn")?.addEventListener("click", checkSelection);
 
-// Keyboard shortcuts (desktop)
-document.addEventListener("keydown",(e)=>{
-  if (e.repeat) return;
-  if (e.key==="Enter") $("submitBtn")?.click();
-  if (e.key==="Escape") $("clearBtn")?.click();
-  if (e.key.toLowerCase()==="r") $("shuffleBtn")?.click();
-});
+// Keyboard
+document.addEventListener("keydown",(e)=>{ if (e.repeat) return; if (e.key==="Enter") $("submitBtn")?.click(); if (e.key==="Escape") $("clearBtn")?.click(); if (e.key.toLowerCase()==="r") $("shuffleBtn")?.click(); });
 
-// -- Bootstrap --
+// --- Bootstrap ---
 (async function bootstrap(){
   try{
     const params=new URLSearchParams(location.search);
     const dateParam=params.get("date");
-
     const loaded=await loadQuizConfig();
     validateConfig(loaded); cfg=loaded;
-
     applyConfigToUI(dateParam||null); init();
     updateDayNav(dateParam||null); updateDailyLinkVisibility();
-
     console.log("Loaded quiz config:", cfg.id || "(no id)");
   }catch(e){
     console.error(e); setMessage(String(e.message));
@@ -487,4 +570,3 @@ document.addEventListener("keydown",(e)=>{
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
-
