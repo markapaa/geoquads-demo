@@ -206,3 +206,21 @@ button {
 @media (max-width: 520px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
 }
+/* --- Mobile adjustments --- */
+@media (max-width: 520px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .cell {
+    padding: 8px;         /* μικρότερο padding */
+    min-height: 48px;     /* πιο χαμηλά */
+    font-size: 12px;      /* μικρότερη γραμματοσειρά */
+  }
+}
+
+@media (max-width: 380px) {
+  .cell {
+    padding: 6px;
+    min-height: 40px;
+    font-size: 11px;
+  }
+}
+
