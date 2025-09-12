@@ -394,6 +394,44 @@ async function shareResult(){
   } catch {}
 }
 
+// --- Mini calendar (heatmap) helpers ---
+function daysRange() {
+  const out = [];
+  const start = new Date(FIRST_DAILY);
+  const end = strToDate(yesterdayStr());
+  for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+    out.push(ymd(d));
+  }
+  return out;
+}
+
+function renderMiniCal() {
+  const grid = document.getElementById("miniCal");
+  if (!grid) return;
+
+  const days = daysRange();
+  grid.innerHTML = "";
+  days.forEach(date => {
+    const cell = document.createElement("div");
+    cell.className = "hm-cell";
+    cell.dataset.date = date;
+    cell.setAttribute("title", date);
+    cell.setAttribute("role", "button");
+    grid.appendChild(cell);
+  });
+
+  // click → open that day in archive
+  grid.onclick = (e) => {
+    const date = e.target?.dataset?.date;
+    if (!date) return;
+    goToArchiveDate(date);
+  };
+
+  // link δίπλα στο "Your calendar" (αν υπάρχει)
+  const hmOpen = document.getElementById("hmOpen");
+  if (hmOpen) hmOpen.onclick = () => goToArchiveDate(yesterdayStr());
+}
+
 // -- Countdown --
 function updateCountdown(){
   const el=$("countdown"); if(!el) return;
@@ -475,6 +513,7 @@ function bindUI(){
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
 
 
 
