@@ -1,4 +1,4 @@
-// ========= GeoQuads — Stable Loader (root JSON only, with Practice menu) =========
+// ========= GeoQuads — Stable Loader (root JSON only) + Hearts UI =========
 
 // -- Constants for Archive --
 const FIRST_DAILY = new Date(2025, 8, 10); // 2025-09-10 (0-based month)
@@ -38,6 +38,21 @@ function shuffleArray(arr){const a=arr.slice(); for(let i=a.length-1;i>0;i--){co
 function setMessage(text,ok=false){const el=$("message"); if(!el) return; el.textContent=text||""; el.className="msg"+(ok?" ok":"");}
 function isGameOver(){return mistakes>=MAX_MISTAKES || solvedGroups.size===4;}
 
+// -- Hearts (lives) UI --
+function renderHearts() {
+  const cont = $("hearts");
+  if (!cont) return;
+  const total = MAX_MISTAKES;
+  const remaining = Math.max(0, total - mistakes);
+  cont.innerHTML = "";
+  for (let i = 0; i < total; i++) {
+    const span = document.createElement("span");
+    span.className = "heart" + (i < remaining ? "" : " empty");
+    span.textContent = "❤"; // εύκολα αντικαθίσταται με SVG αργότερα
+    cont.appendChild(span);
+  }
+}
+
 // -- Validation --
 function normalizeLabel(s){return String(s).trim();}
 function validateConfig(config){
@@ -52,7 +67,7 @@ function validateConfig(config){
 
 // -- Fetch (root only) --
 async function tryFetchJSON(url){
-  const res=await fetch(url, { cache: "no-store" }); // no-store για να μη «κολλάει» σε παλιό
+  const res=await fetch(url, { cache: "no-store" });
   console.log("fetch",url,res.status);
   if(!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   try{ return await res.json(); }catch(e){ throw new Error(`JSON parse error for ${url}: ${e.message}`); }
@@ -201,6 +216,7 @@ function applyConfigToUI(archiveDateStr=null){
 
   updateDailyLinkVisibility();
   updateDayNav(archiveDateStr);
+  renderHearts(); // ενημέρωσε οπτικά τις ζωές
 }
 
 // -- Build / render --
@@ -237,7 +253,9 @@ function updateSubmitState(){
   const btn=$("submitBtn"); if(btn) btn.disabled = selected.size!==4 || isOver;
   const clearBtn=$("clearBtn"); if(clearBtn) clearBtn.disabled=isOver;
   const shuffleBtn=$("shuffleBtn"); if(shuffleBtn) shuffleBtn.disabled=isOver;
-  const livesEl=$("mistakes"); if(livesEl) livesEl.textContent=mistakes;
+
+  // hearts re-render
+  renderHearts();
 }
 
 // -- Game logic --
@@ -286,7 +304,7 @@ setInterval(updateCountdown,1000); updateCountdown();
 // -- Init --
 function init(){
   tiles=buildTiles(); selected.clear(); solvedGroups.clear(); mistakes=0;
-  renderSolvedBars(); renderGrid(); setMessage("");
+  renderSolvedBars(); renderGrid(); setMessage(""); renderHearts();
 }
 
 // -- Practice menu (static HTML present in index.html) --
