@@ -112,26 +112,39 @@ function updateDailyLinkVisibility(){ const el=$("daily"); if(!el) return; el.st
 
 // Day nav
 function ensureDayNav(){
-  let nav=$("dayNav"); if(nav) return nav;
-  const header=document.querySelector("header");
-  nav=document.createElement("div"); nav.id="dayNav";
+  let nav = $("dayNav");
+  if (nav) return nav;
+  const header = document.querySelector("header");
+
+  nav = document.createElement("div");
+  nav.id = "dayNav";
   nav.innerHTML = `
-    <div id="prevDay" class="linkish" style="cursor:pointer; margin-right:8px;">◀ Previous</div>
-    <div id="dayLabel" class="sub"></div>
-    <div id="nextDay" class="linkish" style="cursor:pointer; margin-left:8px;">Next ▶</div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <div id="prevDay" class="linkish" style="cursor:pointer;">◀ Previous</div>
+      <div id="dayLabel" class="sub"></div>
+      <div id="nextDay" class="linkish" style="cursor:pointer;">Next ▶</div>
+    </div>
   `;
+  nav.style.margin = "6px 0 10px";
   nav.style.display = "flex";
   nav.style.justifyContent = "center";
   nav.style.alignItems = "center";
 
-  nav.style.margin="6px 0 10px"; nav.style.display="grid";
-  nav.style.gridTemplateColumns="1fr auto 1fr"; nav.style.alignItems="center"; nav.style.gap="8px";
   header.parentNode.insertBefore(nav, header.nextSibling);
 
-  $("prevDay").onclick=()=>{ const cur=activeArchiveDate(); if(!cur) return; const d=strToDate(cur); d.setDate(d.getDate()-1); goToArchiveDate(ymd(d)); };
-  $("nextDay").onclick=()=>{ const cur=activeArchiveDate(); if(!cur) return; const d=strToDate(cur); d.setDate(d.getDate()+1); goToArchiveDate(ymd(d)); };
+  $("prevDay").onclick = () => {
+    const cur = activeArchiveDate(); if (!cur) return;
+    const d = strToDate(cur); d.setDate(d.getDate() - 1);
+    goToArchiveDate(ymd(d));
+  };
+  $("nextDay").onclick = () => {
+    const cur = activeArchiveDate(); if (!cur) return;
+    const d = strToDate(cur); d.setDate(d.getDate() + 1);
+    goToArchiveDate(ymd(d));
+  };
   return nav;
 }
+
 function updateDayNav(dateStr){
   const nav=ensureDayNav(), prevBtn=$("prevDay"), nextBtn=$("nextDay"), label=$("dayLabel");
   if(!dateStr){ nav.style.display="none"; return; }
@@ -446,5 +459,6 @@ function bindUI(){
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
 
 
