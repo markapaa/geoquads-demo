@@ -1,12 +1,12 @@
-// ========= GeoQuads — Loader with Archive Navigation (ROOT JSON only) =========
+// ========= GeoQuads — Stable Loader (root JSON only, with Practice menu) =========
 
 // -- Constants for Archive --
 const FIRST_DAILY = new Date(2025, 8, 10); // 2025-09-10 (0-based month)
 function ymd(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");return `${y}-${m}-${day}`;}
 function todayStr(){return ymd(new Date());}
-function yesterdayStr(){const d=new Date();d.setDate(d.getDate()-1);return ymd(d);}
-function strToDate(s){const [Y,M,D]=s.split("-").map(Number);return new Date(Y,M-1,D);}
-function clampArchiveBounds(dateStr){const d=strToDate(dateStr),first=FIRST_DAILY,last=strToDate(yesterdayStr());return{hasPrev:d>first,hasNext:d<last};}
+function yesterdayStr(){const d=new Date(); d.setDate(d.getDate()-1); return ymd(d);}
+function strToDate(s){const [Y,M,D]=s.split("-").map(Number); return new Date(Y,M-1,D);}
+function clampArchiveBounds(dateStr){ const d=strToDate(dateStr), first=FIRST_DAILY, last=strToDate(yesterdayStr()); return { hasPrev: d>first, hasNext: d<last }; }
 
 // -- State --
 let tiles=[]; let selected=new Set(); let solvedGroups=new Set();
@@ -27,9 +27,12 @@ const BUILTIN_DEMO={
   ui:{accent:"#4F46E5",locale:"en-US"}
 };
 
+// -- Category palette (light -> dark) for solved bars --
+const CATEGORY_COLORS = ["#7BCDBA", "#00CEC8", "#00A5A0", "#156064"];
+
 // -- Helpers --
 const $=(id)=>document.getElementById(id);
-console.log("GeoQuads app.js (root-only) loaded");
+console.log("GeoQuads app.js loaded");
 
 function shuffleArray(arr){const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;}
 function setMessage(text,ok=false){const el=$("message"); if(!el) return; el.textContent=text||""; el.className="msg"+(ok?" ok":"");}
@@ -47,14 +50,12 @@ function validateConfig(config){
   return true;
 }
 
-// -- Fetch helper (ROOT only, cache-busting) --
+// -- Fetch (root only) --
 async function tryFetchJSON(url){
-  const bust=(url.includes("?")?"&":"?")+"t="+Date.now();
-  const res=await fetch(url+bust,{cache:"no-store"});
+  const res=await fetch(url, { cache: "no-store" }); // no-store για να μη «κολλάει» σε παλιό
   console.log("fetch",url,res.status);
   if(!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  try { return await res.json(); }
-  catch(e){ throw new Error(`JSON parse error for ${url}: ${e.message}`); }
+  try{ return await res.json(); }catch(e){ throw new Error(`JSON parse error for ${url}: ${e.message}`); }
 }
 
 // ---- Practice / Daily / Archive helpers ----
@@ -163,100 +164,6 @@ async function loadQuizConfig(){
   return await tryFetchJSON("practice-easy.json");
 }
 
-// -- Practice Menu --
-function ensurePracticeMenu() {
-  const menu = document.getElementById("practiceMenu");
-  if (!menu) return;
-
-  // Αν δεν έχουν δεθεί ήδη listeners, δέσε τους τώρα (μία φορά)
-  if (!menu.dataset.bound) {
-    menu.addEventListener("click", (e) => {
-      const id = e.target?.dataset?.id;
-      if (!id) {
-        // Κλικ έξω από το κουτί -> κλείσιμο
-        if (e.target === menu) menu.classList.remove("open");
-        return;
-      }
-      if (id === "__close") {
-        menu.classList.remove("open");
-        return;
-      }
-      // Επιλογή practice -> φόρτωσε και κλείσε
-      switchToQuiz(id);
-      menu.classList.remove("open");
-    });
-    menu.dataset.bound = "true";
-  }
-
-  // toggle open/close
-  menu.classList.toggle("open");
-}
-
-
-  // Δημιουργία overlay
-  menu = document.createElement("div");
-  menu.id = "practiceMenu";
-  menu.style.position = "fixed";
-  menu.style.inset = "0";
-  menu.style.display = "none";           // <-- αρχικά κρυφό
-  menu.style.alignItems = "center";
-  menu.style.justifyContent = "center";
-  menu.style.background = "rgba(0,0,0,0.15)";
-  menu.style.zIndex = "50";
-
-  menu.innerHTML = `
-    <div class="pmenu">
-      <div style="font-weight:600;margin-bottom:6px;">Choose a practice</div>
-      <button data-id="practice-easy">Practice — Easy</button>
-      <button data-id="practice-hard">Practice — Hard</button>
-      <button class="ghost" data-id="__close">Close</button>
-    </div>
-  `;
-  document.body.appendChild(menu);
-
-  // Στυλ κουτιού
-  const box = menu.querySelector(".pmenu");
-  box.style.background = "#fff";
-  box.style.border = "1px solid #e5e7eb";
-  box.style.borderRadius = "12px";
-  box.style.padding = "16px";
-  box.style.display = "flex";
-  box.style.gap = "8px";
-  box.style.flexDirection = "column";
-  box.style.minWidth = "260px";
-  box.style.boxShadow = "0 10px 24px rgba(0,0,0,0.08)";
-
-  const btns = box.querySelectorAll("button");
-  btns.forEach(b => {
-    b.style.padding = "10px 14px";
-    b.style.borderRadius = "10px";
-    b.style.border = "1px solid #e5e7eb";
-    b.style.background = "#fff";
-    b.style.cursor = "pointer";
-    b.onmouseover = () => b.style.background = "#e0e7ff";
-    b.onmouseout  = () => b.style.background = "#fff";
-  });
-
-  // Κλείσιμο με click εκτός pmenu
-  menu.addEventListener("click", (e) => {
-    if (e.target === menu) hide();
-  });
-
-  // Clicks στα κουμπιά
-  menu.addEventListener("click", (e) => {
-    const id = e.target?.dataset?.id;
-    if (!id) return;
-    if (id === "__close") { hide(); return; }
-    // Επιλογή practice -> φόρτωσε και κλείσε
-    switchToQuiz(id);
-    hide();
-  });
-
-  // άνοιξε τώρα
-  show();
-}
-
-
 // -- Apply UI from cfg --
 function applyConfigToUI(archiveDateStr=null){
   document.title = cfg.title || "GeoQuads";
@@ -297,23 +204,17 @@ function applyConfigToUI(archiveDateStr=null){
 }
 
 // -- Build / render --
-const CATEGORY_COLORS = ["#7BCDBA", "#00CEC8", "#00A5A0", "#156064"];
-
 function buildTiles(){
   const base=[]; cfg.groups.forEach((g,gi)=>g.items.forEach((label,idx)=>base.push({label,groupIndex:gi,id:`${gi}-${idx}`})));
   return shuffleArray(base);
 }
-function renderSolvedBars() {
-  const container = $("solved");
-  if (!container) return;
-  container.innerHTML = "";
-  [...solvedGroups].forEach((gi) => {
-    const g = cfg.groups[gi];
-    const bar = document.createElement("div");
-    bar.className = "bar";
-    // Αν το JSON έχει δικό του color → το κρατάμε, αλλιώς παίρνει από την παλέτα
+function renderSolvedBars(){
+  const container=$("solved"); if(!container) return;
+  container.innerHTML=""; [...solvedGroups].forEach((gi)=>{
+    const g=cfg.groups[gi]; const bar=document.createElement("div");
+    bar.className="bar";
     bar.style.background = g.color || CATEGORY_COLORS[gi % CATEGORY_COLORS.length];
-    bar.innerHTML = `<div class="name">${g.name}</div><div class="items">${g.items.join(" · ")}</div>`;
+    bar.innerHTML=`<div class="name">${g.name}</div><div class="items">${g.items.join(" · ")}</div>`;
     container.appendChild(bar);
   });
 }
@@ -388,6 +289,31 @@ function init(){
   renderSolvedBars(); renderGrid(); setMessage("");
 }
 
+// -- Practice menu (static HTML present in index.html) --
+function ensurePracticeMenu(){
+  const menu = document.getElementById("practiceMenu");
+  if (!menu) return;
+
+  // bind once
+  if (!menu.dataset.bound) {
+    // κλείσιμο με click έξω
+    menu.addEventListener("click", (e) => {
+      if (e.target === menu) menu.classList.remove("open");
+    });
+    // clicks στα κουμπιά
+    menu.addEventListener("click", (e) => {
+      const id = e.target?.dataset?.id;
+      if (!id) return;
+      if (id === "__close") { menu.classList.remove("open"); return; }
+      switchToQuiz(id);
+      menu.classList.remove("open");
+    });
+    menu.dataset.bound = "true";
+  }
+
+  menu.classList.toggle("open");
+}
+
 // Bind controls & footer links
 const practiceLink=$("practice"); if(practiceLink) practiceLink.onclick=ensurePracticeMenu;
 const archiveLink=$("archive"); if(archiveLink) archiveLink.onclick=()=>{ goToArchiveDate(yesterdayStr()); };
@@ -417,6 +343,3 @@ const submitBtn=$("submitBtn"); if(submitBtn) submitBtn.onclick=checkSelection;
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
-
-
-
