@@ -62,10 +62,21 @@ function validateConfig(config){
 
 // -- Fetch helpers (root and /quizzes; no-store to avoid stale daily) --
 async function tryFetchJSON(url){
-  const res=await fetch(url,{cache:"no-store"}); console.log("fetch",url,res.status);
-  if(!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  try{ return await res.json(); }catch(e){ throw new Error(`JSON parse error for ${url}: ${e.message}`); }
+  // πρόσθεσε cache-buster param για να μη μένει “κολλημένο” (ειδικά σε 404)
+  const bust = `gq=${Date.now()}`;
+  const sep = url.includes("?") ? "&" : "?";
+  const finalUrl = `${url}${sep}${bust}`;
+
+  const res = await fetch(finalUrl, { cache: "no-store" });
+  console.log("fetch", finalUrl, res.status);
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${finalUrl}`);
+  try {
+    return await res.json();
+  } catch (e) {
+    throw new Error(`JSON parse error for ${finalUrl}: ${e.message}`);
+  }
 }
+
 async function tryFetchFirst(urls){
   for(const u of urls){
     try { return await tryFetchJSON(u); }
@@ -476,3 +487,4 @@ document.addEventListener("keydown",(e)=>{
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
