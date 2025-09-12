@@ -182,27 +182,43 @@ async function switchToQuiz(id){
   updateDailyLinkVisibility(); updateDayNav(null);
 }
 async function switchToDaily(){
-  const t=todayStr(), y=yesterdayStr();
-  try{
-    try{
-      const newCfg=await tryFetchFirst([`${t}.json`, `quizzes/${t}.json`]);
-      validateConfig(newCfg); cfg=newCfg;
-      applyConfigToUI(null); init();
-      history.replaceState(null,"",location.pathname);
-      setMessage(`Back to daily: ${cfg.title || t}`,true);
-      updateDayNav(null);
-    }catch(eToday){
-      console.warn(`Daily not found (${t}), trying yesterday (${y})`);
-      const newCfg=await tryFetchFirst([`${y}.json`, `quizzes/${y}.json`]);
-      validateConfig(newCfg); cfg=newCfg;
-      applyConfigToUI(y); init();
-      history.replaceState(null,"",`?date=${encodeURIComponent(y)}`);
-      setMessage(`Showing latest available daily: ${y}`,true);
-      updateDayNav(y);
+  const t = todayStr();
+  const y = yesterdayStr();
+  try {
+    // Προσπάθησε πρώτα το σημερινό
+    const todayCfg = await tryFetchFirst([`${t}.json`, `quizzes/${t}.json`]);
+    validateConfig(todayCfg); 
+    cfg = todayCfg;
+
+    // Daily mode (χωρίς ?date, χωρίς ημερομηνία στο UI)
+    applyConfigToUI(null);
+    init();
+    history.replaceState(null, "", location.pathname);
+    setMessage(`Back to daily: ${cfg.title || t}`, true);
+  } catch (eToday) {
+    console.warn(`Daily not found (${t}), using yesterday (${y})`, eToday.message);
+    try {
+      // Φόρτωσε χθεσινό, αλλά ΠΑΛΙ daily mode (όχι archive UI)
+      const yCfg = await tryFetchFirst([`${y}.json`, `quizzes/${y}.json`]);
+      validateConfig(yCfg);
+      cfg = yCfg;
+
+      applyConfigToUI(null);
+      init();
+      history.replaceState(null, "", location.pathname);
+      setMessage(`Showing latest available daily (yesterday)`, true);
+    } catch (eY) {
+      console.warn(`Yesterday also missing; falling back to practice-easy.`, eY.message);
+      await switchToQuiz("practice-easy");
+      return;
     }
-  }catch(e){ console.warn(`No daily/yesterday found. Falling back to practice-easy.`, e.message); await switchToQuiz("practice-easy"); }
+  }
+
+  // Πάντα κρύψε το day-nav στο daily
+  updateDayNav(null);
   updateDailyLinkVisibility();
 }
+
 
 // -- Loader (id/date/auto) --
 async function loadQuizConfig(){
@@ -459,6 +475,7 @@ function bindUI(){
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
 
 
 
