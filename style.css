@@ -37,32 +37,6 @@ h1 {
   gap: 4px;
 }
 
-.qmark {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Μικρότερο το γράμμα Q + η πυξίδα */
-.qmark svg.compass {
-  width: 14px;   /* μικρότερο μέγεθος */
-  height: 14px;
-  position: absolute;
-  right: -8px;   /* τοποθέτηση μέσα στο Q */
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--accent);
-}
-
-/* Προαιρετικά κάνε το ίδιο το Q λίγο μεγαλύτερο για να «χωρέσει» */
-.qmark {
-  font-weight: bold;
-  font-size: 30px;
-  line-height: 1;
-}
-
-
 /* Chips & help */
 .chip {
   font-size: 12px; padding: 6px 10px; border-radius: 999px;
@@ -218,4 +192,5 @@ h1 {
   user-select: none;
 }
 .heart.empty { color: #e5e7eb; }
+
 
