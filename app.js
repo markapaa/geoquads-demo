@@ -47,24 +47,28 @@ function renderHearts() {
   const remaining = Math.max(0, total - mistakes);
   cont.innerHTML = "";
 
+  // Καρδιά τύπου emoji (συμμετρική), γεμάτη
   const fullSVG = `
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-      <path fill="currentColor"
-        d="M12 21s-6.7-4.35-9.33-7.6C.85 11.32 1.01 8.4 3 6.7 4.6 5.36 7 5.5 8.5 7c.5.5 1 .99 1.5 1.5.5-.51 1-.99 1.5-1.5C13 5.5 15.4 5.36 17 6.7c1.99 1.7 2.15 4.62.33 6.7C18.7 16.65 12 21 12 21z"/>
-    </svg>`;
+  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+    <path fill="currentColor"
+      d="M12 21.35l-1.45-1.32C6.1 15.36 3 12.54 3 9.28 3 7.01 4.86 5 7.24 5c1.41 0 2.75.66 3.6 1.72.85-1.06 2.19-1.72 3.6-1.72C17.14 5 19 7.01 19 9.28c0 3.26-3.1 6.08-7.55 10.75L12 21.35z"/>
+  </svg>`;
+
+  // «Άδεια» καρδιά: περίγραμμα, χωρίς γέμισμα (ίδιο σχήμα)
   const emptySVG = `
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-      <path fill="currentColor" opacity="0.25"
-        d="M12 21s-6.7-4.35-9.33-7.6C.85 11.32 1.01 8.4 3 6.7 4.6 5.36 7 5.5 8.5 7c.5.5 1 .99 1.5 1.5.5-.51 1-.99 1.5-1.5C13 5.5 15.4 5.36 17 6.7c1.99 1.7 2.15 4.62.33 6.7C18.7 16.65 12 21 12 21z"/>
-    </svg>`;
+  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+    <path fill="none" stroke="currentColor" stroke-width="2"
+      d="M12 21.35l-1.45-1.32C6.1 15.36 3 12.54 3 9.28 3 7.01 4.86 5 7.24 5c1.41 0 2.75.66 3.6 1.72.85-1.06 2.19-1.72 3.6-1.72C17.14 5 19 7.01 19 9.28c0 3.26-3.1 6.08-7.55 10.75L12 21.35z"/>
+  </svg>`;
 
   for (let i = 0; i < total; i++) {
     const span = document.createElement("span");
     span.className = "heart" + (i < remaining ? "" : " empty");
-    span.innerHTML = i < remaining ? fullSVG : emptySVG;
+    span.innerHTML = (i < remaining) ? fullSVG : emptySVG;
     cont.appendChild(span);
   }
 }
+
 
 
 // -- Validation --
@@ -375,4 +379,5 @@ const submitBtn=$("submitBtn"); if(submitBtn) submitBtn.onclick=checkSelection;
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
 
