@@ -171,3 +171,17 @@ h1 { margin: 0; font-size: 28px; }
   .grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Hearts (lives) */
+.lives { display:flex; align-items:center; gap:8px; }
+.hearts { display:flex; gap:6px; }
+.heart {
+  font-size: 22px;
+  line-height: 1;
+  color: #dc2626;        /* κόκκινο για «γεμάτη» καρδιά */
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.1));
+  user-select: none;
+}
+.heart.empty {
+  color: #e5e7eb;       /* γκρι για «άδεια» */
+}
+
