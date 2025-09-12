@@ -164,18 +164,34 @@ async function loadQuizConfig(){
 }
 
 // -- Practice Menu --
-function ensurePracticeMenu(){
-  let menu = document.getElementById("practiceMenu");
+function ensurePracticeMenu() {
+  const menu = document.getElementById("practiceMenu");
+  if (!menu) return;
 
-  // helper για show/hide
-  const show = () => { if (menu) menu.style.display = "flex"; };
-  const hide = () => { if (menu) menu.style.display = "none"; };
-
-  if (menu) {
-    // toggle ορατότητας
-    menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "flex" : "none";
-    return;
+  // Αν δεν έχουν δεθεί ήδη listeners, δέσε τους τώρα (μία φορά)
+  if (!menu.dataset.bound) {
+    menu.addEventListener("click", (e) => {
+      const id = e.target?.dataset?.id;
+      if (!id) {
+        // Κλικ έξω από το κουτί -> κλείσιμο
+        if (e.target === menu) menu.classList.remove("open");
+        return;
+      }
+      if (id === "__close") {
+        menu.classList.remove("open");
+        return;
+      }
+      // Επιλογή practice -> φόρτωσε και κλείσε
+      switchToQuiz(id);
+      menu.classList.remove("open");
+    });
+    menu.dataset.bound = "true";
   }
+
+  // toggle open/close
+  menu.classList.toggle("open");
+}
+
 
   // Δημιουργία overlay
   menu = document.createElement("div");
@@ -401,5 +417,6 @@ const submitBtn=$("submitBtn"); if(submitBtn) submitBtn.onclick=checkSelection;
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
 
 
