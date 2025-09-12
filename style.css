@@ -185,16 +185,14 @@ button {
 #practiceMenu .pmenu .ghost { background: transparent; }
 
 /* Hearts (lives) */
-.lives { display:flex; align-items:center; gap:8px; }
-.hearts { display:flex; gap:6px; }
 .heart {
-  font-size: 22px;
-  line-height: 1;
-  color: #4dabb8; /* γεμάτη καρδιά */
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.1));
-  user-select: none;
+  display:inline-block;
+  width:22px;
+  height:22px;
+  color:#4dabb8;             /* μπλε */
+  vertical-align:middle;
 }
-.heart.empty { color: #e5e7eb; } /* άδεια */
+.heart.empty { opacity:0.28; }  /* «άδεια» καρδιά με διαφάνεια */
 
 /* Small interactive feel */
 .cell:active, button:active { transform: translateY(1px); }
@@ -273,4 +271,5 @@ button {
     padding: 3px 2px;
   }
 }
+
 
