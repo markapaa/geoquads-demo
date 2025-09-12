@@ -13,6 +13,54 @@ function clampArchiveBounds(dateStr){const d=strToDate(dateStr),first=FIRST_DAIL
 // -- State --
 let tiles=[]; let selected=new Set(); let solvedGroups=new Set();
 let mistakes=0; let MAX_MISTAKES=4; let SHOW_ONE_AWAY=true; let cfg=null;
+// -- Sound state (on/off persisted) --
+let SOUND_ON = (() => {
+  try { return JSON.parse(localStorage.getItem("gq-sound") ?? "true"); }
+  catch { return true; }
+})();
+
+function setSoundOn(on) {
+  SOUND_ON = !!on;
+  localStorage.setItem("gq-sound", JSON.stringify(SOUND_ON));
+  const b = document.getElementById("soundToggle");
+  if (b) {
+    b.setAttribute("aria-pressed", String(SOUND_ON));
+    b.textContent = SOUND_ON ? "🔊 Sound" : "🔈 Sound";
+  }
+}
+
+// Tiny WebAudio beeps (no files)
+let _audioCtx;
+function _ensureCtx() {
+  if (!_audioCtx) _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return _audioCtx;
+}
+function beep({freq=440, dur=0.12, type="sine", gain=0.06}={}) {
+  if (!SOUND_ON) return;
+  const ctx = _ensureCtx();
+  const t0 = ctx.currentTime;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = type;
+  osc.frequency.value = freq;
+  g.gain.value = gain;
+  osc.connect(g); g.connect(ctx.destination);
+  osc.start(t0);
+  // tiny fadeout
+  g.gain.setValueAtTime(gain, t0 + Math.max(0, dur - 0.04));
+  g.gain.linearRampToValueAtTime(0.0001, t0 + dur);
+  osc.stop(t0 + dur + 0.02);
+}
+// semantic sfx
+const sfx = {
+  select: () => beep({freq: 520, dur: 0.06, type: "square", gain: 0.03}),
+  deselect: () => beep({freq: 360, dur: 0.05, type: "square", gain: 0.03}),
+  shuffle: () => { beep({freq: 400, dur: 0.05}); setTimeout(()=>beep({freq:520,dur:0.05}),60); },
+  correct: () => { beep({freq: 660, dur: 0.10, type: "triangle"}); setTimeout(()=>beep({freq:880,dur:0.10,type:"triangle"}),90); },
+  wrong: () => { beep({freq: 220, dur: 0.12, type: "sawtooth"}); },
+  win: () => { [880,1046,1318].forEach((f,i)=>setTimeout(()=>beep({freq:f,dur:0.1,type:"triangle"}), i*120)); }
+};
+
 
 // -- Built-in demo (safe fallback) --
 const BUILTIN_DEMO={
@@ -276,6 +324,40 @@ function endGame(won){
   renderSolvedBars(); setMessage(won?"Great job! All categories solved.":"Game over. See the categories above."); updateSubmitState();
 }
 
+// -- Stats (localStorage) --
+const STATS_KEY = "gq-stats";
+function readStats(){ try { return JSON.parse(localStorage.getItem(STATS_KEY) || "{}"); } catch { return {}; } }
+function writeStats(s){ localStorage.setItem(STATS_KEY, JSON.stringify(s)); }
+function updateStats(won){
+  const s = readStats();
+  s.played = (s.played || 0) + 1;
+  if (won) {
+    s.wins = (s.wins || 0) + 1;
+    s.streak = (s.streak || 0) + 1;
+    s.bestStreak = Math.max(s.bestStreak || 0, s.streak);
+  } else {
+    s.streak = 0;
+  }
+  writeStats(s);
+}
+function showStats(){
+  const s = readStats();
+  const played = s.played || 0, wins = s.wins || 0, streak = s.streak || 0, best = s.bestStreak || 0;
+  const winrate = played ? Math.round((wins/played)*100) : 0;
+  alert(`Stats\n— Played: ${played}\n— Wins: ${wins} (${winrate}%)\n— Streak: ${streak}\n— Best streak: ${best}`);
+}
+
+// -- Share (Web Share API with clipboard fallback) --
+async function shareResult(){
+  const solved = solvedGroups.size;
+  const text = `I played GeoQuads! ${solved}/4 groups, mistakes: ${mistakes}. Try today’s: ${location.origin}${location.pathname}`;
+  try {
+    if (navigator.share) await navigator.share({ title:"GeoQuads", text, url: location.href });
+    else { await navigator.clipboard.writeText(text); setMessage("Copied result to clipboard ✅", true); }
+  } catch {}
+}
+
+
 // -- Countdown --
 function updateCountdown(){
   const el=$("countdown"); if(!el) return;
@@ -339,3 +421,4 @@ function bindUI(){
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
