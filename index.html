@@ -5,8 +5,13 @@
   <title>GeoQuads</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#4F46E5">
 </head>
 <body>
+  <noscript style="display:block;padding:8px 12px;background:#fee2e2;color:#991b1b;">
+    GeoQuads needs JavaScript enabled to run.
+  </noscript>
+
   <div class="wrap">
     <header>
       <div>
@@ -34,7 +39,9 @@
 
       <div class="status">
         <div id="message" class="msg"></div>
-        <div>Mistakes: <span id="mistakes" class="lives">0</span>/<span id="maxLives">4</span></div>
+        <div>
+          Mistakes: <span id="mistakes" class="lives">0</span>/<span id="maxLives">4</span>
+        </div>
       </div>
     </div>
 
@@ -48,7 +55,7 @@
     </div>
   </div>
 
-  <script src="app.js" defer></script>
+  <!-- Βάλε version param για να σπάει η cache όταν αλλάζεις app.js -->
+  <script src="app.js?v=14" defer></script>
 </body>
 </html>
-
