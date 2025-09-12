@@ -224,3 +224,53 @@ button {
   }
 }
 
+/* === Compact 4×4 σε μικρές οθόνες === */
+@media (max-width: 420px) {
+  .wrap {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  /* ΠΑΝΤΑ 4 στήλες στο κινητό */
+  .grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 4px;
+  }
+
+  .cell {
+    /* πιο «σφιχτά» tiles */
+    padding: 4px 2px;
+    font-size: 11px;
+    line-height: 1.1;
+    border-radius: 8px;
+
+    /* να γίνουν τετράγωνα και μικρά */
+    min-height: auto !important;
+    aspect-ratio: 1 / 1;
+
+    /* σπάσιμο λέξεων για να μη “πετάγονται” έξω */
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  /* πιο μικρό κείμενο στις μπάρες */
+  .bar .items { font-size: 12px; }
+
+  /* κουμπιά πιο compact και κεντρικά */
+  .controls { gap: 8px; }
+  .btn-secondary, .button {
+    min-width: 84px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
+/* ακόμη πιο σφιχτά για πολύ μικρά πλάτη */
+@media (max-width: 360px) {
+  .grid { gap: 3px; }
+  .cell {
+    font-size: 10px;
+    padding: 3px 2px;
+  }
+}
+
