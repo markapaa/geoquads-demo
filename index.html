@@ -65,10 +65,13 @@
     </div>
 
     <!-- Mini heatmap (streak/ιστορικό) -->
-    <div class="heatmap">
-      <div class="hm-title">Your calendar</div>
-      <div id="miniCal" class="hm-grid" aria-hidden="true"></div>
+  <div class="heatmap">
+    <div class="hm-title">
+      <span>Your calendar</span>
+      <span id="hmOpen" class="linkish">(open archive)</span>
     </div>
+    <div id="miniCal" class="hm-grid"></div>
+  </div>
 
     <div class="footer">
       <div>⏱️ Next daily in: <span id="countdown">--:--:--</span></div>
@@ -109,5 +112,6 @@
   <script src="app.js?v=recover1" defer></script>
 </body>
 </html>
+
 
 
