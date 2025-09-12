@@ -45,7 +45,6 @@ function beep({freq=440, dur=0.12, type="sine", gain=0.06}={}) {
   g.gain.value = gain;
   osc.connect(g); g.connect(ctx.destination);
   osc.start(t0);
-  // tiny fadeout
   g.gain.setValueAtTime(gain, t0 + Math.max(0, dur - 0.04));
   g.gain.linearRampToValueAtTime(0.0001, t0 + dur);
   osc.stop(t0 + dur + 0.02);
@@ -148,7 +147,7 @@ function ensureDayNav(){
 function updateDayNav(dateStr){
   const nav=ensureDayNav(), prevBtn=$("prevDay"), nextBtn=$("nextDay"), label=$("dayLabel");
   if(!dateStr){ nav.style.display="none"; return; }
-  nav.style.display="grid";
+  nav.style.display="flex"; // keep FLEX (not grid)
   const {hasPrev,hasNext}=clampArchiveBounds(dateStr);
   prevBtn.style.visibility=hasPrev?"visible":"hidden";
   nextBtn.style.visibility=hasNext?"visible":"hidden";
@@ -170,7 +169,6 @@ async function goToArchiveDate(dateStr){
   updateDailyLinkVisibility(); updateDayNav(dateStr);
 }
 async function switchToQuiz(id){
-  // close practice menu if exists
   const pm=document.getElementById("practiceMenu"); if(pm){ pm.classList.remove("open"); pm.hidden=true; }
   try{
     const newCfg=await tryFetchFirst([`${id}.json`, `quizzes/${id}.json`]);
@@ -185,12 +183,9 @@ async function switchToDaily(){
   const t = todayStr();
   const y = yesterdayStr();
   try {
-    // Προσπάθησε πρώτα το σημερινό
     const todayCfg = await tryFetchFirst([`${t}.json`, `quizzes/${t}.json`]);
     validateConfig(todayCfg); 
     cfg = todayCfg;
-
-    // Daily mode (χωρίς ?date, χωρίς ημερομηνία στο UI)
     applyConfigToUI(null);
     init();
     history.replaceState(null, "", location.pathname);
@@ -198,11 +193,9 @@ async function switchToDaily(){
   } catch (eToday) {
     console.warn(`Daily not found (${t}), using yesterday (${y})`, eToday.message);
     try {
-      // Φόρτωσε χθεσινό, αλλά ΠΑΛΙ daily mode (όχι archive UI)
       const yCfg = await tryFetchFirst([`${y}.json`, `quizzes/${y}.json`]);
       validateConfig(yCfg);
       cfg = yCfg;
-
       applyConfigToUI(null);
       init();
       history.replaceState(null, "", location.pathname);
@@ -213,12 +206,9 @@ async function switchToDaily(){
       return;
     }
   }
-
-  // Πάντα κρύψε το day-nav στο daily
-  updateDayNav(null);
+  updateDayNav(null); // always hide in daily
   updateDailyLinkVisibility();
 }
-
 
 // -- Loader (id/date/auto) --
 async function loadQuizConfig(){
@@ -267,14 +257,10 @@ function applyConfigToUI(archiveDateStr=null){
 
   const maxLivesEl=$("maxLives"); if(maxLivesEl) maxLivesEl.textContent=MAX_MISTAKES;
 
+  // (Single calls; no duplicates, no mini-cal)
   updateDailyLinkVisibility();
   updateDayNav(archiveDateStr);
   renderHearts();
-  updateDailyLinkVisibility();
-  updateDayNav(archiveDateStr);
-
-  // render/refresh mini calendar
-  renderMiniCal();
 }
 
 // -- Build / render --
@@ -361,7 +347,6 @@ function isOneAway(chosen){ const counts={}; chosen.forEach(c=>counts[c.groupInd
 function endGame(won){
   cfg.groups.forEach((_,gi)=>{ if(!solvedGroups.has(gi)) solvedGroups.add(gi); });
   renderSolvedBars(); setMessage(won?"Great job! All categories solved.":"Game over. See the categories above."); updateSubmitState();
-  // stats + win sfx
   updateStats(won);
   if (won) sfx.win();
 }
@@ -419,12 +404,10 @@ function init(){
 
 // -- Bindings (mounted after DOM ready) --
 function bindUI(){
-  // Practice overlay open
   $("practice")?.addEventListener("click", ()=>{
     const m=$("practiceMenu"); if(!m) return;
     m.hidden=false; m.classList.add("open");
   });
-  // Practice overlay inner buttons
   const pm = $("practiceMenu");
   if (pm){
     pm.addEventListener("click",(e)=>{
@@ -441,7 +424,6 @@ function bindUI(){
   $("shuffleBtn")?.addEventListener("click", shuffleTiles);
   $("submitBtn")?.addEventListener("click", checkSelection);
 
-  // Top-right: stats / share / sound
   $("stats")?.addEventListener("click", showStats);
   $("share")?.addEventListener("click", shareResult);
   const soundBtn = $("soundToggle");
@@ -450,7 +432,6 @@ function bindUI(){
     soundBtn.addEventListener("click", ()=> setSoundOn(!SOUND_ON));
   }
 
-  // keyboard shortcuts (desktop)
   document.addEventListener("keydown",(e)=>{
     if(e.repeat) return;
     if(e.key==="Enter") $("submitBtn")?.click();
@@ -480,10 +461,3 @@ function bindUI(){
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
-
-
-
-
-
-
-
