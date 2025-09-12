@@ -199,5 +199,22 @@ h1 {
 }
 .heart.empty { color: #e5e7eb; }
 
+/* Heatmap */
+.hm-grid { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; }
+.hm-cell {
+  width: 18px; height: 18px; border-radius: 4px;
+  background: #e5eef7; /* empty */
+}
+.hm-cell.win { background: #7BCDBA; }
+.hm-cell.played { background: #00CEC8; }
+.hm-cell.fail { background: #EF476F; }
+.hm-cell[role="button"] { cursor: pointer; }
+.hm-cell:hover { outline: 2px solid rgba(0,0,0,0.1); }
+
+.hm-title { display:flex; align-items:center; gap:8px; }
+.hm-title .linkish { cursor:pointer; text-decoration:underline; }
+
+
+
 
 
