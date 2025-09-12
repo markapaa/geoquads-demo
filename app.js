@@ -253,15 +253,26 @@ function buildTiles(){
   const base=[]; cfg.groups.forEach((g,gi)=>g.items.forEach((label,idx)=>base.push({label,groupIndex:gi,id:`${gi}-${idx}`})));
   return shuffleArray(base);
 }
-function renderSolvedBars(){
-  const container=$("solved"); if(!container) return;
-  container.innerHTML=""; [...solvedGroups].forEach((gi)=>{
-    const g=cfg.groups[gi]; const bar=document.createElement("div");
-    bar.className="bar"; if(g.color) bar.style.background=g.color;
-    bar.innerHTML=`<div class="name">${g.name}</div><div class="items">${g.items.join(" · ")}</div>`;
+function renderSolvedBars() {
+  const container = document.getElementById("solved");
+  if (!container) return;
+  container.innerHTML = "";
+
+  // Δείξε τις κατηγορίες με τη ΣΕΙΡΑ ΤΟΥΣ (0..3), μόνο όσες έχουν λυθεί
+  for (let gi = 0; gi < cfg.groups.length; gi++) {
+    if (!solvedGroups.has(gi)) continue;
+    const g = cfg.groups[gi];
+
+    const bar = document.createElement("div");
+    bar.className = "bar " + `group-${gi}`; // παίρνει χρώμα από CSS (.group-0..3)
+    bar.innerHTML = `
+      <div class="name">${g.name}</div>
+      <div class="items">${g.items.join(" · ")}</div>
+    `;
     container.appendChild(bar);
-  });
+  }
 }
+
 function renderGrid(){
   const grid=$("grid"); if(!grid) return;
   grid.innerHTML=""; tiles.forEach((t,idx)=>{
@@ -484,3 +495,4 @@ document.addEventListener("keydown",(e)=>{
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
