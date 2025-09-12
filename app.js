@@ -281,16 +281,23 @@ function applyConfigToUI(archiveDateStr=null){
 }
 
 // -- Build / render --
+const CATEGORY_COLORS = ["#7BCDBA", "#00CEC8", "#00A5A0", "#156064"];
+
 function buildTiles(){
   const base=[]; cfg.groups.forEach((g,gi)=>g.items.forEach((label,idx)=>base.push({label,groupIndex:gi,id:`${gi}-${idx}`})));
   return shuffleArray(base);
 }
-function renderSolvedBars(){
-  const container=$("solved"); if(!container) return;
-  container.innerHTML=""; [...solvedGroups].forEach((gi)=>{
-    const g=cfg.groups[gi]; const bar=document.createElement("div");
-    bar.className="bar"; if(g.color) bar.style.background=g.color;
-    bar.innerHTML=`<div class="name">${g.name}</div><div class="items">${g.items.join(" · ")}</div>`;
+function renderSolvedBars() {
+  const container = $("solved");
+  if (!container) return;
+  container.innerHTML = "";
+  [...solvedGroups].forEach((gi) => {
+    const g = cfg.groups[gi];
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    // Αν το JSON έχει δικό του color → το κρατάμε, αλλιώς παίρνει από την παλέτα
+    bar.style.background = g.color || CATEGORY_COLORS[gi % CATEGORY_COLORS.length];
+    bar.innerHTML = `<div class="name">${g.name}</div><div class="items">${g.items.join(" · ")}</div>`;
     container.appendChild(bar);
   });
 }
@@ -394,4 +401,5 @@ const submitBtn=$("submitBtn"); if(submitBtn) submitBtn.onclick=checkSelection;
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
 
