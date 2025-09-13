@@ -1,0 +1,31 @@
+{
+  "id": "2025-09-13",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think geography and some history.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Capitals starting with A",
+      "items": ["Andorra", "Greece", "Turkey", "Netherlands"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "German-speaking countries",
+      "items": ["Switzerland", "Austria", "Luxembourg", "Belgium"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Most recent NATO members",
+      "items": ["Sweden", "Finland", "Montenegro", "North Macedonia"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "Countries with land on the african tectonic plate)",
+      "items": ["Spain", "Malta", "Portugal", "Italy"],
+      "color": "#FFECEC"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}
