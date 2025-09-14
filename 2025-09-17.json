@@ -1,0 +1,31 @@
+{
+  "id": "2025-09-15",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think flags, geology, borders and antartic animals.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Countries that border Brazil",
+      "items": ["Bolivia", "France", "Paraguay", "Colombia"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "Flags with 3 vertical stripes not containing white",
+      "items": ["Romania", "Belgiuim", "Mali", "Guinea"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Countries with the most active volcanoes",
+      "items": ["USA", "Japan", "Indonesia", "Russia"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "Countries with penguins",
+      "items": ["Ecuador", "Chile", "South Africa", "Australia"],
+      "color": "#FFECEC"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}
