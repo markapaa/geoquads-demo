@@ -252,7 +252,7 @@ function applyConfigToUI(archiveDateStr=null){
     spoilerEl.onclick=()=>{ spoilerEl.classList.toggle("revealed"); spoilerEl.classList.toggle("spoiler"); };
   }
 
-  MAX_MISTAKES = Number.isInteger(cfg.lives) ? cfg.lives : 4;
+  MAX_MISTAKES = Number.isInteger(cfg.lives) ? cfg.lives : 5;
   SHOW_ONE_AWAY = cfg.showOneAway !== false;
 
   const maxLivesEl=$("maxLives"); if(maxLivesEl) maxLivesEl.textContent=MAX_MISTAKES;
@@ -461,3 +461,4 @@ function bindUI(){
     catch(ee){ console.error("BUILTIN_DEMO failed:", ee); alert("Fatal error: demo config invalid."); }
   }
 })();
+
