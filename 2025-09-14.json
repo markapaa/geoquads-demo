@@ -1,0 +1,31 @@
+{
+  "id": "2025-09-14",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think capitals and alliances.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Capitals starting with D",
+      "items": ["Djibouti", "Tajikistan", "Ireland", "Tanzania"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "Largest coastlines",
+      "items": ["Canada", "Russia", "Norway", "Indonesia"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Most recent world cup winners",
+      "items": ["Argentina", "GErmany", "France", "Spain"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "Countries with no official languages",
+      "items": ["UK", "Eritrea", "Australia", "Mexico"],
+      "color": "#FFECEC"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}
