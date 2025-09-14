@@ -1,9 +1,9 @@
 {
   "id": "2025-09-10",
   "title": "GeoQuads — Daily",
-  "spoiler": "Σκέψου πρωτεύουσες vs ποτάμια.",
-  "help": "Επίλεξε 4 λέξεις που ανήκουν στην ίδια κατηγορία και πάτα Submit. Έχεις 4 λάθη.",
-  "lives": 4,
+  "spoiler": "Think mountains and capitals",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     { "name": "Longest coastlines", "items": ["Norway","Canada","Indonesia","Russia"], "color": "#E8FFF3" },
@@ -13,4 +13,5 @@
   ],
   "ui": { "accent": "#4F46E5", "locale": "el-GR" }
 }
+
 
