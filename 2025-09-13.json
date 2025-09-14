@@ -1,7 +1,7 @@
 {
   "id": "2025-09-13",
   "title": "GeoQuads — Daily",
-  "spoiler": "Think capitals and alliances.",
+  "spoiler": "Think capitals, languages and alliances.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
   "lives": 5,
   "showOneAway": true,
@@ -22,7 +22,7 @@
       "color": "#E8FFF3"
     },
     {
-      "name": "Countries with land on the african tectonic plate)",
+      "name": "Countries with land on the african tectonic plate",
       "items": ["Spain", "Malta", "Portugal", "Italy"],
       "color": "#FFECEC"
     }
