@@ -7,23 +7,23 @@
   "showOneAway": true,
   "groups": [
     {
-      "name": "Countries with coast on the Mediterranean",
-      "items": ["Italy", "Greece", "Turkey", "Egypt"],
+      "name": "Countries with star on flag",
+      "items": ["Bosnia and Herzegovina", "Kosovo", "Azerbaijan", "Turkey"],
       "color": "#E6F4FF"
     },
     {
-      "name": "Countries starting with 'S'",
-      "items": ["Spain", "Sweden", "Slovakia", "Slovenia"],
+      "name": "Countries with cross on flag",
+      "items": ["Greece", "Georgia", "Switzerland", "Norway"],
       "color": "#FFF7E6"
     },
     {
-      "name": "Historical empires (countries once centers)",
-      "items": ["UK", "France", "Mongolia", "Ottoman"],
+      "name": "Countries with black in flag",
+      "items": ["Albania", "Belgium", "Estonia", "Germany"],
       "color": "#E8FFF3"
     },
     {
-      "name": "Countries using the euro",
-      "items": ["Germany", "Netherlands", "Portugal", "Finland"],
+      "name": "Countries with 4 or more colors in their flag",
+      "items": ["Liechtenstein", "Andorra", "Portugal", "Croatia"],
       "color": "#FFECEC"
     }
   ],
