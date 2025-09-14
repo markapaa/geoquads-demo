@@ -1,1 +1,31 @@
-
+{
+  "id": "2025-09-15",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think politics and capitals.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Countries that border the caspian sea",
+      "items": ["Kazakhstan", "Turkmenistan", "Azerbaijan", "Iran"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "Capitals starting with D",
+      "items": ["East Timor", "Bangladesh", "Syria", "Tajikistan"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Countries with nuclear weapons",
+      "items": ["Cabo Verde", "Guinea Bissau", "Angola", "Mozambique"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "Monarchies",
+      "items": ["Saudi Arabia", "Japan", "Thailand", "Bhutan"],
+      "color": "#FFECEC"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}
