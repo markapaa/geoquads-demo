@@ -1,7 +1,7 @@
 {
   "id": "2025-09-11",
   "title": "GeoQuads — Daily",
-  "spoiler": "Think alliances and currencies.",
+  "spoiler": "Think alliances, capitals and borders.",
   "help": "Pick 4 countries per hidden rule. No overlaps between categories.",
   "lives": 5,
   "showOneAway": true,
@@ -29,4 +29,5 @@
   ],
   "ui": { "accent": "#4F46E5", "locale": "en-US" }
 }
+
 
