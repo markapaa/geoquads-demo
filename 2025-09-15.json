@@ -1,0 +1,31 @@
+{
+  "id": "2025-09-15",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think capitals and football.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Countries that lie on the Equator",
+      "items": ["Somalia", "DRC", "Uganda", "Gabon"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "Countries that lie on the Prime Meridian",
+      "items": ["Algeria", "Mali", "Togo", "Burkina Faso"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Portuguese Africa",
+      "items": ["Cabo Verde", "Guinea Bissau", "Angola", "Mozambique"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "Countries Where The Capital Is Not The Largest City",
+      "items": ["Tanzania", "Malawi", "South Africa", "Morocco"],
+      "color": "#FFECEC"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}
