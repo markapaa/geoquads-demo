@@ -183,9 +183,26 @@ h1 {
 
 /* Responsive */
 @media (max-width: 520px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-  .cell { min-height: 50px; padding: 10px; font-size: 14px; }
+  body { padding: 10px; }
+  .wrap { max-width: 100%; }
+  .grid {
+    grid-template-columns: repeat(4, 1fr); /* κρατάμε 4 στήλες */
+    gap: 6px;
+  }
+  .cell {
+    min-height: 46px;
+    padding: 8px;
+    font-size: 12px;
+  }
+  .controls { gap: 12px; margin: 14px 0; }
 }
+
+/* Προαιρετικά, για πολύ στενές οθόνες */
+@media (max-width: 380px) {
+  .grid { gap: 5px; }
+  .cell { min-height: 40px; padding: 6px; font-size: 11px; }
+}
+
 
 /* Hearts (lives) */
 .lives { display:flex; align-items:center; gap:8px; }
@@ -213,6 +230,7 @@ h1 {
 
 .hm-title { display:flex; align-items:center; gap:8px; }
 .hm-title .linkish { cursor:pointer; text-decoration:underline; }
+
 
 
 
