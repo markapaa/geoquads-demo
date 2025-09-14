@@ -3,7 +3,7 @@
   "title": "GeoQuads — Daily",
   "spoiler": "Think alliances and currencies.",
   "help": "Pick 4 countries per hidden rule. No overlaps between categories.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
@@ -29,3 +29,4 @@
   ],
   "ui": { "accent": "#4F46E5", "locale": "en-US" }
 }
+
