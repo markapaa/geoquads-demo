@@ -1,0 +1,31 @@
+{
+  "id": "2025-09-18",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think position in map.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Pacific states",
+      "items": ["Hawaoo", "California", "Oregon", "Washington"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "Landlocked states",
+      "items": ["Arizona", "New Mexico", "Michigan", "Wyoming"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Mississippi river crosses",
+      "items": ["Mississippi", "Minnesota", "Wisconsin", "Louisiana"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "New England states",
+      "items": ["Maine", "Rhode island", "New Hampshire", "Connecticut"],
+      "color": "#E6F4FF"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}
