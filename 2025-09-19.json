@@ -1,0 +1,31 @@
+{
+  "id": "2025-09-19",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think position in map.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Southernmost countries",
+      "items": ["Chile", "Argentina", "Australia", "New Zealand"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "Northernmost countries",
+      "items": ["USA", "Russia", "Norway", "Canada"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Furthest countries from an ocean",
+      "items": ["Tajikistan", "Uzbekistan", "Kyrgyzstan", "Rwanda"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "Closest countries to 0 latitude and 0 longtitude",
+      "items": ["Ghana", "Gabon", "Republic of the Congo", "São Tomé and Príncipe"],
+      "color": "#E6F4FF"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}
