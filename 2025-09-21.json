@@ -1,0 +1,31 @@
+{
+  "id": "2025-09-21",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think flags.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Flags with crescent & star",
+      "items": ["Turkey", "Pakistan", "Algeria", "Tunisia"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "Flags with sun",
+      "items": ["Kyrgyzstan", "Uruguay", "North Macedonia", "Rwanda"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Flags with animals",
+      "items": ["Albania", "Bhutan", "Uganda", "Papua New Guinea"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "Flags with weapons",
+      "items": ["Moazmbique", "Oman", "Saudi arabia", "Angola"],
+      "color": "#E6F4FF"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}
