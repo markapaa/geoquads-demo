@@ -1,0 +1,31 @@
+{
+  "id": "2025-09-22",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think flags, politics and economics.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Most recent changed flags",
+      "items": ["Syria", "Kyrgyzstan", "Afghanistan", "Mauritania"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "Most recent UN members",
+      "items": ["South Sudan", "Montenegro", "Timor-Leste", "Switzerland"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Oldest date for current flag adoption",
+      "items": ["Denmark", "Netherlands", "Argentina", "UK"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "BRICS founding countries",
+      "items": ["Brazil", "Russia", "India", "China"],
+      "color": "#E6F4FF"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}
