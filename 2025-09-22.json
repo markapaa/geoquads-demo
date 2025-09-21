@@ -3,7 +3,7 @@
   "title": "GeoQuads — Daily",
   "spoiler": "Think flags, politics and economics.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
