@@ -1,0 +1,31 @@
+{
+  "id": "2025-09-23",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think olympics, elevation and location.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Capitals that hosted the Olympics",
+      "items": ["Greece", "France", "Mexico", "Russia"],
+      "color": "#E6F4FF"
+    },
+    {
+      "name": "High-altitude capitals (>2000 m)",
+      "items": ["Bolivia", "Ecuador", "Ethiopia", "Bhutan"],
+      "color": "#FFF7E6"
+    },
+    {
+      "name": "Capitals of “-stan” countries",
+      "items": ["Uzbekistan", "Tajikistan", "Kyrgyzstan", "Kazakhstan"],
+      "color": "#E8FFF3"
+    },
+    {
+      "name": "Island capitals",
+      "items": ["Cuba", "Philippines", "Indonesia", "Madagascar"],
+      "color": "#F3E8FF"
+    }
+  ],
+  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+}
