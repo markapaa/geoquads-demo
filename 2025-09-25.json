@@ -7,23 +7,23 @@
   "showOneAway": true,
   "groups": [
     {
-      "name": "Capitals that hosted the Olympics",
-      "items": ["Greece", "France", "Mexico", "Russia"],
+      "name": "Smallest countries",
+      "items": ["Vatican City", "Nauru", "Tuvalu", "Monaco"],
       "color": "#E6F4FF"
     },
     {
-      "name": "High-altitude capitals (>2000 m)",
-      "items": ["Bolivia", "Ecuador", "Ethiopia", "Bhutan"],
+      "name": "Countries with highest GDP",
+      "items": ["USA", "China", "Germany", "Japan"],
       "color": "#FFF7E6"
     },
     {
-      "name": "Capitals of “-stan” countries",
-      "items": ["Uzbekistan", "Tajikistan", "Kyrgyzstan", "Kazakhstan"],
+      "name": "Countries with the Highest Crime Index",
+      "items": ["Venezuela", "Papua New Guinea", "Afghanistan", "Haiti"],
       "color": "#E8FFF3"
     },
     {
-      "name": "Island capitals",
-      "items": ["Cuba", "Philippines", "Indonesia", "Madagascar"],
+      "name": "Countries with the most coffee production",
+      "items": ["Brazil", "Vietnam", "Indonesia", "Colombia"],
       "color": "#F3E8FF"
     }
   ],
