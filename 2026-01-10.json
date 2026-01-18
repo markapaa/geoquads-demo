@@ -1,5 +1,5 @@
 {
-  "id": "2025-09-10",
+  "id": "2026-01-10",
   "title": "GeoQuads — Daily",
   "spoiler": "Think mountains and capitals",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
@@ -13,6 +13,7 @@
   ],
   "ui": { "accent": "#4F46E5", "locale": "el-GR" }
 }
+
 
 
 
