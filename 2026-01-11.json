@@ -1,5 +1,5 @@
 {
-  "id": "2025-09-11",
+  "id": "2026-01-11",
   "title": "GeoQuads — Daily",
   "spoiler": "Think alliances, capitals and borders.",
   "help": "Pick 4 countries per hidden rule. No overlaps between categories.",
@@ -29,5 +29,6 @@
   ],
   "ui": { "accent": "#4F46E5", "locale": "en-US" }
 }
+
 
 
