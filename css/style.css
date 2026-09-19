@@ -3,18 +3,18 @@
 
 :root {
   /* Page */
-  --bg: #e4f3fd;
-  --bg-top: #f6fbff;
+  --bg: #fbf3e6;
+  --bg-top: #fffaf2;
   --card: #ffffff;
-  --ink: #1b2733;
-  --muted: #62748a;
-  --border: #d9e6f2;
-  --edge: #c5d6e6; /* the "3D" bottom edge of tiles and buttons */
+  --ink: #2b1a22;
+  --muted: #7d6a70;
+  --border: #eadfcf;
+  --edge: #e0d1bb; /* the "3D" bottom edge of tiles and buttons */
 
   /* Buttons and selection */
-  --primary: #2f6fdd;
-  --primary-dark: #1e4979;
-  --primary-weak: #e6efff;
+  --primary: #8c1f44;
+  --primary-dark: #5e1230;
+  --primary-weak: #f8e8ee;
 
   /* Feedback */
   --ok: #047857;
@@ -23,15 +23,16 @@
   --heart: #ff6b81;
 
   /* Category colors. Same order as the share emojis: green, blue, yellow, purple. */
-  --group-0: #7ddba3;
-  --group-1: #6cb8ff;
-  --group-2: #ffd45e;
-  --group-3: #b99bff;
-  --group-ink: #1b2733;
-  --accent: #8a5cf6;          /* second colour of the title gradient */
-  --primary-light: #4c8bf5;   /* top of the primary button */
-  --primary-disabled: #a9c1ea;
-  --primary-disabled-edge: #8ea9d6;
+  --group-0: #ffe5a4;
+  --group-1: #9adfe3;
+  --group-2: #ae87d4;
+  --group-3: #8c1f44;
+  --group-ink: #2b1a22;
+  --group-3-ink: #ffffff;     /* text on the dark 4th colour */
+  --accent: #ae87d4;          /* second colour of the title gradient */
+  --primary-light: #a63a5f;   /* top of the primary button */
+  --primary-disabled: #dcbcc9;
+  --primary-disabled-edge: #c9a0b2;
   --streak-ink: #b45309; --streak-bg: #fff4e0; --streak-border: #ffd9a0; --streak-edge: #f2c98a;
   --hint-bg: #fff9e0; --hint-border: #ffe08a;
   --notice-bg: #fff7e6; --notice-border: #f5d9a6;
@@ -39,8 +40,8 @@
   --win: #10b981; --fail: #ef476f;
 
   /* World map */
-  --map-sea: #eaf5fc;
-  --map-land: #d5e2ee;
+  --map-sea: #eaf7f8;
+  --map-land: #e3dde8;
   --map-border: #ffffff;
 
   --shadow: 0 10px 30px rgba(30, 73, 121, 0.12);
@@ -238,6 +239,7 @@ h1 span {
 .group-1 { background: var(--group-1); }
 .group-2 { background: var(--group-2); }
 .group-3 { background: var(--group-3); }
+.bar.group-3 { color: var(--group-3-ink); }
 
 /* Grid of 16 (or fewer) tiles */
 .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; }

@@ -92,22 +92,45 @@ export function evaluateGuess(chosen) {
 
 // -- Stats --------------------------------------------------------------------
 
-export function nextStats(stats, won) {
+/**
+ * Updates the stats after a finished quiz.
+ * The streak counts DAYS IN A ROW: only winning today's daily moves it.
+ * Archive quizzes count as "played" but never change the streak.
+ */
+export function nextStats(stats, won, { isTodaysDaily = false, today = todayStr() } = {}) {
   const s = { ...stats };
   s.played = (s.played || 0) + 1;
+  if (won) s.wins = (s.wins || 0) + 1;
+  if (!isTodaysDaily) return s;
+
   if (won) {
-    s.wins = (s.wins || 0) + 1;
-    s.streak = (s.streak || 0) + 1;
-    s.bestStreak = Math.max(s.bestStreak || 0, s.streak);
-  } else {
+    if (s.lastWinDay !== today) {
+      s.streak = s.lastWinDay === yesterdayOf(today) ? (s.streak || 0) + 1 : 1;
+      s.lastWinDay = today;
+    }
+    s.bestStreak = Math.max(s.bestStreak || 0, s.streak || 0);
+  } else if (s.lastWinDay !== today) {
     s.streak = 0;
   }
   return s;
 }
 
+function yesterdayOf(day) {
+  const d = strToDate(day);
+  d.setDate(d.getDate() - 1);
+  return ymd(d);
+}
+
+/** The streak to show: it is broken if you did not win yesterday's or today's daily. */
+export function currentStreak(stats, today = todayStr()) {
+  const last = stats.lastWinDay;
+  if (!last || (last !== today && last !== yesterdayOf(today))) return 0;
+  return stats.streak || 0;
+}
+
 // -- Sharing ------------------------------------------------------------------
 
-const SQUARES = ["🟩", "🟦", "🟨", "🟪"];
+const SQUARES = ["🟨", "🟦", "🟪", "🟥"];
 
 export function shareText({ label, won, mistakes, history, url }) {
   const rows = history.map((row) => row.map((gi) => SQUARES[gi] ?? "⬜").join("")).join("\n");

@@ -1,7 +1,7 @@
 // GeoQuads: UI and game flow. Pure rules live in logic.js, browser storage in storage.js, sounds in sound.js.
 import {
   todayStr, strToDate, isDateId, buildTiles, validateConfig, evaluateGuess,
-  nextStats, msUntilMidnight, formatCountdown, shareText, shuffleArray,
+  nextStats, currentStreak, msUntilMidnight, formatCountdown, shareText, shuffleArray,
 } from "./logic.js";
 import * as store from "./storage.js";
 import { sfx, setSoundEnabled, isSoundEnabled } from "./sound.js";
@@ -358,7 +358,7 @@ function finishGame(won) {
   state.won = won;
   if (state.mode !== "practice") {
     store.saveResult(state.quizId, { won, mistakes: state.mistakes, history: state.history });
-    store.setStats(nextStats(store.getStats(), won));
+    store.setStats(nextStats(store.getStats(), won, { isTodaysDaily: state.mode === "daily" && state.quizId === todayStr() }));
   }
   if (won) {
     sfx.win();
@@ -398,7 +398,7 @@ function renderRecap() {
 }
 
 function updateStreak() {
-  const streak = store.getStats().streak || 0;
+  const streak = currentStreak(store.getStats());
   $("streakChip").hidden = streak < 1;
   $("streakNum").textContent = streak;
   $("streakChip").title = `${streak} in a row`;
@@ -414,7 +414,7 @@ function openStats() {
   const cells = [
     [played, "Played"],
     [`${rate}%`, "Win rate"],
-    [s.streak || 0, "Streak"],
+    [currentStreak(s), "Streak"],
     [s.bestStreak || 0, "Best streak"],
   ];
   $("statsBody").innerHTML = cells.map(([n, label]) => `<div class="stat"><b>${n}</b><span>${label}</span></div>`).join("");
