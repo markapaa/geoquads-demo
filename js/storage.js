@@ -21,6 +21,10 @@ function write(key, value) {
 export const getSound = () => read("gq-sound", false);
 export const setSound = (on) => write("gq-sound", !!on);
 
+/** "light", "dark", or null (follow the device setting). */
+export const getTheme = () => read("gq-theme", null);
+export const setTheme = (t) => write("gq-theme", t);
+
 export const getStats = () => read("gq-stats", {});
 export const setStats = (stats) => write("gq-stats", stats);
 

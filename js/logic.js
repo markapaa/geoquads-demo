@@ -128,6 +128,31 @@ export function currentStreak(stats, today = todayStr()) {
   return stats.streak || 0;
 }
 
+// -- Statistics chart ---------------------------------------------------------
+
+/**
+ * Counts how many finished quizzes had 0, 1, 2... mistakes, plus how many were lost.
+ * results: { "2026-09-19": { won: true, mistakes: 1, ... }, ... }
+ * Returns { rows: [{ label, count, lost }], total } where rows always include 0..3 mistakes.
+ */
+export function mistakeDistribution(results) {
+  const wins = {};
+  let lost = 0;
+  let total = 0;
+  for (const r of Object.values(results || {})) {
+    if (!r || typeof r.won !== "boolean") continue;
+    total++;
+    if (!r.won) { lost++; continue; }
+    const m = Math.max(0, Math.floor(Number(r.mistakes) || 0));
+    wins[m] = (wins[m] || 0) + 1;
+  }
+  const max = Math.max(3, ...Object.keys(wins).map(Number));
+  const rows = [];
+  for (let m = 0; m <= max; m++) rows.push({ label: m === 1 ? "1 mistake" : `${m} mistakes`, count: wins[m] || 0, lost: false });
+  rows.push({ label: "Lost", count: lost, lost: true });
+  return { rows, total };
+}
+
 // -- Sharing ------------------------------------------------------------------
 
 const SQUARES = ["🟨", "🟦", "🟪", "🟥"];

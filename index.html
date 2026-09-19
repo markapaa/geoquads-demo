@@ -10,8 +10,22 @@
   <meta property="og:title" content="GeoQuads — Daily Geography Puzzle" />
   <meta property="og:description" content="Find 4 groups of 4. New puzzle every day. Can you solve today's GeoQuads?" />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#e4f3fd" />
+  <meta property="og:url" content="https://geoquads.vercel.app/" />
+  <meta property="og:image" content="https://geoquads.vercel.app/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#fbf3e6" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <!-- Apply the saved theme before the page paints, so there is no flash of the wrong colours -->
+  <script>
+    try {
+      var t = JSON.parse(localStorage.getItem("gq-theme") || "null");
+      if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,6 +63,9 @@
         </button>
         <button id="soundBtn" class="chip" type="button" aria-pressed="false" title="Sound on/off">
           <span id="soundIcon" aria-hidden="true">🔇</span><span class="chip-label">Sound</span>
+        </button>
+        <button id="themeBtn" class="chip" type="button" title="Light / dark theme">
+          <span id="themeIcon" aria-hidden="true">🌙</span><span class="chip-label">Theme</span>
         </button>
         <button id="helpBtn" class="chip chip-round" type="button" title="How to play" aria-label="How to play">?</button>
       </div>
@@ -131,6 +148,8 @@
     <form method="dialog">
       <h2>Your stats</h2>
       <div id="statsBody" class="stats-grid"></div>
+      <h3 class="chart-title">Mistakes per solved quiz</h3>
+      <div id="statsChart" class="chart"></div>
       <button class="btn btn-primary" value="close">Close</button>
     </form>
   </dialog>

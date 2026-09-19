@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "npx serve .",
+    "test": "node --test tests/logic.test.mjs",
     "validate": "node scripts/validate-quizzes.mjs",
     "build:index": "node scripts/build-index.mjs",
     "build:map": "node scripts/build-map.mjs"

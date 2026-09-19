@@ -1,7 +1,7 @@
 // GeoQuads: UI and game flow. Pure rules live in logic.js, browser storage in storage.js, sounds in sound.js.
 import {
   todayStr, strToDate, isDateId, buildTiles, validateConfig, evaluateGuess,
-  nextStats, currentStreak, msUntilMidnight, formatCountdown, shareText, shuffleArray,
+  nextStats, currentStreak, mistakeDistribution, msUntilMidnight, formatCountdown, shareText, shuffleArray,
 } from "./logic.js";
 import * as store from "./storage.js";
 import { sfx, setSoundEnabled, isSoundEnabled } from "./sound.js";
@@ -418,7 +418,21 @@ function openStats() {
     [s.bestStreak || 0, "Best streak"],
   ];
   $("statsBody").innerHTML = cells.map(([n, label]) => `<div class="stat"><b>${n}</b><span>${label}</span></div>`).join("");
+  renderStatsChart();
   $("statsDialog").showModal();
+}
+
+function renderStatsChart() {
+  const { rows, total } = mistakeDistribution(store.getResults());
+  const box = $("statsChart");
+  if (!total) {
+    box.innerHTML = '<p class="chart-empty">Finish a daily or an archive quiz to see your chart.</p>';
+    return;
+  }
+  const top = Math.max(1, ...rows.map((r) => r.count));
+  box.innerHTML = rows
+    .map((r) => `<div class="chart-row${r.lost ? " lost" : ""}"><span class="lbl">${r.label}</span><span class="track"><span class="fill" style="width:${Math.round((r.count / top) * 100)}%"></span></span><span class="num">${r.count}</span></div>`)
+    .join("");
 }
 
 async function shareResult() {
@@ -503,6 +517,26 @@ function updateSoundButton() {
   $("soundIcon").textContent = on ? "🔊" : "🔇";
 }
 
+// ------------------------------------------------------------------ theme ---
+
+function isDark() {
+  const set = document.documentElement.getAttribute("data-theme");
+  if (set) return set === "dark";
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+}
+
+function updateThemeButton() {
+  $("themeIcon").textContent = isDark() ? "☀️" : "🌙";
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark() ? "#171016" : "#fbf3e6");
+}
+
+function toggleTheme() {
+  const next = isDark() ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  store.setTheme(next);
+  updateThemeButton();
+}
+
 function wireUI() {
   $("clearBtn").addEventListener("click", clearSelection);
   $("shuffleBtn").addEventListener("click", shuffleTiles);
@@ -517,6 +551,9 @@ function wireUI() {
     updateSoundButton();
   });
   updateSoundButton();
+
+  $("themeBtn").addEventListener("click", toggleTheme);
+  updateThemeButton();
 
   $("spoiler").addEventListener("click", () => {
     const on = $("spoiler").classList.toggle("revealed");
@@ -548,6 +585,10 @@ function wireUI() {
 
 (async function bootstrap() {
   wireUI();
+  // Lets the game be installed on a phone and keep working offline (see sw.js). Failing here is harmless.
+  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  }
   await loadManifest();
   const params = new URLSearchParams(location.search);
   const id = params.get("id");

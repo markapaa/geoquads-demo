@@ -23,6 +23,7 @@ A daily geography grouping puzzle. Sixteen words (countries, cities, islands, la
 | **?** | Shows the instructions |
 | **Stats** | Played, win rate, current and best streak |
 | **Share** | Copies your result as an emoji grid |
+| **Theme** | Switches between light and dark mode |
 | **Sound** | Toggles soft sound effects (off by default) |
 
 ## Features
@@ -33,6 +34,10 @@ A daily geography grouping puzzle. Sixteen words (countries, cities, islands, la
 - A finished daily stays finished when you reload the page
 - **World map that lights up**: every solved group lights its countries on a world map (cities, peaks, seas and areas appear as pins) and the map zooms to them
 - Optional 💡 fun fact for each group (add a `fact` field in the quiz JSON)
+- **Stats chart**: how many of your quizzes were solved with 0, 1, 2, 3 mistakes (or lost), plus best streak
+- **Dark / light theme** (follows your system, or switch with the theme button)
+- **Installable app (PWA)**: add it to your phone's home screen; the game shell works offline once loaded
+- Link previews (Open Graph image) when the game is shared in chat apps
 - Win streak counter, confetti and a colored recap of your guesses
 - "One away" feedback, lives counter, spoiler hints, shareable results, sound toggle
 - Responsive layout that works on phones
@@ -43,6 +48,8 @@ A daily geography grouping puzzle. Sixteen words (countries, cities, islands, la
 - Vanilla **JavaScript** (ES modules), **HTML** and **CSS**, no framework and no build step
 - Quizzes stored as **JSON** files, one per day
 - **Node.js** scripts to validate quizzes and build the quiz index
+- **Service worker** + web manifest (PWA)
+- **Node.js test runner** for unit tests (`npm test`)
 - Deployed on **Vercel**
 
 ## Project structure
