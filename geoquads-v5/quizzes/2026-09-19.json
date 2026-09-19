@@ -1,0 +1,53 @@
+{
+  "id": "2026-09-19",
+  "title": "GeoQuads — Daily",
+  "spoiler": "One group is a river's guest list.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Nordic countries",
+      "items": [
+        "Finland",
+        "Iceland",
+        "Norway",
+        "Denmark"
+      ],
+      "fact": "Iceland gets almost all of its electricity from renewable sources: hydro and geothermal power."
+    },
+    {
+      "name": "Seas",
+      "items": [
+        "Baltic",
+        "Caspian",
+        "Adriatic",
+        "Aegean"
+      ],
+      "fact": "The Caspian Sea is the largest inland body of water on Earth."
+    },
+    {
+      "name": "Capitals on the Danube",
+      "items": [
+        "Vienna",
+        "Budapest",
+        "Bratislava",
+        "Belgrade"
+      ],
+      "fact": "The Danube flows through four capital cities, more than any other river in the world."
+    },
+    {
+      "name": "Famous volcanoes",
+      "items": [
+        "Etna",
+        "Vesuvius",
+        "Krakatoa",
+        "Fuji"
+      ],
+      "fact": "Vesuvius buried the Roman town of Pompeii in AD 79."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

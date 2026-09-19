@@ -1,0 +1,53 @@
+{
+  "id": "2026-09-18",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think high, think salty, think stan.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Capitals high above sea level",
+      "items": [
+        "La Paz",
+        "Quito",
+        "Bogotá",
+        "Addis Ababa"
+      ],
+      "fact": "La Paz, at roughly 3,600 metres, is often called the highest seat of government in the world."
+    },
+    {
+      "name": "Countries on the Red Sea",
+      "items": [
+        "Egypt",
+        "Sudan",
+        "Eritrea",
+        "Yemen"
+      ],
+      "fact": "The Red Sea is one of the saltiest seas on the planet."
+    },
+    {
+      "name": "Mountain ranges",
+      "items": [
+        "Alps",
+        "Andes",
+        "Atlas",
+        "Urals"
+      ],
+      "fact": "The Andes are the longest continental mountain range in the world, stretching about 7,000 km."
+    },
+    {
+      "name": "Countries ending in -stan",
+      "items": [
+        "Kazakhstan",
+        "Pakistan",
+        "Uzbekistan",
+        "Tajikistan"
+      ],
+      "fact": "In Persian, \"-stan\" means \"land of\"."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

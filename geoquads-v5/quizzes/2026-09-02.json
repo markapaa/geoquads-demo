@@ -1,5 +1,5 @@
 {
-  "id": "2026-01-11",
+  "id": "2026-09-02",
   "title": "GeoQuads — Daily",
   "spoiler": "Think alliances, capitals and borders.",
   "help": "Pick 4 countries per hidden rule. No overlaps between categories.",
@@ -8,27 +8,42 @@
   "groups": [
     {
       "name": "European countries NOT in NATO",
-      "items": ["Ireland", "Austria", "Switzerland", "Serbia"],
-      "color": "#E6F4FF"
+      "items": [
+        "Ireland",
+        "Austria",
+        "Switzerland",
+        "Serbia"
+      ]
     },
     {
       "name": "Capitals starting with 'B'",
-      "items": ["Belgium", "Germany", "Hungary", "Romania"],
-      "color": "#FFF7E6"
+      "items": [
+        "Belgium",
+        "Germany",
+        "Hungary",
+        "Romania"
+      ]
     },
     {
       "name": "Countries with a land border with Russia",
-      "items": ["Norway", "Latvia", "Poland", "Finland"],
-      "color": "#E8FFF3"
+      "items": [
+        "Norway",
+        "Latvia",
+        "Poland",
+        "Finland"
+      ]
     },
     {
       "name": "EU countries with non-European overseas territories",
-      "items": ["France", "Spain", "Portugal", "Netherlands"],
-      "color": "#FFECEC"
+      "items": [
+        "France",
+        "Spain",
+        "Portugal",
+        "Netherlands"
+      ]
     }
   ],
-  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+  "ui": {
+    "locale": "en-US"
+  }
 }
-
-
-

@@ -1,0 +1,53 @@
+{
+  "id": "2026-09-29",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Two groups hide a river.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Cities on the Rhine",
+      "items": [
+        "Basel",
+        "Cologne",
+        "Strasbourg",
+        "Mainz"
+      ],
+      "fact": "The Rhine begins in the Swiss Alps and flows all the way to the North Sea."
+    },
+    {
+      "name": "Italian cities",
+      "items": [
+        "Milan",
+        "Naples",
+        "Turin",
+        "Florence"
+      ],
+      "fact": "Naples is widely considered the birthplace of pizza."
+    },
+    {
+      "name": "Spanish cities",
+      "items": [
+        "Seville",
+        "Valencia",
+        "Bilbao",
+        "Granada"
+      ],
+      "fact": "Valencia is widely considered the birthplace of paella."
+    },
+    {
+      "name": "German cities",
+      "items": [
+        "Munich",
+        "Hamburg",
+        "Dresden",
+        "Leipzig"
+      ],
+      "fact": "Munich's Oktoberfest mostly takes place in September."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

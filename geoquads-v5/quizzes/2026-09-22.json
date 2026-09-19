@@ -1,0 +1,53 @@
+{
+  "id": "2026-09-22",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Not every Guinea is in Africa.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Countries of East Africa",
+      "items": [
+        "Kenya",
+        "Tanzania",
+        "Uganda",
+        "Rwanda"
+      ],
+      "fact": "Mount Kilimanjaro, Africa's highest peak, is in Tanzania."
+    },
+    {
+      "name": "Countries with Guinea in their name",
+      "items": [
+        "Guinea",
+        "Guinea-Bissau",
+        "Equatorial Guinea",
+        "Papua New Guinea"
+      ],
+      "fact": "Exactly four countries have \"Guinea\" in their name, and only three of them are in Africa."
+    },
+    {
+      "name": "African capitals",
+      "items": [
+        "Nairobi",
+        "Accra",
+        "Dakar",
+        "Rabat"
+      ],
+      "fact": "Dakar is the westernmost capital city on the African mainland."
+    },
+    {
+      "name": "Lakes of Africa",
+      "items": [
+        "Victoria",
+        "Tanganyika",
+        "Malawi",
+        "Chad"
+      ],
+      "fact": "Lake Victoria is the largest lake in Africa by area."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

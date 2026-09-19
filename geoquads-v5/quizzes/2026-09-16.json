@@ -1,0 +1,49 @@
+{
+  "id": "2026-09-16",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think felonies, economy, size and beans.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Smallest countries",
+      "items": [
+        "Vatican City",
+        "Nauru",
+        "Tuvalu",
+        "Monaco"
+      ]
+    },
+    {
+      "name": "Countries with highest GDP",
+      "items": [
+        "USA",
+        "China",
+        "Germany",
+        "Japan"
+      ]
+    },
+    {
+      "name": "Countries with the Highest Crime Index",
+      "items": [
+        "Venezuela",
+        "Papua New Guinea",
+        "Afghanistan",
+        "Haiti"
+      ]
+    },
+    {
+      "name": "Countries with the most coffee production",
+      "items": [
+        "Brazil",
+        "Vietnam",
+        "Indonesia",
+        "Colombia"
+      ]
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

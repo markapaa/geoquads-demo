@@ -1,0 +1,53 @@
+{
+  "id": "2026-09-28",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Cold coasts, roaring falls, wild plains.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Places famous for fjords",
+      "items": [
+        "Norway",
+        "Chile",
+        "New Zealand",
+        "Greenland"
+      ],
+      "fact": "Norway's Sognefjord is the longest fjord in Europe, at about 200 km."
+    },
+    {
+      "name": "Waterfalls",
+      "items": [
+        "Niagara",
+        "Victoria",
+        "Iguazu",
+        "Angel"
+      ],
+      "fact": "Angel Falls in Venezuela is the world's tallest uninterrupted waterfall, at 979 metres."
+    },
+    {
+      "name": "Safari parks",
+      "items": [
+        "Serengeti",
+        "Kruger",
+        "Etosha",
+        "Chobe"
+      ],
+      "fact": "Every year, more than a million wildebeest migrate across the Serengeti."
+    },
+    {
+      "name": "Rainforests",
+      "items": [
+        "Amazon",
+        "Congo",
+        "Daintree",
+        "Borneo"
+      ],
+      "fact": "The Amazon is the largest tropical rainforest on Earth."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

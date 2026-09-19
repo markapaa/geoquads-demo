@@ -1,0 +1,53 @@
+{
+  "id": "2026-09-25",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think Mile High.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "US national parks",
+      "items": [
+        "Yellowstone",
+        "Yosemite",
+        "Zion",
+        "Everglades"
+      ],
+      "fact": "Yellowstone, established in 1872, is widely considered the world's first national park."
+    },
+    {
+      "name": "Capitals of South America",
+      "items": [
+        "Lima",
+        "Santiago",
+        "Montevideo",
+        "Asunción"
+      ],
+      "fact": "More than a third of all Uruguayans live in Montevideo."
+    },
+    {
+      "name": "Rivers of the Americas",
+      "items": [
+        "Amazon",
+        "Mississippi",
+        "Orinoco",
+        "Yukon"
+      ],
+      "fact": "The Amazon carries more water than any other river on Earth."
+    },
+    {
+      "name": "US state capitals",
+      "items": [
+        "Denver",
+        "Boston",
+        "Nashville",
+        "Sacramento"
+      ],
+      "fact": "Denver sits exactly one mile (5,280 feet) above sea level, which is why it is called the Mile High City."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

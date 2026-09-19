@@ -1,5 +1,5 @@
 {
-  "id": "2026-01-20",
+  "id": "2026-09-11",
   "title": "GeoQuads — Daily",
   "spoiler": "Think height, islands and rivers.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
@@ -8,24 +8,42 @@
   "groups": [
     {
       "name": "Lowest average elevation",
-      "items": ["Maldives", "Tuvalu", "Kiribati", "Marshall Islands"],
-      "color": "#E6F4FF"
+      "items": [
+        "Maldives",
+        "Tuvalu",
+        "Kiribati",
+        "Marshall Islands"
+      ]
     },
     {
       "name": "Highest average elevation",
-      "items": ["Bhutan", "Nepal", "Tajikistan", "Kyrgyzstan"],
-      "color": "#FFF7E6"
+      "items": [
+        "Bhutan",
+        "Nepal",
+        "Tajikistan",
+        "Kyrgyzstan"
+      ]
     },
     {
       "name": "Countries with the most number of islands",
-      "items": ["Norway", "Sweden", "Canada", "Finland"],
-      "color": "#E8FFF3"
+      "items": [
+        "Norway",
+        "Sweden",
+        "Canada",
+        "Finland"
+      ]
     },
     {
       "name": "Countries with the longest total waterways",
-      "items": ["Russia", "Brazil", "China", "USA"],
-      "color": "#E6F4FF"
+      "items": [
+        "Russia",
+        "Brazil",
+        "China",
+        "USA"
+      ]
     }
   ],
-  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+  "ui": {
+    "locale": "en-US"
+  }
 }

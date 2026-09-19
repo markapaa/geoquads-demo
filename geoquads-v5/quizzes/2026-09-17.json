@@ -1,0 +1,53 @@
+{
+  "id": "2026-09-17",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Some of these names live a double life.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Landlocked countries in Europe",
+      "items": [
+        "Austria",
+        "Slovakia",
+        "Serbia",
+        "Liechtenstein"
+      ],
+      "fact": "Liechtenstein and Uzbekistan are the only two doubly landlocked countries: every neighbour is landlocked too."
+    },
+    {
+      "name": "Rivers of Africa",
+      "items": [
+        "Nile",
+        "Congo",
+        "Niger",
+        "Zambezi"
+      ],
+      "fact": "The Nile, at about 6,650 km, is traditionally considered the world's longest river, though the Amazon is a rival for the title."
+    },
+    {
+      "name": "Capitals of Asia",
+      "items": [
+        "Hanoi",
+        "Manila",
+        "Kathmandu",
+        "Thimphu"
+      ],
+      "fact": "Kathmandu sits in a valley about 1,400 metres above sea level."
+    },
+    {
+      "name": "Island nations of the Indian Ocean",
+      "items": [
+        "Mauritius",
+        "Maldives",
+        "Seychelles",
+        "Comoros"
+      ],
+      "fact": "The Maldives is the lowest-lying country on Earth, with an average ground level of about 1.5 metres above the sea."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "2026-09-24",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Not every M is a mountain.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Islands of the Mediterranean",
+      "items": [
+        "Sicily",
+        "Crete",
+        "Cyprus",
+        "Sardinia"
+      ],
+      "fact": "Sicily is the largest island in the Mediterranean Sea."
+    },
+    {
+      "name": "European monarchies",
+      "items": [
+        "Spain",
+        "Belgium",
+        "Sweden",
+        "Netherlands"
+      ],
+      "fact": "Europe still has about a dozen monarchies."
+    },
+    {
+      "name": "Capitals starting with M",
+      "items": [
+        "Madrid",
+        "Moscow",
+        "Muscat",
+        "Maputo"
+      ],
+      "fact": "At about 650 metres, Madrid is the highest capital city in the European Union."
+    },
+    {
+      "name": "Rivers of Europe",
+      "items": [
+        "Rhine",
+        "Seine",
+        "Volga",
+        "Thames"
+      ],
+      "fact": "The Volga is the longest river in Europe."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

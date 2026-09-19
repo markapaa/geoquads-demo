@@ -1,0 +1,49 @@
+{
+  "id": "2026-09-14",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think seas.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Red sea access",
+      "items": [
+        "Egypt",
+        "Yemen",
+        "Sudan",
+        "Eritrea"
+      ]
+    },
+    {
+      "name": "Adriatic sea access",
+      "items": [
+        "Slovenia",
+        "Albania",
+        "Italy",
+        "Bosnia and Herzegovina"
+      ]
+    },
+    {
+      "name": "Caspian sea access",
+      "items": [
+        "Azerbaijan",
+        "Turkmenistan",
+        "Russia",
+        "Kazakhstan"
+      ]
+    },
+    {
+      "name": "Persian gulf access",
+      "items": [
+        "Iraq",
+        "Kuwait",
+        "Qatar",
+        "UAE"
+      ]
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "2026-09-04",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think capitals, languages and alliances.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Capitals starting with A",
+      "items": [
+        "Andorra",
+        "Greece",
+        "Turkey",
+        "Netherlands"
+      ]
+    },
+    {
+      "name": "German-speaking countries",
+      "items": [
+        "Switzerland",
+        "Austria",
+        "Luxembourg",
+        "Belgium"
+      ]
+    },
+    {
+      "name": "Most recent NATO members",
+      "items": [
+        "Sweden",
+        "Finland",
+        "Montenegro",
+        "North Macedonia"
+      ]
+    },
+    {
+      "name": "Countries with land on the african tectonic plate",
+      "items": [
+        "Spain",
+        "Malta",
+        "Portugal",
+        "Italy"
+      ]
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

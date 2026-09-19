@@ -1,0 +1,53 @@
+{
+  "id": "2026-09-26",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Water connects them, water separates them.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Straits",
+      "items": [
+        "Gibraltar",
+        "Bosphorus",
+        "Hormuz",
+        "Malacca"
+      ],
+      "fact": "The Bosphorus separates Europe from Asia in the middle of Istanbul."
+    },
+    {
+      "name": "Canals",
+      "items": [
+        "Suez",
+        "Panama",
+        "Kiel",
+        "Corinth"
+      ],
+      "fact": "The Suez Canal, opened in 1869, links the Mediterranean Sea to the Red Sea."
+    },
+    {
+      "name": "Peninsulas",
+      "items": [
+        "Iberia",
+        "Balkan",
+        "Kamchatka",
+        "Yucatán"
+      ],
+      "fact": "Kamchatka has around 30 active volcanoes."
+    },
+    {
+      "name": "Oceans",
+      "items": [
+        "Atlantic",
+        "Pacific",
+        "Indian",
+        "Arctic"
+      ],
+      "fact": "The Pacific Ocean is larger than all of Earth's land put together."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

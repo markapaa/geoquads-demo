@@ -1,0 +1,53 @@
+{
+  "id": "2026-09-20",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Ontario is a trickster.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Great Lakes",
+      "items": [
+        "Superior",
+        "Huron",
+        "Erie",
+        "Ontario"
+      ],
+      "fact": "Together, the Great Lakes hold about a fifth of the world's fresh surface water."
+    },
+    {
+      "name": "Canadian provinces",
+      "items": [
+        "Alberta",
+        "Manitoba",
+        "Quebec",
+        "Saskatchewan"
+      ],
+      "fact": "Canada has ten provinces and three territories."
+    },
+    {
+      "name": "Countries of Central America",
+      "items": [
+        "Belize",
+        "Honduras",
+        "Nicaragua",
+        "Panama"
+      ],
+      "fact": "Belize is the only country in Central America where English is the official language."
+    },
+    {
+      "name": "Caribbean islands",
+      "items": [
+        "Cuba",
+        "Jamaica",
+        "Barbados",
+        "Haiti"
+      ],
+      "fact": "Cuba is the largest island in the Caribbean."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}
