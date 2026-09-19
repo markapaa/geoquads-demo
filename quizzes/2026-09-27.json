@@ -1,50 +1,50 @@
 {
   "id": "2026-09-27",
   "title": "GeoQuads — Daily",
-  "spoiler": "Size matters, but so do borders.",
+  "spoiler": "Think capitals, coasts, size and namesakes.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Smallest countries by area",
+      "name": "Capital on the Mediterranean",
       "items": [
-        "Vatican City",
-        "Monaco",
-        "Nauru",
-        "Tuvalu"
+        "Lebanon",
+        "Libya",
+        "Algeria",
+        "Tunisia"
       ],
-      "fact": "Vatican City covers about 0.44 square kilometres, smaller than many city parks."
+      "fact": "Tunis stands close to the ruins of ancient Carthage."
     },
     {
-      "name": "Countries spanning two continents",
+      "name": "Capital is not the biggest city",
       "items": [
-        "Russia",
+        "Australia",
         "Turkey",
-        "Egypt",
-        "Kazakhstan"
+        "Canada",
+        "Switzerland"
       ],
-      "fact": "Turkey's biggest city, Istanbul, sits on both sides of the Bosphorus, so it spans Europe and Asia."
+      "fact": "Canberra was purpose-built as a compromise between Sydney and Melbourne."
     },
     {
-      "name": "Landlocked countries in Africa",
+      "name": "Capital on the Indian Ocean",
       "items": [
-        "Chad",
-        "Zambia",
-        "Botswana",
-        "Malawi"
+        "Somalia",
+        "Mozambique",
+        "Maldives",
+        "Comoros"
       ],
-      "fact": "Botswana's Okavango River never reaches the sea: it ends in an inland delta in the Kalahari."
+      "fact": "Malé is one of the most densely populated capitals in the world."
     },
     {
-      "name": "Capitals starting with S",
+      "name": "Capital named after a person",
       "items": [
-        "Seoul",
-        "Stockholm",
-        "Sofia",
-        "Sarajevo"
+        "Liberia",
+        "Republic of the Congo",
+        "Dominican Republic",
+        "Guyana"
       ],
-      "fact": "About half of South Korea's population lives in the Seoul metropolitan area."
+      "fact": "Brazzaville and Kinshasa face each other across the Congo River, among the closest pairs of capitals in the world."
     }
   ],
   "ui": {

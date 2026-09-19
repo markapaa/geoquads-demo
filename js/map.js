@@ -120,12 +120,12 @@ export function createWorldMap(container, data) {
 
     const pos = items.map((it) => ({ px: (it.mx - target.x) / u, py: (it.my - target.y) / u }));
     // Markers are obstacles for every label, so reserve their space first.
-    const taken = items.flatMap((it, i) => (it.type === "pin" ? [rect(pos[i].px - 7, pos[i].py - 7, 14, 14)] : []));
+    const taken = items.flatMap((it, i) => (it.type === "pin" || it.small ? [rect(pos[i].px - 7, pos[i].py - 7, 14, 14)] : []));
 
     return items.map((it, i) => {
       const { px, py } = pos[i];
       const tw = it.label.length * 6.6 + 6;
-      const isCountry = it.type === "country";
+      const isCountry = it.type === "country" && !it.small;
       const g = isCountry ? 0 : 9;
       const options = isCountry
         ? [[-tw / 2, -th / 2], [-tw / 2, th * 0.6], [-tw / 2, -th * 1.6], [-tw / 2, th * 1.7], [-tw / 2, -th * 2.6]]
@@ -168,7 +168,9 @@ export function createWorldMap(container, data) {
           const p = pathByName[r.name];
           p.setAttribute("class", `country lit lit-${g.gi}${isNew ? " pop" : ""}`);
           land.appendChild(p); // draw lit countries on top so their outline is visible
-          items.push({ ...r, gi: g.gi, isNew, mx: c.c[0], my: c.c[1] });
+          // Tiny countries (islands at this scale) also get a dot so they are easy to spot.
+          const small = c.bbox[2] - c.bbox[0] < 14 && c.bbox[3] - c.bbox[1] < 14;
+          items.push({ ...r, gi: g.gi, isNew, small, mx: c.c[0], my: c.c[1] });
         } else {
           items.push({ ...r, gi: g.gi, isNew, mx: r.x, my: r.y });
         }
@@ -183,6 +185,7 @@ export function createWorldMap(container, data) {
       const m = el("g", { class: `mark g${it.gi}${it.isNew ? " pop" : ""}`, "data-x": it.mx, "data-y": it.my, transform: `translate(${it.mx} ${it.my}) scale(${u})` }, marks);
       m.appendChild(el("title")).textContent = it.label;
       if (it.type === "pin") m.appendChild((SHAPES[it.kind] || SHAPES.area)());
+      else if (it.small) m.appendChild(SHAPES.micro());
       const t = el("text", { x: labels[i].dx, y: labels[i].dy, "text-anchor": "middle", class: it.type === "country" ? "clabel" : "plabel" }, m);
       t.textContent = it.label;
     });

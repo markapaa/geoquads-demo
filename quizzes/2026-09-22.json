@@ -1,50 +1,50 @@
 {
   "id": "2026-09-22",
   "title": "GeoQuads — Daily",
-  "spoiler": "Not every Guinea is in Africa.",
+  "spoiler": "Think money, from Latin America to the Indian Ocean.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Countries of East Africa",
+      "name": "Peso",
       "items": [
-        "Kenya",
-        "Tanzania",
-        "Uganda",
-        "Rwanda"
+        "Mexico",
+        "Chile",
+        "Cuba",
+        "Philippines"
       ],
-      "fact": "Mount Kilimanjaro, Africa's highest peak, is in Tanzania."
+      "fact": "\"Peso\" means \"weight\" in Spanish."
     },
     {
-      "name": "Countries with Guinea in their name",
+      "name": "Dollar (not the US one)",
       "items": [
-        "Guinea",
-        "Guinea-Bissau",
-        "Equatorial Guinea",
-        "Papua New Guinea"
+        "Jamaica",
+        "Singapore",
+        "Namibia",
+        "New Zealand"
       ],
-      "fact": "Exactly four countries have \"Guinea\" in their name, and only three of them are in Africa."
+      "fact": "Singapore and Brunei accept each other's dollar at par."
     },
     {
-      "name": "African capitals",
+      "name": "Rupee",
       "items": [
-        "Nairobi",
-        "Accra",
-        "Dakar",
-        "Rabat"
+        "India",
+        "Nepal",
+        "Mauritius",
+        "Seychelles"
       ],
-      "fact": "Dakar is the westernmost capital city on the African mainland."
+      "fact": "\"Rupee\" comes from a Sanskrit word for silver."
     },
     {
-      "name": "Lakes of Africa",
+      "name": "Franc",
       "items": [
-        "Victoria",
-        "Tanganyika",
-        "Malawi",
-        "Chad"
+        "Switzerland",
+        "Rwanda",
+        "Burundi",
+        "Djibouti"
       ],
-      "fact": "Lake Victoria is the largest lake in Africa by area."
+      "fact": "These four francs are all separate currencies, not one shared money."
     }
   ],
   "ui": {

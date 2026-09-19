@@ -1,50 +1,50 @@
 {
   "id": "2026-09-19",
   "title": "GeoQuads — Daily",
-  "spoiler": "One group is a river's guest list.",
+  "spoiler": "Think games, namesakes, hemispheres and capitals.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Nordic countries",
+      "name": "Winter Olympic host cities",
       "items": [
-        "Finland",
-        "Iceland",
-        "Norway",
-        "Denmark"
+        "Sapporo",
+        "Lillehammer",
+        "Sochi",
+        "Calgary"
       ],
-      "fact": "Iceland gets almost all of its electricity from renewable sources: hydro and geothermal power."
+      "fact": "Lillehammer hosted the 1994 Winter Games in a town of fewer than 30,000 people."
     },
     {
-      "name": "Seas",
+      "name": "Named after a person",
       "items": [
-        "Baltic",
-        "Caspian",
-        "Adriatic",
-        "Aegean"
+        "Alexandria",
+        "Monrovia",
+        "Washington",
+        "Houston"
       ],
-      "fact": "The Caspian Sea is the largest inland body of water on Earth."
+      "fact": "Monrovia, the capital of Liberia, is named after US President James Monroe."
     },
     {
-      "name": "Capitals on the Danube",
+      "name": "Capitals in the Southern Hemisphere",
       "items": [
-        "Vienna",
-        "Budapest",
-        "Bratislava",
-        "Belgrade"
+        "Lima",
+        "Nairobi",
+        "Jakarta",
+        "Wellington"
       ],
-      "fact": "The Danube flows through four capital cities, more than any other river in the world."
+      "fact": "Nairobi lies only about 1.3° south of the Equator."
     },
     {
-      "name": "Famous volcanoes",
+      "name": "Largest city of its country, but not the capital",
       "items": [
-        "Etna",
-        "Vesuvius",
-        "Krakatoa",
-        "Fuji"
+        "Toronto",
+        "Karachi",
+        "Istanbul",
+        "Lagos"
       ],
-      "fact": "Vesuvius buried the Roman town of Pompeii in AD 79."
+      "fact": "Lagos was Nigeria's capital until 1991."
     }
   ],
   "ui": {

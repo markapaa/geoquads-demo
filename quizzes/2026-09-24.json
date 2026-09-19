@@ -1,50 +1,50 @@
 {
   "id": "2026-09-24",
   "title": "GeoQuads — Daily",
-  "spoiler": "Not every M is a mountain.",
+  "spoiler": "Think alphabets, official languages and what locals really call their country.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Islands of the Mediterranean",
+      "name": "Officially written in Cyrillic",
       "items": [
-        "Sicily",
-        "Crete",
-        "Cyprus",
-        "Sardinia"
+        "Bulgaria",
+        "Mongolia",
+        "Belarus",
+        "Kazakhstan"
       ],
-      "fact": "Sicily is the largest island in the Mediterranean Sea."
+      "fact": "Cyrillic is named after Saint Cyril and grew out of medieval Bulgaria."
     },
     {
-      "name": "European monarchies",
+      "name": "Its own people call it something else",
       "items": [
-        "Spain",
-        "Belgium",
-        "Sweden",
-        "Netherlands"
+        "Germany",
+        "Hungary",
+        "Finland",
+        "Albania"
       ],
-      "fact": "Europe still has about a dozen monarchies."
+      "fact": "Finland is \"Suomi\" in Finnish, which has nothing in common with \"Finland\"."
     },
     {
-      "name": "Capitals starting with M",
+      "name": "Own script used almost nowhere else",
       "items": [
-        "Madrid",
-        "Moscow",
-        "Muscat",
-        "Maputo"
+        "Thailand",
+        "Israel",
+        "Sri Lanka",
+        "Myanmar"
       ],
-      "fact": "At about 650 metres, Madrid is the highest capital city in the European Union."
+      "fact": "The Thai alphabet has 44 consonant letters."
     },
     {
-      "name": "Rivers of Europe",
+      "name": "Four or more official languages",
       "items": [
-        "Rhine",
-        "Seine",
-        "Volga",
-        "Thames"
+        "South Africa",
+        "Bolivia",
+        "Singapore",
+        "Zimbabwe"
       ],
-      "fact": "The Volga is the longest river in Europe."
+      "fact": "Bolivia officially recognises 37 languages."
     }
   ],
   "ui": {

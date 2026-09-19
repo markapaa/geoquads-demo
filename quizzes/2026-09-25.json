@@ -1,50 +1,50 @@
 {
   "id": "2026-09-25",
   "title": "GeoQuads — Daily",
-  "spoiler": "Think Mile High.",
+  "spoiler": "Think meanings, old names, islands and rivers.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "US national parks",
+      "name": "Name literally describes the place",
       "items": [
-        "Yellowstone",
-        "Yosemite",
-        "Zion",
-        "Everglades"
+        "Ecuador",
+        "Montenegro",
+        "Costa Rica",
+        "Sierra Leone"
       ],
-      "fact": "Yellowstone, established in 1872, is widely considered the world's first national park."
+      "fact": "\"Ecuador\" is simply Spanish for \"equator\"."
     },
     {
-      "name": "Capitals of South America",
+      "name": "Shares its island with another country",
       "items": [
-        "Lima",
-        "Santiago",
-        "Montevideo",
-        "Asunción"
+        "Ireland",
+        "Brunei",
+        "Papua New Guinea",
+        "Dominican Republic"
       ],
-      "fact": "More than a third of all Uruguayans live in Montevideo."
+      "fact": "Borneo is shared by three countries: Brunei, Malaysia and Indonesia."
     },
     {
-      "name": "Rivers of the Americas",
+      "name": "Formerly known by another name",
       "items": [
-        "Amazon",
-        "Mississippi",
-        "Orinoco",
-        "Yukon"
+        "Thailand",
+        "Ghana",
+        "Benin",
+        "Iran"
       ],
-      "fact": "The Amazon carries more water than any other river on Earth."
+      "fact": "Thailand was called Siam until 1939."
     },
     {
-      "name": "US state capitals",
+      "name": "Named after a river",
       "items": [
-        "Denver",
-        "Boston",
-        "Nashville",
-        "Sacramento"
+        "Gambia",
+        "Uruguay",
+        "India",
+        "Niger"
       ],
-      "fact": "Denver sits exactly one mile (5,280 feet) above sea level, which is why it is called the Mile High City."
+      "fact": "India takes its name from the Indus River."
     }
   ],
   "ui": {

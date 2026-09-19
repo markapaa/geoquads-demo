@@ -1,50 +1,50 @@
 {
   "id": "2026-09-20",
   "title": "GeoQuads — Daily",
-  "spoiler": "Ontario is a trickster.",
+  "spoiler": "Think sand, summits, salty lakes and rivers.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Great Lakes",
+      "name": "Deserts",
       "items": [
-        "Superior",
-        "Huron",
-        "Erie",
-        "Ontario"
+        "Gobi",
+        "Atacama",
+        "Namib",
+        "Thar"
       ],
-      "fact": "Together, the Great Lakes hold about a fifth of the world's fresh surface water."
+      "fact": "The Atacama is one of the driest places on Earth."
     },
     {
-      "name": "Canadian provinces",
+      "name": "Highest peak of a continent",
       "items": [
-        "Alberta",
-        "Manitoba",
-        "Quebec",
-        "Saskatchewan"
+        "Everest",
+        "Aconcagua",
+        "Kilimanjaro",
+        "Elbrus"
       ],
-      "fact": "Canada has ten provinces and three territories."
+      "fact": "Aconcagua, at about 6,960 m, is the highest mountain outside Asia."
     },
     {
-      "name": "Countries of Central America",
+      "name": "Rivers that flow through a capital",
       "items": [
-        "Belize",
-        "Honduras",
-        "Nicaragua",
-        "Panama"
+        "Thames",
+        "Seine",
+        "Tiber",
+        "Tigris"
       ],
-      "fact": "Belize is the only country in Central America where English is the official language."
+      "fact": "The banks of the Seine in Paris are a UNESCO World Heritage Site."
     },
     {
-      "name": "Caribbean islands",
+      "name": "Called a \"sea\" but really a lake",
       "items": [
-        "Cuba",
-        "Jamaica",
-        "Barbados",
-        "Haiti"
+        "Caspian Sea",
+        "Dead Sea",
+        "Aral Sea",
+        "Sea of Galilee"
       ],
-      "fact": "Cuba is the largest island in the Caribbean."
+      "fact": "The Caspian is the largest inland body of water on Earth."
     }
   ],
   "ui": {

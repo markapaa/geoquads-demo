@@ -1,50 +1,50 @@
 {
   "id": "2026-09-28",
   "title": "GeoQuads — Daily",
-  "spoiler": "Cold coasts, roaring falls, wild plains.",
+  "spoiler": "Think flag colours and a famous corner.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Places famous for fjords",
+      "name": "Union Jack in the corner",
       "items": [
-        "Norway",
-        "Chile",
+        "Australia",
         "New Zealand",
-        "Greenland"
+        "Fiji",
+        "Tuvalu"
       ],
-      "fact": "Norway's Sognefjord is the longest fjord in Europe, at about 200 km."
+      "fact": "New Zealand voted to keep its flag in a 2016 referendum."
     },
     {
-      "name": "Waterfalls",
+      "name": "Flag is only red and white",
       "items": [
-        "Niagara",
-        "Victoria",
-        "Iguazu",
-        "Angel"
+        "Japan",
+        "Poland",
+        "Peru",
+        "Tunisia"
       ],
-      "fact": "Angel Falls in Venezuela is the world's tallest uninterrupted waterfall, at 979 metres."
+      "fact": "Japan's flag is officially called Nisshōki, the \"sun-mark flag\"."
     },
     {
-      "name": "Safari parks",
+      "name": "Flag is only blue and white",
       "items": [
-        "Serengeti",
-        "Kruger",
-        "Etosha",
-        "Chobe"
+        "Greece",
+        "Finland",
+        "Israel",
+        "Somalia"
       ],
-      "fact": "Every year, more than a million wildebeest migrate across the Serengeti."
+      "fact": "Greece's nine stripes are said to match the nine syllables of \"Freedom or Death\"."
     },
     {
-      "name": "Rainforests",
+      "name": "Flag is red, yellow and green",
       "items": [
-        "Amazon",
-        "Congo",
-        "Daintree",
-        "Borneo"
+        "Bolivia",
+        "Lithuania",
+        "Guinea",
+        "Mali"
       ],
-      "fact": "The Amazon is the largest tropical rainforest on Earth."
+      "fact": "Red, yellow and green are known as the Pan-African colours."
     }
   ],
   "ui": {

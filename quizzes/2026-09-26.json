@@ -1,50 +1,50 @@
 {
   "id": "2026-09-26",
   "title": "GeoQuads — Daily",
-  "spoiler": "Water connects them, water separates them.",
+  "spoiler": "Think islands: one, many, two, and shared.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Straits",
+      "name": "The whole country is one island",
       "items": [
-        "Gibraltar",
-        "Bosphorus",
-        "Hormuz",
-        "Malacca"
+        "Iceland",
+        "Madagascar",
+        "Sri Lanka",
+        "Jamaica"
       ],
-      "fact": "The Bosphorus separates Europe from Asia in the middle of Istanbul."
+      "fact": "Madagascar is the world's fourth-largest island."
     },
     {
-      "name": "Canals",
+      "name": "Archipelago nations",
       "items": [
-        "Suez",
-        "Panama",
-        "Kiel",
-        "Corinth"
+        "Philippines",
+        "Bahamas",
+        "Maldives",
+        "Japan"
       ],
-      "fact": "The Suez Canal, opened in 1869, links the Mediterranean Sea to the Red Sea."
+      "fact": "The Philippines is made up of more than 7,000 islands."
     },
     {
-      "name": "Peninsulas",
+      "name": "Twin-island countries",
       "items": [
-        "Iberia",
-        "Balkan",
-        "Kamchatka",
-        "Yucatán"
+        "Trinidad and Tobago",
+        "Antigua and Barbuda",
+        "Saint Kitts and Nevis",
+        "São Tomé and Príncipe"
       ],
-      "fact": "Kamchatka has around 30 active volcanoes."
+      "fact": "São Tomé and Príncipe is the second-smallest country in Africa."
     },
     {
-      "name": "Oceans",
+      "name": "Shares an island with another country",
       "items": [
-        "Atlantic",
-        "Pacific",
-        "Indian",
-        "Arctic"
+        "Haiti",
+        "Chile",
+        "Malaysia",
+        "Timor-Leste"
       ],
-      "fact": "The Pacific Ocean is larger than all of Earth's land put together."
+      "fact": "Timor-Leste shares the island of Timor with Indonesia."
     }
   ],
   "ui": {

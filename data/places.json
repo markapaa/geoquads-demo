@@ -1,204 +1,1123 @@
 {
-  "USA": {"country": "United States of America"},
-  "Bosnia and Herzegovina": {"country": "Bosnia and Herz."},
-  "UK": {"country": "United Kingdom"},
-  "DRC": {"country": "Dem. Rep. Congo"},
-  "Guinea Bissau": {"country": "Guinea-Bissau"},
-  "East Timor": {"country": "Timor-Leste"},
-  "Republic of the Congo": {"country": "Congo"},
-  "South Sudan": {"country": "S. Sudan"},
-  "UAE": {"country": "United Arab Emirates"},
-  "Equatorial Guinea": {"country": "Eq. Guinea"},
-  "Liechtenstein": {"lat": 47.16, "lon": 9.55, "kind": "micro"},
-  "Andorra": {"lat": 42.55, "lon": 1.58, "kind": "micro"},
-  "Malta": {"lat": 35.9, "lon": 14.4, "kind": "micro"},
-  "Monaco": {"lat": 43.74, "lon": 7.42, "kind": "micro"},
-  "Vatican City": {"lat": 41.9, "lon": 12.45, "kind": "micro"},
-  "Cabo Verde": {"lat": 16.0, "lon": -24.0, "kind": "micro"},
-  "São Tomé and Príncipe": {"lat": 0.3, "lon": 6.6, "kind": "micro"},
-  "Maldives": {"lat": 3.2, "lon": 73.2, "kind": "micro"},
-  "Tuvalu": {"lat": -8.5, "lon": 179.2, "kind": "micro"},
-  "Kiribati": {"lat": 1.9, "lon": -157.4, "kind": "micro"},
-  "Marshall Islands": {"lat": 7.1, "lon": 171.2, "kind": "micro"},
-  "Nauru": {"lat": -0.5, "lon": 166.9, "kind": "micro"},
-  "Mauritius": {"lat": -20.3, "lon": 57.6, "kind": "micro"},
-  "Seychelles": {"lat": -4.7, "lon": 55.5, "kind": "micro"},
-  "Comoros": {"lat": -11.9, "lon": 43.3, "kind": "micro"},
-  "Barbados": {"lat": 13.2, "lon": -59.55, "kind": "micro"},
-  "Samoa": {"lat": -13.8, "lon": -172.1, "kind": "micro"},
-  "Tonga": {"lat": -21.2, "lon": -175.2, "kind": "micro"},
-  "Athens": {"lat": 37.98, "lon": 23.73, "kind": "city"},
-  "Paris": {"lat": 48.86, "lon": 2.35, "kind": "city"},
-  "Mexico City": {"lat": 19.43, "lon": -99.13, "kind": "city"},
-  "Moscow": {"lat": 55.75, "lon": 37.62, "kind": "city"},
-  "La Paz": {"lat": -16.5, "lon": -68.15, "kind": "city"},
-  "Quito": {"lat": -0.18, "lon": -78.47, "kind": "city"},
-  "Addis Ababa": {"lat": 9.03, "lon": 38.74, "kind": "city"},
-  "Thimphu": {"lat": 27.47, "lon": 89.64, "kind": "city"},
-  "Tashkent": {"lat": 41.3, "lon": 69.24, "kind": "city"},
-  "Dushanbe": {"lat": 38.56, "lon": 68.79, "kind": "city"},
-  "Bishkek": {"lat": 42.87, "lon": 74.59, "kind": "city"},
-  "Astana": {"lat": 51.17, "lon": 71.43, "kind": "city"},
-  "Havana": {"lat": 23.11, "lon": -82.37, "kind": "city"},
-  "Manila": {"lat": 14.6, "lon": 120.98, "kind": "city"},
-  "Jakarta": {"lat": -6.21, "lon": 106.85, "kind": "city"},
-  "Antananarivo": {"lat": -18.88, "lon": 47.51, "kind": "city"},
-  "Hanoi": {"lat": 21.03, "lon": 105.85, "kind": "city"},
-  "Kathmandu": {"lat": 27.72, "lon": 85.32, "kind": "city"},
-  "Bogotá": {"lat": 4.71, "lon": -74.07, "kind": "city"},
-  "Vienna": {"lat": 48.21, "lon": 16.37, "kind": "city"},
-  "Budapest": {"lat": 47.5, "lon": 19.04, "kind": "city"},
-  "Bratislava": {"lat": 48.15, "lon": 17.11, "kind": "city"},
-  "Belgrade": {"lat": 44.79, "lon": 20.45, "kind": "city"},
-  "Nairobi": {"lat": -1.29, "lon": 36.82, "kind": "city"},
-  "Accra": {"lat": 5.6, "lon": -0.19, "kind": "city"},
-  "Dakar": {"lat": 14.72, "lon": -17.47, "kind": "city"},
-  "Rabat": {"lat": 34.02, "lon": -6.84, "kind": "city"},
-  "Perth": {"lat": -31.95, "lon": 115.86, "kind": "city"},
-  "Adelaide": {"lat": -34.93, "lon": 138.6, "kind": "city"},
-  "Hobart": {"lat": -42.88, "lon": 147.33, "kind": "city"},
-  "Darwin": {"lat": -12.46, "lon": 130.84, "kind": "city"},
-  "Auckland": {"lat": -36.85, "lon": 174.76, "kind": "city"},
-  "Wellington": {"lat": -41.29, "lon": 174.78, "kind": "city"},
-  "Christchurch": {"lat": -43.53, "lon": 172.64, "kind": "city"},
-  "Dunedin": {"lat": -45.87, "lon": 170.5, "kind": "city"},
-  "Madrid": {"lat": 40.42, "lon": -3.7, "kind": "city"},
-  "Muscat": {"lat": 23.59, "lon": 58.41, "kind": "city"},
-  "Maputo": {"lat": -25.97, "lon": 32.57, "kind": "city"},
-  "Lima": {"lat": -12.05, "lon": -77.04, "kind": "city"},
-  "Santiago": {"lat": -33.45, "lon": -70.67, "kind": "city"},
-  "Montevideo": {"lat": -34.9, "lon": -56.16, "kind": "city"},
-  "Asunción": {"lat": -25.26, "lon": -57.58, "kind": "city"},
-  "Denver": {"lat": 39.74, "lon": -104.99, "kind": "city"},
-  "Boston": {"lat": 42.36, "lon": -71.06, "kind": "city"},
-  "Nashville": {"lat": 36.16, "lon": -86.78, "kind": "city"},
-  "Sacramento": {"lat": 38.58, "lon": -121.49, "kind": "city"},
-  "Seoul": {"lat": 37.57, "lon": 126.98, "kind": "city"},
-  "Stockholm": {"lat": 59.33, "lon": 18.07, "kind": "city"},
-  "Sofia": {"lat": 42.7, "lon": 23.32, "kind": "city"},
-  "Sarajevo": {"lat": 43.86, "lon": 18.41, "kind": "city"},
-  "Basel": {"lat": 47.56, "lon": 7.59, "kind": "city"},
-  "Cologne": {"lat": 50.94, "lon": 6.96, "kind": "city"},
-  "Strasbourg": {"lat": 48.57, "lon": 7.75, "kind": "city"},
-  "Mainz": {"lat": 50.0, "lon": 8.27, "kind": "city"},
-  "Milan": {"lat": 45.46, "lon": 9.19, "kind": "city"},
-  "Naples": {"lat": 40.85, "lon": 14.27, "kind": "city"},
-  "Turin": {"lat": 45.07, "lon": 7.69, "kind": "city"},
-  "Florence": {"lat": 43.77, "lon": 11.26, "kind": "city"},
-  "Seville": {"lat": 37.39, "lon": -5.98, "kind": "city"},
-  "Valencia": {"lat": 39.47, "lon": -0.38, "kind": "city"},
-  "Bilbao": {"lat": 43.26, "lon": -2.93, "kind": "city"},
-  "Granada": {"lat": 37.18, "lon": -3.6, "kind": "city"},
-  "Munich": {"lat": 48.14, "lon": 11.58, "kind": "city"},
-  "Hamburg": {"lat": 53.55, "lon": 9.99, "kind": "city"},
-  "Dresden": {"lat": 51.05, "lon": 13.74, "kind": "city"},
-  "Leipzig": {"lat": 51.34, "lon": 12.37, "kind": "city"},
-  "Doha": {"lat": 25.29, "lon": 51.53, "kind": "city"},
-  "Dubai": {"lat": 25.2, "lon": 55.27, "kind": "city"},
-  "Abu Dhabi": {"lat": 24.45, "lon": 54.38, "kind": "city"},
-  "Manama": {"lat": 26.23, "lon": 50.59, "kind": "city"},
-  "Brussels": {"lat": 50.85, "lon": 4.35, "kind": "city"},
-  "Brasilia": {"lat": -15.79, "lon": -47.88, "kind": "city"},
-  "Bangkok": {"lat": 13.76, "lon": 100.5, "kind": "city"},
-  "Etna": {"lat": 37.75, "lon": 14.99, "kind": "peak"},
-  "Vesuvius": {"lat": 40.82, "lon": 14.43, "kind": "peak"},
-  "Krakatoa": {"lat": -6.1, "lon": 105.42, "kind": "peak"},
-  "Fuji": {"lat": 35.36, "lon": 138.73, "kind": "peak"},
-  "Everest": {"lat": 27.99, "lon": 86.93, "kind": "peak"},
-  "K2": {"lat": 35.88, "lon": 76.51, "kind": "peak"},
-  "Kilimanjaro": {"lat": -3.07, "lon": 37.35, "kind": "peak"},
-  "Aconcagua": {"lat": -32.65, "lon": -70.01, "kind": "peak"},
-  "Alps": {"lat": 46.6, "lon": 9.5, "kind": "peak"},
-  "Andes": {"lat": -13.5, "lon": -72.0, "kind": "peak"},
-  "Atlas": {"lat": 32.0, "lon": -5.0, "kind": "peak"},
-  "Urals": {"lat": 60.0, "lon": 59.5, "kind": "peak"},
-  "Nile": {"lat": 26.0, "lon": 32.7, "kind": "water"},
-  "Zambezi": {"lat": -16.2, "lon": 29.0, "kind": "water"},
-  "Congo@Rivers of Africa": {"lat": -1.5, "lon": 17.0, "kind": "water"},
-  "Niger@Rivers of Africa": {"lat": 13.5, "lon": -6.0, "kind": "water"},
-  "Mekong": {"lat": 15.0, "lon": 105.8, "kind": "water"},
-  "Ganges": {"lat": 25.4, "lon": 83.0, "kind": "water"},
-  "Yangtze": {"lat": 30.5, "lon": 111.0, "kind": "water"},
-  "Indus": {"lat": 28.0, "lon": 69.5, "kind": "water"},
-  "Rhine": {"lat": 50.4, "lon": 7.6, "kind": "water"},
-  "Seine": {"lat": 49.0, "lon": 1.5, "kind": "water"},
-  "Volga": {"lat": 53.2, "lon": 48.5, "kind": "water"},
-  "Thames": {"lat": 51.5, "lon": -0.5, "kind": "water"},
-  "Amazon": {"lat": -3.5, "lon": -62.0, "kind": "water"},
-  "Mississippi@Rivers of the Americas": {"lat": 34.5, "lon": -91.0, "kind": "water"},
-  "Orinoco": {"lat": 7.5, "lon": -64.0, "kind": "water"},
-  "Yukon": {"lat": 64.1, "lon": -139.4, "kind": "water"},
-  "Superior": {"lat": 47.7, "lon": -87.5, "kind": "water"},
-  "Huron": {"lat": 44.8, "lon": -82.2, "kind": "water"},
-  "Erie": {"lat": 42.2, "lon": -81.2, "kind": "water"},
-  "Ontario": {"lat": 43.7, "lon": -77.9, "kind": "water"},
-  "Baltic": {"lat": 58.5, "lon": 20.0, "kind": "water"},
-  "Caspian": {"lat": 41.8, "lon": 50.8, "kind": "water"},
-  "Adriatic": {"lat": 43.0, "lon": 15.5, "kind": "water"},
-  "Aegean": {"lat": 38.8, "lon": 25.0, "kind": "water"},
-  "Victoria@Lakes of Africa": {"lat": -1.0, "lon": 33.0, "kind": "water"},
-  "Tanganyika": {"lat": -6.0, "lon": 29.5, "kind": "water"},
-  "Malawi@Lakes of Africa": {"lat": -12.0, "lon": 34.5, "kind": "water"},
-  "Chad@Lakes of Africa": {"lat": 13.0, "lon": 14.5, "kind": "water"},
-  "Niagara": {"lat": 43.08, "lon": -79.07, "kind": "water"},
-  "Victoria@Waterfalls": {"lat": -17.92, "lon": 25.86, "kind": "water"},
-  "Iguazu": {"lat": -25.69, "lon": -54.44, "kind": "water"},
-  "Angel": {"lat": 5.97, "lon": -62.54, "kind": "water"},
-  "Gibraltar": {"lat": 35.97, "lon": -5.6, "kind": "water"},
-  "Bosphorus": {"lat": 41.12, "lon": 29.05, "kind": "water"},
-  "Hormuz": {"lat": 26.57, "lon": 56.25, "kind": "water"},
-  "Malacca": {"lat": 2.5, "lon": 101.5, "kind": "water"},
-  "Suez": {"lat": 30.5, "lon": 32.3, "kind": "water"},
-  "Panama@Canals": {"lat": 9.08, "lon": -79.68, "kind": "water"},
-  "Kiel": {"lat": 54.0, "lon": 9.4, "kind": "water"},
-  "Corinth": {"lat": 37.93, "lon": 22.98, "kind": "water"},
-  "Atlantic": {"lat": 0.0, "lon": -25.0, "kind": "water"},
-  "Pacific": {"lat": 0.0, "lon": -150.0, "kind": "water"},
-  "Indian": {"lat": -15.0, "lon": 80.0, "kind": "water"},
-  "Arctic": {"lat": 80.0, "lon": 0.0, "kind": "water"},
-  "Gobi": {"lat": 43.0, "lon": 105.0, "kind": "area"},
-  "Sahara": {"lat": 23.0, "lon": 12.0, "kind": "area"},
-  "Kalahari": {"lat": -23.0, "lon": 22.0, "kind": "area"},
-  "Atacama": {"lat": -24.0, "lon": -69.5, "kind": "area"},
-  "Iberia": {"lat": 40.0, "lon": -4.5, "kind": "area"},
-  "Balkan": {"lat": 42.0, "lon": 22.0, "kind": "area"},
-  "Kamchatka": {"lat": 56.0, "lon": 160.0, "kind": "area"},
-  "Yucatán": {"lat": 20.5, "lon": -89.0, "kind": "area"},
-  "Yellowstone": {"lat": 44.6, "lon": -110.5, "kind": "area"},
-  "Yosemite": {"lat": 37.85, "lon": -119.55, "kind": "area"},
-  "Zion": {"lat": 37.3, "lon": -113.0, "kind": "area"},
-  "Everglades": {"lat": 25.4, "lon": -80.9, "kind": "area"},
-  "Serengeti": {"lat": -2.33, "lon": 34.83, "kind": "area"},
-  "Kruger": {"lat": -23.99, "lon": 31.55, "kind": "area"},
-  "Etosha": {"lat": -18.85, "lon": 16.33, "kind": "area"},
-  "Chobe": {"lat": -18.6, "lon": 25.1, "kind": "area"},
-  "Daintree": {"lat": -16.2, "lon": 145.4, "kind": "area"},
-  "Borneo": {"lat": 0.5, "lon": 114.0, "kind": "area"},
-  "Amazon@Rainforests": {"lat": -5.0, "lon": -64.0, "kind": "area"},
-  "Congo@Rainforests": {"lat": 0.0, "lon": 22.0, "kind": "area"},
-  "New Guinea": {"lat": -5.5, "lon": 141.5, "kind": "area"},
-  "Sicily": {"lat": 37.6, "lon": 14.0, "kind": "area"},
-  "Crete": {"lat": 35.24, "lon": 24.9, "kind": "area"},
-  "Sardinia": {"lat": 40.0, "lon": 9.0, "kind": "area"},
-  "Alberta": {"lat": 55.0, "lon": -115.0, "kind": "area"},
-  "Manitoba": {"lat": 55.0, "lon": -98.0, "kind": "area"},
-  "Quebec": {"lat": 52.0, "lon": -72.0, "kind": "area"},
-  "Saskatchewan": {"lat": 54.0, "lon": -106.0, "kind": "area"},
-  "Hawaii": {"lat": 20.8, "lon": -156.3, "kind": "area"},
-  "California": {"lat": 37.0, "lon": -120.0, "kind": "area"},
-  "Oregon": {"lat": 44.0, "lon": -120.5, "kind": "area"},
-  "Washington": {"lat": 47.4, "lon": -120.5, "kind": "area"},
-  "Arizona": {"lat": 34.3, "lon": -111.7, "kind": "area"},
-  "New Mexico": {"lat": 34.4, "lon": -106.1, "kind": "area"},
-  "Michigan": {"lat": 44.3, "lon": -85.4, "kind": "area"},
-  "Wyoming": {"lat": 43.0, "lon": -107.5, "kind": "area"},
-  "Mississippi": {"lat": 32.7, "lon": -89.7, "kind": "area"},
-  "Minnesota": {"lat": 46.3, "lon": -94.3, "kind": "area"},
-  "Wisconsin": {"lat": 44.6, "lon": -89.9, "kind": "area"},
-  "Louisiana": {"lat": 31.0, "lon": -92.0, "kind": "area"},
-  "Maine": {"lat": 45.3, "lon": -69.2, "kind": "area"},
-  "Rhode Island": {"lat": 41.7, "lon": -71.5, "kind": "area"},
-  "New Hampshire": {"lat": 43.7, "lon": -71.6, "kind": "area"},
-  "Connecticut": {"lat": 41.6, "lon": -72.7, "kind": "area"}
-  "Singapore": { "lat": 1.35, "lon": 103.82, "kind": "micro" }
+  "USA": {
+    "country": "United States of America"
+  },
+  "Bosnia and Herzegovina": {
+    "country": "Bosnia and Herz."
+  },
+  "UK": {
+    "country": "United Kingdom"
+  },
+  "DRC": {
+    "country": "Dem. Rep. Congo"
+  },
+  "Guinea Bissau": {
+    "country": "Guinea-Bissau"
+  },
+  "East Timor": {
+    "country": "Timor-Leste"
+  },
+  "Republic of the Congo": {
+    "country": "Congo"
+  },
+  "South Sudan": {
+    "country": "S. Sudan"
+  },
+  "UAE": {
+    "country": "United Arab Emirates"
+  },
+  "Equatorial Guinea": {
+    "country": "Eq. Guinea"
+  },
+  "Liechtenstein": {
+    "lat": 47.16,
+    "lon": 9.55,
+    "kind": "micro"
+  },
+  "Andorra": {
+    "lat": 42.55,
+    "lon": 1.58,
+    "kind": "micro"
+  },
+  "Malta": {
+    "lat": 35.9,
+    "lon": 14.4,
+    "kind": "micro"
+  },
+  "Monaco": {
+    "lat": 43.74,
+    "lon": 7.42,
+    "kind": "micro"
+  },
+  "Vatican City": {
+    "lat": 41.9,
+    "lon": 12.45,
+    "kind": "micro"
+  },
+  "Cabo Verde": {
+    "lat": 16.0,
+    "lon": -24.0,
+    "kind": "micro"
+  },
+  "São Tomé and Príncipe": {
+    "lat": 0.3,
+    "lon": 6.6,
+    "kind": "micro"
+  },
+  "Maldives": {
+    "lat": 3.2,
+    "lon": 73.2,
+    "kind": "micro"
+  },
+  "Tuvalu": {
+    "lat": -8.5,
+    "lon": 179.2,
+    "kind": "micro"
+  },
+  "Kiribati": {
+    "lat": 1.9,
+    "lon": -157.4,
+    "kind": "micro"
+  },
+  "Marshall Islands": {
+    "lat": 7.1,
+    "lon": 171.2,
+    "kind": "micro"
+  },
+  "Nauru": {
+    "lat": -0.5,
+    "lon": 166.9,
+    "kind": "micro"
+  },
+  "Mauritius": {
+    "lat": -20.3,
+    "lon": 57.6,
+    "kind": "micro"
+  },
+  "Seychelles": {
+    "lat": -4.7,
+    "lon": 55.5,
+    "kind": "micro"
+  },
+  "Comoros": {
+    "lat": -11.9,
+    "lon": 43.3,
+    "kind": "micro"
+  },
+  "Barbados": {
+    "lat": 13.2,
+    "lon": -59.55,
+    "kind": "micro"
+  },
+  "Samoa": {
+    "lat": -13.8,
+    "lon": -172.1,
+    "kind": "micro"
+  },
+  "Tonga": {
+    "lat": -21.2,
+    "lon": -175.2,
+    "kind": "micro"
+  },
+  "Athens": {
+    "lat": 37.98,
+    "lon": 23.73,
+    "kind": "city"
+  },
+  "Paris": {
+    "lat": 48.86,
+    "lon": 2.35,
+    "kind": "city"
+  },
+  "Mexico City": {
+    "lat": 19.43,
+    "lon": -99.13,
+    "kind": "city"
+  },
+  "Moscow": {
+    "lat": 55.75,
+    "lon": 37.62,
+    "kind": "city"
+  },
+  "La Paz": {
+    "lat": -16.5,
+    "lon": -68.15,
+    "kind": "city"
+  },
+  "Quito": {
+    "lat": -0.18,
+    "lon": -78.47,
+    "kind": "city"
+  },
+  "Addis Ababa": {
+    "lat": 9.03,
+    "lon": 38.74,
+    "kind": "city"
+  },
+  "Thimphu": {
+    "lat": 27.47,
+    "lon": 89.64,
+    "kind": "city"
+  },
+  "Tashkent": {
+    "lat": 41.3,
+    "lon": 69.24,
+    "kind": "city"
+  },
+  "Dushanbe": {
+    "lat": 38.56,
+    "lon": 68.79,
+    "kind": "city"
+  },
+  "Bishkek": {
+    "lat": 42.87,
+    "lon": 74.59,
+    "kind": "city"
+  },
+  "Astana": {
+    "lat": 51.17,
+    "lon": 71.43,
+    "kind": "city"
+  },
+  "Havana": {
+    "lat": 23.11,
+    "lon": -82.37,
+    "kind": "city"
+  },
+  "Manila": {
+    "lat": 14.6,
+    "lon": 120.98,
+    "kind": "city"
+  },
+  "Jakarta": {
+    "lat": -6.21,
+    "lon": 106.85,
+    "kind": "city"
+  },
+  "Antananarivo": {
+    "lat": -18.88,
+    "lon": 47.51,
+    "kind": "city"
+  },
+  "Hanoi": {
+    "lat": 21.03,
+    "lon": 105.85,
+    "kind": "city"
+  },
+  "Kathmandu": {
+    "lat": 27.72,
+    "lon": 85.32,
+    "kind": "city"
+  },
+  "Bogotá": {
+    "lat": 4.71,
+    "lon": -74.07,
+    "kind": "city"
+  },
+  "Vienna": {
+    "lat": 48.21,
+    "lon": 16.37,
+    "kind": "city"
+  },
+  "Budapest": {
+    "lat": 47.5,
+    "lon": 19.04,
+    "kind": "city"
+  },
+  "Bratislava": {
+    "lat": 48.15,
+    "lon": 17.11,
+    "kind": "city"
+  },
+  "Belgrade": {
+    "lat": 44.79,
+    "lon": 20.45,
+    "kind": "city"
+  },
+  "Nairobi": {
+    "lat": -1.29,
+    "lon": 36.82,
+    "kind": "city"
+  },
+  "Accra": {
+    "lat": 5.6,
+    "lon": -0.19,
+    "kind": "city"
+  },
+  "Dakar": {
+    "lat": 14.72,
+    "lon": -17.47,
+    "kind": "city"
+  },
+  "Rabat": {
+    "lat": 34.02,
+    "lon": -6.84,
+    "kind": "city"
+  },
+  "Perth": {
+    "lat": -31.95,
+    "lon": 115.86,
+    "kind": "city"
+  },
+  "Adelaide": {
+    "lat": -34.93,
+    "lon": 138.6,
+    "kind": "city"
+  },
+  "Hobart": {
+    "lat": -42.88,
+    "lon": 147.33,
+    "kind": "city"
+  },
+  "Darwin": {
+    "lat": -12.46,
+    "lon": 130.84,
+    "kind": "city"
+  },
+  "Auckland": {
+    "lat": -36.85,
+    "lon": 174.76,
+    "kind": "city"
+  },
+  "Wellington": {
+    "lat": -41.29,
+    "lon": 174.78,
+    "kind": "city"
+  },
+  "Christchurch": {
+    "lat": -43.53,
+    "lon": 172.64,
+    "kind": "city"
+  },
+  "Dunedin": {
+    "lat": -45.87,
+    "lon": 170.5,
+    "kind": "city"
+  },
+  "Madrid": {
+    "lat": 40.42,
+    "lon": -3.7,
+    "kind": "city"
+  },
+  "Muscat": {
+    "lat": 23.59,
+    "lon": 58.41,
+    "kind": "city"
+  },
+  "Maputo": {
+    "lat": -25.97,
+    "lon": 32.57,
+    "kind": "city"
+  },
+  "Lima": {
+    "lat": -12.05,
+    "lon": -77.04,
+    "kind": "city"
+  },
+  "Santiago": {
+    "lat": -33.45,
+    "lon": -70.67,
+    "kind": "city"
+  },
+  "Montevideo": {
+    "lat": -34.9,
+    "lon": -56.16,
+    "kind": "city"
+  },
+  "Asunción": {
+    "lat": -25.26,
+    "lon": -57.58,
+    "kind": "city"
+  },
+  "Denver": {
+    "lat": 39.74,
+    "lon": -104.99,
+    "kind": "city"
+  },
+  "Boston": {
+    "lat": 42.36,
+    "lon": -71.06,
+    "kind": "city"
+  },
+  "Nashville": {
+    "lat": 36.16,
+    "lon": -86.78,
+    "kind": "city"
+  },
+  "Sacramento": {
+    "lat": 38.58,
+    "lon": -121.49,
+    "kind": "city"
+  },
+  "Seoul": {
+    "lat": 37.57,
+    "lon": 126.98,
+    "kind": "city"
+  },
+  "Stockholm": {
+    "lat": 59.33,
+    "lon": 18.07,
+    "kind": "city"
+  },
+  "Sofia": {
+    "lat": 42.7,
+    "lon": 23.32,
+    "kind": "city"
+  },
+  "Sarajevo": {
+    "lat": 43.86,
+    "lon": 18.41,
+    "kind": "city"
+  },
+  "Basel": {
+    "lat": 47.56,
+    "lon": 7.59,
+    "kind": "city"
+  },
+  "Cologne": {
+    "lat": 50.94,
+    "lon": 6.96,
+    "kind": "city"
+  },
+  "Strasbourg": {
+    "lat": 48.57,
+    "lon": 7.75,
+    "kind": "city"
+  },
+  "Mainz": {
+    "lat": 50.0,
+    "lon": 8.27,
+    "kind": "city"
+  },
+  "Milan": {
+    "lat": 45.46,
+    "lon": 9.19,
+    "kind": "city"
+  },
+  "Naples": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "kind": "city"
+  },
+  "Turin": {
+    "lat": 45.07,
+    "lon": 7.69,
+    "kind": "city"
+  },
+  "Florence": {
+    "lat": 43.77,
+    "lon": 11.26,
+    "kind": "city"
+  },
+  "Seville": {
+    "lat": 37.39,
+    "lon": -5.98,
+    "kind": "city"
+  },
+  "Valencia": {
+    "lat": 39.47,
+    "lon": -0.38,
+    "kind": "city"
+  },
+  "Bilbao": {
+    "lat": 43.26,
+    "lon": -2.93,
+    "kind": "city"
+  },
+  "Granada": {
+    "lat": 37.18,
+    "lon": -3.6,
+    "kind": "city"
+  },
+  "Munich": {
+    "lat": 48.14,
+    "lon": 11.58,
+    "kind": "city"
+  },
+  "Hamburg": {
+    "lat": 53.55,
+    "lon": 9.99,
+    "kind": "city"
+  },
+  "Dresden": {
+    "lat": 51.05,
+    "lon": 13.74,
+    "kind": "city"
+  },
+  "Leipzig": {
+    "lat": 51.34,
+    "lon": 12.37,
+    "kind": "city"
+  },
+  "Doha": {
+    "lat": 25.29,
+    "lon": 51.53,
+    "kind": "city"
+  },
+  "Dubai": {
+    "lat": 25.2,
+    "lon": 55.27,
+    "kind": "city"
+  },
+  "Abu Dhabi": {
+    "lat": 24.45,
+    "lon": 54.38,
+    "kind": "city"
+  },
+  "Manama": {
+    "lat": 26.23,
+    "lon": 50.59,
+    "kind": "city"
+  },
+  "Brussels": {
+    "lat": 50.85,
+    "lon": 4.35,
+    "kind": "city"
+  },
+  "Brasilia": {
+    "lat": -15.79,
+    "lon": -47.88,
+    "kind": "city"
+  },
+  "Bangkok": {
+    "lat": 13.76,
+    "lon": 100.5,
+    "kind": "city"
+  },
+  "Etna": {
+    "lat": 37.75,
+    "lon": 14.99,
+    "kind": "peak"
+  },
+  "Vesuvius": {
+    "lat": 40.82,
+    "lon": 14.43,
+    "kind": "peak"
+  },
+  "Krakatoa": {
+    "lat": -6.1,
+    "lon": 105.42,
+    "kind": "peak"
+  },
+  "Fuji": {
+    "lat": 35.36,
+    "lon": 138.73,
+    "kind": "peak"
+  },
+  "Everest": {
+    "lat": 27.99,
+    "lon": 86.93,
+    "kind": "peak"
+  },
+  "K2": {
+    "lat": 35.88,
+    "lon": 76.51,
+    "kind": "peak"
+  },
+  "Kilimanjaro": {
+    "lat": -3.07,
+    "lon": 37.35,
+    "kind": "peak"
+  },
+  "Aconcagua": {
+    "lat": -32.65,
+    "lon": -70.01,
+    "kind": "peak"
+  },
+  "Alps": {
+    "lat": 46.6,
+    "lon": 9.5,
+    "kind": "peak"
+  },
+  "Andes": {
+    "lat": -13.5,
+    "lon": -72.0,
+    "kind": "peak"
+  },
+  "Atlas": {
+    "lat": 32.0,
+    "lon": -5.0,
+    "kind": "peak"
+  },
+  "Urals": {
+    "lat": 60.0,
+    "lon": 59.5,
+    "kind": "peak"
+  },
+  "Nile": {
+    "lat": 26.0,
+    "lon": 32.7,
+    "kind": "water"
+  },
+  "Zambezi": {
+    "lat": -16.2,
+    "lon": 29.0,
+    "kind": "water"
+  },
+  "Congo@Rivers of Africa": {
+    "lat": -1.5,
+    "lon": 17.0,
+    "kind": "water"
+  },
+  "Niger@Rivers of Africa": {
+    "lat": 13.5,
+    "lon": -6.0,
+    "kind": "water"
+  },
+  "Mekong": {
+    "lat": 15.0,
+    "lon": 105.8,
+    "kind": "water"
+  },
+  "Ganges": {
+    "lat": 25.4,
+    "lon": 83.0,
+    "kind": "water"
+  },
+  "Yangtze": {
+    "lat": 30.5,
+    "lon": 111.0,
+    "kind": "water"
+  },
+  "Indus": {
+    "lat": 28.0,
+    "lon": 69.5,
+    "kind": "water"
+  },
+  "Rhine": {
+    "lat": 50.4,
+    "lon": 7.6,
+    "kind": "water"
+  },
+  "Seine": {
+    "lat": 49.0,
+    "lon": 1.5,
+    "kind": "water"
+  },
+  "Volga": {
+    "lat": 53.2,
+    "lon": 48.5,
+    "kind": "water"
+  },
+  "Thames": {
+    "lat": 51.5,
+    "lon": -0.5,
+    "kind": "water"
+  },
+  "Amazon": {
+    "lat": -3.5,
+    "lon": -62.0,
+    "kind": "water"
+  },
+  "Mississippi@Rivers of the Americas": {
+    "lat": 34.5,
+    "lon": -91.0,
+    "kind": "water"
+  },
+  "Orinoco": {
+    "lat": 7.5,
+    "lon": -64.0,
+    "kind": "water"
+  },
+  "Yukon": {
+    "lat": 64.1,
+    "lon": -139.4,
+    "kind": "water"
+  },
+  "Superior": {
+    "lat": 47.7,
+    "lon": -87.5,
+    "kind": "water"
+  },
+  "Huron": {
+    "lat": 44.8,
+    "lon": -82.2,
+    "kind": "water"
+  },
+  "Erie": {
+    "lat": 42.2,
+    "lon": -81.2,
+    "kind": "water"
+  },
+  "Ontario": {
+    "lat": 43.7,
+    "lon": -77.9,
+    "kind": "water"
+  },
+  "Baltic": {
+    "lat": 58.5,
+    "lon": 20.0,
+    "kind": "water"
+  },
+  "Caspian": {
+    "lat": 41.8,
+    "lon": 50.8,
+    "kind": "water"
+  },
+  "Adriatic": {
+    "lat": 43.0,
+    "lon": 15.5,
+    "kind": "water"
+  },
+  "Aegean": {
+    "lat": 38.8,
+    "lon": 25.0,
+    "kind": "water"
+  },
+  "Victoria@Lakes of Africa": {
+    "lat": -1.0,
+    "lon": 33.0,
+    "kind": "water"
+  },
+  "Tanganyika": {
+    "lat": -6.0,
+    "lon": 29.5,
+    "kind": "water"
+  },
+  "Malawi@Lakes of Africa": {
+    "lat": -12.0,
+    "lon": 34.5,
+    "kind": "water"
+  },
+  "Chad@Lakes of Africa": {
+    "lat": 13.0,
+    "lon": 14.5,
+    "kind": "water"
+  },
+  "Niagara": {
+    "lat": 43.08,
+    "lon": -79.07,
+    "kind": "water"
+  },
+  "Victoria@Waterfalls": {
+    "lat": -17.92,
+    "lon": 25.86,
+    "kind": "water"
+  },
+  "Iguazu": {
+    "lat": -25.69,
+    "lon": -54.44,
+    "kind": "water"
+  },
+  "Angel": {
+    "lat": 5.97,
+    "lon": -62.54,
+    "kind": "water"
+  },
+  "Gibraltar": {
+    "lat": 35.97,
+    "lon": -5.6,
+    "kind": "water"
+  },
+  "Bosphorus": {
+    "lat": 41.12,
+    "lon": 29.05,
+    "kind": "water"
+  },
+  "Hormuz": {
+    "lat": 26.57,
+    "lon": 56.25,
+    "kind": "water"
+  },
+  "Malacca": {
+    "lat": 2.5,
+    "lon": 101.5,
+    "kind": "water"
+  },
+  "Suez": {
+    "lat": 30.5,
+    "lon": 32.3,
+    "kind": "water"
+  },
+  "Panama@Canals": {
+    "lat": 9.08,
+    "lon": -79.68,
+    "kind": "water"
+  },
+  "Kiel": {
+    "lat": 54.0,
+    "lon": 9.4,
+    "kind": "water"
+  },
+  "Corinth": {
+    "lat": 37.93,
+    "lon": 22.98,
+    "kind": "water"
+  },
+  "Atlantic": {
+    "lat": 0.0,
+    "lon": -25.0,
+    "kind": "water"
+  },
+  "Pacific": {
+    "lat": 0.0,
+    "lon": -150.0,
+    "kind": "water"
+  },
+  "Indian": {
+    "lat": -15.0,
+    "lon": 80.0,
+    "kind": "water"
+  },
+  "Arctic": {
+    "lat": 80.0,
+    "lon": 0.0,
+    "kind": "water"
+  },
+  "Gobi": {
+    "lat": 43.0,
+    "lon": 105.0,
+    "kind": "area"
+  },
+  "Sahara": {
+    "lat": 23.0,
+    "lon": 12.0,
+    "kind": "area"
+  },
+  "Kalahari": {
+    "lat": -23.0,
+    "lon": 22.0,
+    "kind": "area"
+  },
+  "Atacama": {
+    "lat": -24.0,
+    "lon": -69.5,
+    "kind": "area"
+  },
+  "Iberia": {
+    "lat": 40.0,
+    "lon": -4.5,
+    "kind": "area"
+  },
+  "Balkan": {
+    "lat": 42.0,
+    "lon": 22.0,
+    "kind": "area"
+  },
+  "Kamchatka": {
+    "lat": 56.0,
+    "lon": 160.0,
+    "kind": "area"
+  },
+  "Yucatán": {
+    "lat": 20.5,
+    "lon": -89.0,
+    "kind": "area"
+  },
+  "Yellowstone": {
+    "lat": 44.6,
+    "lon": -110.5,
+    "kind": "area"
+  },
+  "Yosemite": {
+    "lat": 37.85,
+    "lon": -119.55,
+    "kind": "area"
+  },
+  "Zion": {
+    "lat": 37.3,
+    "lon": -113.0,
+    "kind": "area"
+  },
+  "Everglades": {
+    "lat": 25.4,
+    "lon": -80.9,
+    "kind": "area"
+  },
+  "Serengeti": {
+    "lat": -2.33,
+    "lon": 34.83,
+    "kind": "area"
+  },
+  "Kruger": {
+    "lat": -23.99,
+    "lon": 31.55,
+    "kind": "area"
+  },
+  "Etosha": {
+    "lat": -18.85,
+    "lon": 16.33,
+    "kind": "area"
+  },
+  "Chobe": {
+    "lat": -18.6,
+    "lon": 25.1,
+    "kind": "area"
+  },
+  "Daintree": {
+    "lat": -16.2,
+    "lon": 145.4,
+    "kind": "area"
+  },
+  "Borneo": {
+    "lat": 0.5,
+    "lon": 114.0,
+    "kind": "area"
+  },
+  "Amazon@Rainforests": {
+    "lat": -5.0,
+    "lon": -64.0,
+    "kind": "area"
+  },
+  "Congo@Rainforests": {
+    "lat": 0.0,
+    "lon": 22.0,
+    "kind": "area"
+  },
+  "New Guinea": {
+    "lat": -5.5,
+    "lon": 141.5,
+    "kind": "area"
+  },
+  "Sicily": {
+    "lat": 37.6,
+    "lon": 14.0,
+    "kind": "area"
+  },
+  "Crete": {
+    "lat": 35.24,
+    "lon": 24.9,
+    "kind": "area"
+  },
+  "Sardinia": {
+    "lat": 40.0,
+    "lon": 9.0,
+    "kind": "area"
+  },
+  "Alberta": {
+    "lat": 55.0,
+    "lon": -115.0,
+    "kind": "area"
+  },
+  "Manitoba": {
+    "lat": 55.0,
+    "lon": -98.0,
+    "kind": "area"
+  },
+  "Quebec": {
+    "lat": 52.0,
+    "lon": -72.0,
+    "kind": "area"
+  },
+  "Saskatchewan": {
+    "lat": 54.0,
+    "lon": -106.0,
+    "kind": "area"
+  },
+  "Hawaii": {
+    "lat": 20.8,
+    "lon": -156.3,
+    "kind": "area"
+  },
+  "California": {
+    "lat": 37.0,
+    "lon": -120.0,
+    "kind": "area"
+  },
+  "Oregon": {
+    "lat": 44.0,
+    "lon": -120.5,
+    "kind": "area"
+  },
+  "Washington": {
+    "lat": 47.4,
+    "lon": -120.5,
+    "kind": "area"
+  },
+  "Arizona": {
+    "lat": 34.3,
+    "lon": -111.7,
+    "kind": "area"
+  },
+  "New Mexico": {
+    "lat": 34.4,
+    "lon": -106.1,
+    "kind": "area"
+  },
+  "Michigan": {
+    "lat": 44.3,
+    "lon": -85.4,
+    "kind": "area"
+  },
+  "Wyoming": {
+    "lat": 43.0,
+    "lon": -107.5,
+    "kind": "area"
+  },
+  "Mississippi": {
+    "lat": 32.7,
+    "lon": -89.7,
+    "kind": "area"
+  },
+  "Minnesota": {
+    "lat": 46.3,
+    "lon": -94.3,
+    "kind": "area"
+  },
+  "Wisconsin": {
+    "lat": 44.6,
+    "lon": -89.9,
+    "kind": "area"
+  },
+  "Louisiana": {
+    "lat": 31.0,
+    "lon": -92.0,
+    "kind": "area"
+  },
+  "Maine": {
+    "lat": 45.3,
+    "lon": -69.2,
+    "kind": "area"
+  },
+  "Rhode Island": {
+    "lat": 41.7,
+    "lon": -71.5,
+    "kind": "area"
+  },
+  "New Hampshire": {
+    "lat": 43.7,
+    "lon": -71.6,
+    "kind": "area"
+  },
+  "Connecticut": {
+    "lat": 41.6,
+    "lon": -72.7,
+    "kind": "area"
+  },
+  "Singapore": {
+    "lat": 1.35,
+    "lon": 103.82,
+    "kind": "micro"
+  },
+  "Sapporo": {
+    "lat": 43.06,
+    "lon": 141.35,
+    "kind": "city"
+  },
+  "Lillehammer": {
+    "lat": 61.11,
+    "lon": 10.47,
+    "kind": "city"
+  },
+  "Sochi": {
+    "lat": 43.6,
+    "lon": 39.73,
+    "kind": "city"
+  },
+  "Calgary": {
+    "lat": 51.05,
+    "lon": -114.07,
+    "kind": "city"
+  },
+  "Alexandria": {
+    "lat": 31.2,
+    "lon": 29.92,
+    "kind": "city"
+  },
+  "Monrovia": {
+    "lat": 6.3,
+    "lon": -10.8,
+    "kind": "city"
+  },
+  "Houston": {
+    "lat": 29.76,
+    "lon": -95.37,
+    "kind": "city"
+  },
+  "Toronto": {
+    "lat": 43.65,
+    "lon": -79.38,
+    "kind": "city"
+  },
+  "Karachi": {
+    "lat": 24.86,
+    "lon": 67.0,
+    "kind": "city"
+  },
+  "Istanbul": {
+    "lat": 41.01,
+    "lon": 28.98,
+    "kind": "city"
+  },
+  "Lagos": {
+    "lat": 6.52,
+    "lon": 3.38,
+    "kind": "city"
+  },
+  "Namib": {
+    "lat": -23.5,
+    "lon": 15.2,
+    "kind": "area"
+  },
+  "Thar": {
+    "lat": 27.0,
+    "lon": 71.0,
+    "kind": "area"
+  },
+  "Elbrus": {
+    "lat": 43.35,
+    "lon": 42.44,
+    "kind": "peak"
+  },
+  "Tiber": {
+    "lat": 41.9,
+    "lon": 12.47,
+    "kind": "water"
+  },
+  "Tigris": {
+    "lat": 33.31,
+    "lon": 44.36,
+    "kind": "water"
+  },
+  "Caspian Sea": {
+    "lat": 41.5,
+    "lon": 50.5,
+    "kind": "water"
+  },
+  "Dead Sea": {
+    "lat": 31.5,
+    "lon": 35.48,
+    "kind": "water"
+  },
+  "Aral Sea": {
+    "lat": 45.0,
+    "lon": 60.0,
+    "kind": "water"
+  },
+  "Sea of Galilee": {
+    "lat": 32.82,
+    "lon": 35.59,
+    "kind": "water"
+  },
+  "Cape Verde": {
+    "lat": 15.1,
+    "lon": -23.6,
+    "kind": "micro"
+  },
+  "San Marino": {
+    "lat": 43.94,
+    "lon": 12.46,
+    "kind": "micro"
+  },
+  "Ivory Coast": {
+    "country": "Côte d'Ivoire"
+  },
+  "Dominican Republic": {
+    "country": "Dominican Rep."
+  },
+  "Antigua and Barbuda": {
+    "lat": 17.1,
+    "lon": -61.8,
+    "kind": "micro"
+  },
+  "Saint Kitts and Nevis": {
+    "lat": 17.33,
+    "lon": -62.75,
+    "kind": "micro"
+  },
+  "Washington@Named after a person": {
+    "lat": 38.9,
+    "lon": -77.04,
+    "kind": "city"
+  }
 }

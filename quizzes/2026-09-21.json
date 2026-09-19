@@ -1,50 +1,50 @@
 {
   "id": "2026-09-21",
   "title": "GeoQuads — Daily",
-  "spoiler": "One group is all about a line on the map.",
+  "spoiler": "Think languages, roads, money and governments.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Countries crossed by the Tropic of Cancer",
+      "name": "Portuguese is an official language",
       "items": [
-        "India",
-        "Egypt",
-        "Mexico",
-        "Algeria"
+        "Portugal",
+        "Brazil",
+        "Angola",
+        "Cape Verde"
       ],
-      "fact": "The Tropic of Cancer crosses three continents: North America, Africa and Asia."
+      "fact": "Portuguese is an official language on four continents."
     },
     {
-      "name": "Countries of mainland Southeast Asia",
+      "name": "Drive on the left",
       "items": [
-        "Laos",
-        "Cambodia",
-        "Vietnam",
-        "Thailand"
+        "Japan",
+        "Thailand",
+        "Kenya",
+        "Jamaica"
       ],
-      "fact": "Laos is the only landlocked country in Southeast Asia."
+      "fact": "Japan and Thailand are the famous exceptions: most left-driving countries were once British-ruled."
     },
     {
-      "name": "Rivers of Asia",
+      "name": "Use the euro but are not in the EU",
       "items": [
-        "Mekong",
-        "Ganges",
-        "Yangtze",
-        "Indus"
+        "Andorra",
+        "Monaco",
+        "San Marino",
+        "Montenegro"
       ],
-      "fact": "The Yangtze is the longest river in Asia and the third longest in the world."
+      "fact": "Montenegro adopted the euro on its own, without joining the eurozone."
     },
     {
-      "name": "Deserts",
+      "name": "Government sits outside the official capital",
       "items": [
-        "Gobi",
-        "Sahara",
-        "Kalahari",
-        "Atacama"
+        "Bolivia",
+        "Netherlands",
+        "Benin",
+        "Ivory Coast"
       ],
-      "fact": "The Sahara is the largest hot desert in the world."
+      "fact": "In the Netherlands, Amsterdam is the capital but the government sits in The Hague."
     }
   ],
   "ui": {

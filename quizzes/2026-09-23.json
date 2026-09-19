@@ -1,50 +1,50 @@
 {
   "id": "2026-09-23",
   "title": "GeoQuads — Daily",
-  "spoiler": "One group lives at the bottom of the world.",
+  "spoiler": "Think kings, continents, oceans and tropics.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Australian state and territory capitals",
+      "name": "Monarchies",
       "items": [
-        "Perth",
-        "Adelaide",
-        "Hobart",
-        "Darwin"
+        "Japan",
+        "Jordan",
+        "Bhutan",
+        "Morocco"
       ],
-      "fact": "Hobart is the second-oldest capital city in Australia, after Sydney."
+      "fact": "Japan's imperial line is often called the oldest continuous hereditary monarchy in the world."
     },
     {
-      "name": "Pacific island nations",
+      "name": "Spans two continents",
       "items": [
-        "Fiji",
-        "Samoa",
-        "Tonga",
-        "Vanuatu"
+        "Turkey",
+        "Egypt",
+        "Indonesia",
+        "Kazakhstan"
       ],
-      "fact": "Fiji is made up of more than 300 islands."
+      "fact": "Istanbul sits on both Europe and Asia, split by the Bosphorus."
     },
     {
-      "name": "Famous mountains",
+      "name": "Coasts on both the Atlantic and the Pacific",
       "items": [
-        "Everest",
-        "K2",
-        "Kilimanjaro",
-        "Aconcagua"
+        "Colombia",
+        "Costa Rica",
+        "Mexico",
+        "USA"
       ],
-      "fact": "Aconcagua, in Argentina, is the highest mountain outside Asia."
+      "fact": "Colombia has coasts on both the Caribbean Sea and the Pacific Ocean."
     },
     {
-      "name": "Cities of New Zealand",
+      "name": "Crossed by the Tropic of Capricorn",
       "items": [
-        "Auckland",
-        "Wellington",
-        "Christchurch",
-        "Dunedin"
+        "Namibia",
+        "Madagascar",
+        "Brazil",
+        "Botswana"
       ],
-      "fact": "Wellington is the southernmost capital city of a sovereign state in the world."
+      "fact": "The Tropic of Capricorn is the southernmost latitude where the Sun can be directly overhead."
     }
   ],
   "ui": {
