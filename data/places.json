@@ -200,4 +200,5 @@
   "Rhode Island": {"lat": 41.7, "lon": -71.5, "kind": "area"},
   "New Hampshire": {"lat": 43.7, "lon": -71.6, "kind": "area"},
   "Connecticut": {"lat": 41.6, "lon": -72.7, "kind": "area"}
+  "Singapore": { "lat": 1.35, "lon": 103.82, "kind": "micro" }
 }
