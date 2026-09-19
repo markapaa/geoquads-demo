@@ -37,6 +37,7 @@ A daily geography grouping puzzle. Sixteen words (countries, cities, islands, la
 - **Stats chart**: how many of your quizzes were solved with 0, 1, 2, 3 mistakes (or lost), plus best streak
 - **Dark / light theme** (follows your system, or switch with the theme button)
 - **Installable app (PWA)**: add it to your phone's home screen; the game shell works offline once loaded
+- **Anonymous play statistics** (optional, Supabase): one record per finished quiz (quiz id, solved or not, mistakes, random browser id). No account, no personal data, players can opt out in the Stats window
 - Link previews (Open Graph image) when the game is shared in chat apps
 - Win streak counter, confetti and a colored recap of your guesses
 - "One away" feedback, lives counter, spoiler hints, shareable results, sound toggle
