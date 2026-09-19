@@ -1,4 +1,5 @@
 // GeoQuads: UI and game flow. Pure rules live in logic.js, browser storage in storage.js, sounds in sound.js.
+import { reportResult, isConfigured, isEnabled, setEnabled } from "./telemetry.js";
 import {
   todayStr, strToDate, isDateId, buildTiles, validateConfig, evaluateGuess,
   nextStats, currentStreak, mistakeDistribution, msUntilMidnight, formatCountdown, shareText, shuffleArray,
@@ -359,6 +360,7 @@ function finishGame(won) {
   if (state.mode !== "practice") {
     store.saveResult(state.quizId, { won, mistakes: state.mistakes, history: state.history });
     store.setStats(nextStats(store.getStats(), won, { isTodaysDaily: state.mode === "daily" && state.quizId === todayStr() }));
+    reportResult({ quizId: state.quizId, mode: state.mode, won, mistakes: state.mistakes, history: state.history });
   }
   if (won) {
     sfx.win();
@@ -419,6 +421,8 @@ function openStats() {
   ];
   $("statsBody").innerHTML = cells.map(([n, label]) => `<div class="stat"><b>${n}</b><span>${label}</span></div>`).join("");
   renderStatsChart();
+  $("privacy").hidden = !isConfigured();
+  $("shareToggle").checked = isEnabled();
   $("statsDialog").showModal();
 }
 
@@ -553,6 +557,7 @@ function wireUI() {
   updateSoundButton();
 
   $("themeBtn").addEventListener("click", toggleTheme);
+  $("shareToggle").addEventListener("change", (e) => setEnabled(e.target.checked));
   updateThemeButton();
 
   $("spoiler").addEventListener("click", () => {
