@@ -32,7 +32,7 @@ export function foundOrder(history) {
 }
 
 function headers() {
-  const h = { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json", Prefer: "resolution=ignore-duplicates,return=minimal" };
+  const h = { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json", Prefer: "return=minimal" };
   // Old-style anon keys are JWTs and go in Authorization too; new "sb_publishable_" keys only use apikey.
   if (!SUPABASE_ANON_KEY.startsWith("sb_")) h.Authorization = `Bearer ${SUPABASE_ANON_KEY}`;
   return h;
@@ -49,7 +49,7 @@ export function reportResult({ quizId, mode, won, mistakes, history }) {
     found_order: foundOrder(history),
   };
   try {
-    fetch(`${SUPABASE_URL}/rest/v1/plays?on_conflict=player_id,quiz_id`, {
+    fetch(`${SUPABASE_URL}/rest/v1/plays`, {
       method: "POST",
       keepalive: true,
       headers: headers(),

@@ -2,7 +2,7 @@
 // Strategy: always try the network first, so a new daily quiz or a code update shows up right away.
 // If the network fails, fall back to the last copy we saved.
 
-const CACHE = "geoquads-v3";
+const CACHE = "geoquads-v4";
 
 self.addEventListener("install", () => self.skipWaiting());
 
@@ -27,6 +27,10 @@ self.addEventListener("fetch", (event) => {
         }
         return res;
       })
-      .catch(() => caches.match(req).then((hit) => hit || caches.match("index.html")))
+      .catch(() =>
+        caches.match(req, { ignoreSearch: true })
+          .then((hit) => hit || caches.match("index.html", { ignoreSearch: true }))
+          .then((hit) => hit || new Response("You are offline.", { status: 503, headers: { "Content-Type": "text/plain" } }))
+      )
   );
 });
