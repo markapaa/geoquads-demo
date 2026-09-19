@@ -1,6 +1,6 @@
 # GeoQuads
 
-A daily geography grouping puzzle. Sixteen words (countries, cities, islands, landmarks) hide four groups of four. Find all four groups before you run out of lives.
+A daily geography puzzle. Sixteen words hide four groups of four: find all four groups before you run out of lives. Every solved group lights up on a world map.
 
 **Play it:** https://geoquads.vercel.app/
 
@@ -8,119 +8,81 @@ A daily geography grouping puzzle. Sixteen words (countries, cities, islands, la
 
 ## How to play
 
-1. You get a 4x4 grid of 16 words. Each word belongs to exactly one of four hidden categories (for example *capitals*, *islands*, *countries on the equator*).
-2. Click a word to select it. Select four words that you think share a category, then press **Submit**.
-3. **Correct:** the four words merge into a banner at the top and the grid shrinks (4x4, then 3x4, and so on).
-4. **Wrong:** the selection is cleared and you lose a life. If your guess was only **one word away**, the game tells you.
-5. Lose all your lives and the remaining categories are revealed one by one.
-6. Stuck? Tap the blurred **Spoiler** box for a vague hint (it never names the category outright).
-
-| Control | What it does |
-|---|---|
-| **Clear** (`Esc`) | Deselects every selected word |
-| **Submit** (`Enter`) | Enabled only when exactly 4 words are selected |
-| **Shuffle** (`R`) | Rearranges the remaining words |
-| **?** | Shows the instructions |
-| **Stats** | Played, win rate, current and best streak |
-| **Share** | Copies your result as an emoji grid |
-| **Theme** | Switches between light and dark mode |
-| **Sound** | Toggles soft sound effects (off by default) |
+1. Select four words you think belong together and press **Submit**.
+2. Right: the group is revealed. Wrong: you lose a life (5 in total). *One away* means 3 of your 4 words were right.
+3. Stuck? Tap the blurred **Spoiler** box for a gentle hint.
+4. Keyboard: `Enter` submit, `Esc` clear, `R` shuffle.
 
 ## Features
 
-- New **daily puzzle** every day, with a countdown to the next one (resets at local midnight)
-- **Practice** rounds (easy and hard) that don't affect your stats
-- **Archive** of past dailies, with a marker on the ones you solved or failed
-- A finished daily stays finished when you reload the page
-- **World map that lights up**: every solved group lights its countries on a world map (cities, peaks, seas and areas appear as pins) and the map zooms to them
-- Optional 💡 fun fact for each group (add a `fact` field in the quiz JSON)
-- **Stats chart**: how many of your quizzes were solved with 0, 1, 2, 3 mistakes (or lost), plus best streak
-- **Dark / light theme** (follows your system, or switch with the theme button)
-- **Installable app (PWA)**: add it to your phone's home screen; the game shell works offline once loaded
-- **Anonymous play statistics** (optional, Supabase): one record per finished quiz (quiz id, solved or not, mistakes, random browser id). No account, no personal data, players can opt out in the Stats window
-- Link previews (Open Graph image) when the game is shared in chat apps
-- Win streak counter, confetti and a colored recap of your guesses
-- "One away" feedback, lives counter, spoiler hints, shareable results, sound toggle
-- Responsive layout that works on phones
-- Quizzes are plain JSON files, checked by a **validation script**
+- A new **daily puzzle** every day, an **archive** of past days and **practice** rounds
+- **World map** that lights up the countries, cities, peaks and seas of every solved group
+- **Stats**: played, win rate, streak, best streak and a chart of mistakes per quiz
+- **Light and dark theme**, responsive layout for phones, installable as an app (PWA)
+- Shareable emoji result, spoiler hints and a fun fact for each group
+- **Anonymous play statistics** (optional, see below)
 
 ## Tech stack
 
-- Vanilla **JavaScript** (ES modules), **HTML** and **CSS**, no framework and no build step
-- Quizzes stored as **JSON** files, one per day
-- **Node.js** scripts to validate quizzes and build the quiz index
-- **Service worker** + web manifest (PWA)
-- **Node.js test runner** for unit tests (`npm test`)
-- Deployed on **Vercel**
+- Vanilla **JavaScript** (ES modules), **HTML** and **CSS**: no framework, no build step
+- Quizzes as **JSON** files, checked by a **Node.js** validation script
+- Map drawn from **Natural Earth** data with a custom Node script
+- **Supabase** (PostgreSQL) for anonymous statistics, with row-level security
+- **Service worker** and web manifest (PWA), **Node test runner** for unit tests
+- Hosted on **Vercel**
+
+## Anonymous statistics
+
+When a player finishes a daily or archive quiz, one record is saved: quiz date, solved or not, number of mistakes, the order the groups were found in and a random id created in the browser. There are no accounts, names or e-mails, and players can switch it off in the Stats window. The table is set up in [`supabase/setup.sql`](supabase/setup.sql); the public key can only add rows, never read them.
 
 ## Project structure
 
 ```
-index.html            page markup
-css/style.css         styles (colors are CSS variables at the top)
-js/
-  app.js              UI and game flow
-  logic.js            pure game rules (no DOM), easy to unit test
-  storage.js          localStorage wrapper (stats, results, settings)
-  sound.js            sound effects
-  map.js              the world map (drawing only)
-  confetti.js         win animation
-quizzes/
-  YYYY-MM-DD.json     one daily puzzle per date
-  practice-*.json     practice puzzles
-  index.json          list of available quizzes (generated)
-scripts/
-  validate-quizzes.mjs   checks every quiz file
-  build-index.mjs        regenerates quizzes/index.json
-  build-map.mjs          regenerates assets/map-data.json
-data/
-  countries-110m.geojson  country outlines (Natural Earth, public domain)
-  places.json             where each quiz item is on the map (our own list)
-assets/               favicon + generated map-data.json
-docs/                 README images
+index.html            page
+css/style.css         styles (all colours are CSS variables)
+js/                   app.js (UI), logic.js (pure rules), storage.js, map.js,
+                      telemetry.js (anonymous stats), sound.js, confetti.js
+quizzes/              one JSON file per daily quiz + practice quizzes
+scripts/              validate-quizzes, build-index, build-map
+data/, assets/        map data, icons, social preview image
+supabase/setup.sql    database table and security policy
+tests/                unit tests
 ```
 
 ## Run it locally
 
 ```bash
-git clone https://github.com/markapaa/geoquads-demo.git
-cd geoquads-demo
-npm start
+git clone https://github.com/markapaa/geoquads.git
+cd geoquads
+npm start        # then open the address shown in the terminal
+npm test         # unit tests
+npm run validate # checks every quiz file
 ```
 
-Then open the address printed in the terminal. The game uses ES modules and loads JSON files, so it must be served over HTTP; opening `index.html` directly from disk will not work.
+## Add a quiz
 
-## Adding a new daily quiz
+1. Copy a file in `quizzes/` and rename it to the date, e.g. `2026-10-01.json` (the `id` inside must match).
+2. Write four groups of four unique items and a `spoiler`.
+3. Run `npm run build:index`, `npm run build:map` and `npm run validate`.
 
-1. Copy an existing file in `quizzes/` and rename it to the date, e.g. `2026-10-01.json`. The `id` inside must match the file name.
-2. Fill in four categories with four unique items each, plus a `spoiler` hint.
-3. Update the index and validate:
+Countries light up on the map automatically. For cities, peaks and seas add a line to `data/places.json`.
 
-   ```bash
-   npm run build:index
-   npm run build:map    # lists items that have no place on the map yet
-   npm run validate
-   ```
+## What this project shows
 
-   Items whose name is a country (e.g. `Norway`) light up automatically. For anything else (cities, mountains, seas) add a line to `data/places.json`, e.g. `"Hanoi": { "lat": 21.03, "lon": 105.85, "kind": "city" }`. Use `"Nile@Rivers of Africa"` to apply an entry only inside one group.
+- Building and deploying a complete web app, from idea to live site with real players
+- Separating pure game logic from the UI so it can be unit tested
+- Designing a small database with security rules and collecting data responsibly (anonymous, opt-out)
+- Turning geographic open data into an interactive map
+- Accessibility and mobile-first design: light/dark theme, keyboard support, small screens
 
-The dailies currently run from 2026-09-01 to 2026-09-30.
+## Roadmap
 
-## Changing the colours
-
-Every colour lives in the `:root` block at the top of `css/style.css` (`--group-0` to `--group-3` are the four group colours; the confetti, logo and map use them too). Edit those values and nothing else needs to change.
+- [ ] Automated checks on every push (GitHub Actions)
+- [ ] Dashboard analysing the anonymous play data
+- [ ] Revise mode: replay the groups you missed
 
 ## Credits
 
 Country outlines: [Natural Earth](https://www.naturalearthdata.com) (public domain). Pin positions are approximate.
 
-## Roadmap
-
-- [ ] Automated tests for the game logic, run in CI with GitHub Actions
-- [ ] Medium-difficulty practice quiz
-- [ ] Optional accounts, personal statistics and a leaderboard (backend + database)
-- [ ] Revise mode: replay the groups you missed
-
-## Author
-
-Made by [Margieta Kokkinou](https://github.com/markapaa) as a personal project.
+Made by [Margieta Kokkinou](https://github.com/markapaa).
