@@ -1,53 +1,31 @@
 {
   "id": "2026-09-30",
   "title": "GeoQuads — Daily",
-  "spoiler": "Count the letters, look at the flags.",
+  "spoiler": "Think neighbours, the World Cup, one little word and Swahili.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Countries with red and white flags",
-      "items": [
-        "Canada",
-        "Japan",
-        "Poland",
-        "Switzerland"
-      ],
-      "fact": "Switzerland and Vatican City are the only countries with square national flags."
+      "name": "Land borders with nine or more countries",
+      "items": ["China", "Brazil", "Germany", "DR Congo"],
+      "fact": "China and Russia are tied for the most land neighbours in the world: 14 each."
     },
     {
-      "name": "Countries ending in -land",
-      "items": [
-        "Iceland",
-        "Ireland",
-        "Thailand",
-        "Finland"
-      ],
-      "fact": "Ireland is nicknamed the Emerald Isle because of its green landscape."
+      "name": "Usually written with \"the\"",
+      "items": ["Gambia", "Bahamas", "Netherlands", "Philippines"],
+      "fact": "The official name is the Republic of The Gambia, with a capital T."
     },
     {
-      "name": "Landlocked countries in Asia",
-      "items": [
-        "Nepal",
-        "Bhutan",
-        "Mongolia",
-        "Afghanistan"
-      ],
-      "fact": "Mongolia is the least densely populated sovereign country in the world."
+      "name": "First-time World Cup hosts since 2000",
+      "items": ["Japan", "South Korea", "South Africa", "Qatar"],
+      "fact": "The 2002 World Cup was the first hosted by two countries."
     },
     {
-      "name": "Cities of the Persian Gulf",
-      "items": [
-        "Doha",
-        "Dubai",
-        "Abu Dhabi",
-        "Manama"
-      ],
-      "fact": "Abu Dhabi, not Dubai, is the capital of the United Arab Emirates."
+      "name": "Swahili is an official language",
+      "items": ["Tanzania", "Kenya", "Uganda", "Rwanda"],
+      "fact": "Swahili is one of the official languages of the African Union."
     }
   ],
-  "ui": {
-    "locale": "en-US"
-  }
+  "ui": { "locale": "en-US" }
 }
