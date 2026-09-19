@@ -1,50 +1,30 @@
 {
   "id": "2026-09-18",
   "title": "GeoQuads — Daily",
-  "spoiler": "Think high, think salty, think stan.",
+  "spoiler": "Look at the names, the flags and the capitals. And do some counting.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
   "lives": 4,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Capitals high above sea level",
-      "items": [
-        "La Paz",
-        "Quito",
-        "Bogotá",
-        "Addis Ababa"
-      ],
-      "fact": "La Paz, at roughly 3,600 metres, is often called the highest seat of government in the world."
+      "name": "Capital has the same name as the country",
+      "items": ["Kuwait", "Panama", "Luxembourg", "Singapore"],
+      "fact": "Luxembourg is the world's only remaining sovereign grand duchy."
     },
     {
-      "name": "Countries on the Red Sea",
-      "items": [
-        "Egypt",
-        "Sudan",
-        "Eritrea",
-        "Yemen"
-      ],
-      "fact": "The Red Sea is one of the saltiest seas on the planet."
+      "name": "Flag features an animal",
+      "items": ["Bhutan", "Uganda", "Albania", "Sri Lanka"],
+      "fact": "Bhutan's flag shows a Druk, the Thunder Dragon; the country's local name means \"Land of the Thunder Dragon\"."
     },
     {
-      "name": "Mountain ranges",
-      "items": [
-        "Alps",
-        "Andes",
-        "Atlas",
-        "Urals"
-      ],
-      "fact": "The Andes are the longest continental mountain range in the world, stretching about 7,000 km."
+      "name": "Name hides another country",
+      "items": ["Nigeria", "Romania", "Somalia", "South Sudan"],
+      "fact": "Nigeria is named after the Niger River, and Niger is its next-door neighbour."
     },
     {
-      "name": "Countries ending in -stan",
-      "items": [
-        "Kazakhstan",
-        "Pakistan",
-        "Uzbekistan",
-        "Tajikistan"
-      ],
-      "fact": "In Persian, \"-stan\" means \"land of\"."
+      "name": "Exactly one land neighbour",
+      "items": ["Portugal", "Lesotho", "Qatar", "Denmark"],
+      "fact": "Lesotho is completely surrounded by South Africa."
     }
   ],
   "ui": {
