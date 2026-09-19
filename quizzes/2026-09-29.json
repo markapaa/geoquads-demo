@@ -1,53 +1,31 @@
 {
   "id": "2026-09-29",
   "title": "GeoQuads — Daily",
-  "spoiler": "Two groups hide a river.",
+  "spoiler": "Think saints, new towns, Olympic rings and thin air.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Cities on the Rhine",
-      "items": [
-        "Basel",
-        "Cologne",
-        "Strasbourg",
-        "Mainz"
-      ],
-      "fact": "The Rhine begins in the Swiss Alps and flows all the way to the North Sea."
+      "name": "Named after a saint",
+      "items": ["São Paulo", "San Francisco", "Santiago", "Saint Petersburg"],
+      "fact": "São Paulo takes its name from Saint Paul, whose feast day was the day the city was founded."
     },
     {
-      "name": "Italian cities",
-      "items": [
-        "Milan",
-        "Naples",
-        "Turin",
-        "Florence"
-      ],
-      "fact": "Naples is widely considered the birthplace of pizza."
+      "name": "Name means \"new town\" or \"new castle\"",
+      "items": ["Naples", "Novi Sad", "Neuchâtel", "Newcastle"],
+      "fact": "Naples comes from the Greek \"Neapolis\", meaning \"new city\"."
     },
     {
-      "name": "Spanish cities",
-      "items": [
-        "Seville",
-        "Valencia",
-        "Bilbao",
-        "Granada"
-      ],
-      "fact": "Valencia is widely considered the birthplace of paella."
+      "name": "Hosted the Summer Olympics more than once",
+      "items": ["London", "Paris", "Athens", "Tokyo"],
+      "fact": "London was the first city to host the Summer Games three times."
     },
     {
-      "name": "German cities",
-      "items": [
-        "Munich",
-        "Hamburg",
-        "Dresden",
-        "Leipzig"
-      ],
-      "fact": "Munich's Oktoberfest mostly takes place in September."
+      "name": "Above 2,500 metres",
+      "items": ["La Paz", "Lhasa", "Cusco", "Quito"],
+      "fact": "Lhasa sits at about 3,650 m, so there is roughly a third less oxygen than at sea level."
     }
   ],
-  "ui": {
-    "locale": "en-US"
-  }
+  "ui": { "locale": "en-US" }
 }
