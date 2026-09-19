@@ -1,53 +1,31 @@
 {
   "id": "2026-09-20",
   "title": "GeoQuads — Daily",
-  "spoiler": "Think sand, summits, salty lakes and rivers.",
+  "spoiler": "Think colours, choke points, shared shores and rivers going the wrong way.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
   "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Deserts",
-      "items": [
-        "Gobi",
-        "Atacama",
-        "Namib",
-        "Thar"
-      ],
-      "fact": "The Atacama is one of the driest places on Earth."
+      "name": "Seas named after a colour",
+      "items": ["Red Sea", "Black Sea", "White Sea", "Yellow Sea"],
+      "fact": "The Red Sea is one of the saltiest seas in the world."
     },
     {
-      "name": "Highest peak of a continent",
-      "items": [
-        "Everest",
-        "Aconcagua",
-        "Kilimanjaro",
-        "Elbrus"
-      ],
-      "fact": "Aconcagua, at about 6,960 m, is the highest mountain outside Asia."
+      "name": "Straits",
+      "items": ["Malacca", "Hormuz", "Bosphorus", "Gibraltar"],
+      "fact": "The Strait of Malacca is one of the busiest shipping lanes on Earth."
     },
     {
-      "name": "Rivers that flow through a capital",
-      "items": [
-        "Thames",
-        "Seine",
-        "Tiber",
-        "Tigris"
-      ],
-      "fact": "The banks of the Seine in Paris are a UNESCO World Heritage Site."
+      "name": "Lakes shared by three or more countries",
+      "items": ["Lake Victoria", "Lake Chad", "Lake Constance", "Lake Prespa"],
+      "fact": "Lake Victoria is the largest lake in Africa."
     },
     {
-      "name": "Called a \"sea\" but really a lake",
-      "items": [
-        "Caspian Sea",
-        "Dead Sea",
-        "Aral Sea",
-        "Sea of Galilee"
-      ],
-      "fact": "The Caspian is the largest inland body of water on Earth."
+      "name": "Rivers that flow north",
+      "items": ["Nile", "Ob", "Lena", "Mackenzie"],
+      "fact": "The Nile is one of the few great rivers that flows north."
     }
   ],
-  "ui": {
-    "locale": "en-US"
-  }
+  "ui": { "locale": "en-US" }
 }
