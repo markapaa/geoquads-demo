@@ -12,9 +12,12 @@
   --edge: #e0d1bb; /* the "3D" bottom edge of tiles and buttons */
 
   /* Buttons and selection */
-  --primary: #8c1f44;
-  --primary-dark: #5e1230;
-  --primary-weak: #f8e8ee;
+  --primary: #2b1a22;
+  --primary-dark: #120a0e;
+  --primary-weak: #efe6e9;
+  --primary-light: #4a3540;
+  --primary-disabled: #cfc4c8;
+  --primary-disabled-edge: #b9adb1;
 
   /* Feedback */
   --ok: #047857;
@@ -87,12 +90,7 @@ h1 {
   letter-spacing: -0.03em;
   line-height: 1;
 }
-h1 span {
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+h1 span { color: var(--ink); }
 .sub { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
 .actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
 
@@ -128,7 +126,7 @@ h1 span {
 }
 .spoiler-label { font-weight: 700; color: var(--primary-dark); white-space: nowrap; }
 .spoiler-label::before { content: "💡 "; }
-.spoiler-label::after { content: " — tap to reveal"; font-weight: 400; color: var(--muted); }
+.spoiler-label::after { content: " - tap to reveal"; font-weight: 400; color: var(--muted); }
 .spoiler.revealed .spoiler-label::after { content: ""; }
 .spoiler-text { filter: blur(5px); transition: filter 0.25s; user-select: none; }
 .spoiler.revealed .spoiler-text { filter: none; user-select: text; }
