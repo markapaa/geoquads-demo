@@ -1,6 +1,6 @@
 # GeoQuads
 
-A daily geography puzzle in the style of *Connections*. Sixteen words (countries, cities, islands, landmarks) hide four groups of four. Find all four groups before you run out of lives.
+A daily geography grouping puzzle. Sixteen words (countries, cities, islands, landmarks) hide four groups of four. Find all four groups before you run out of lives.
 
 **Play it:** https://geoquads.vercel.app/
 
@@ -31,6 +31,7 @@ A daily geography puzzle in the style of *Connections*. Sixteen words (countries
 - **Practice** rounds (easy and hard) that don't affect your stats
 - **Archive** of past dailies, with a marker on the ones you solved or failed
 - A finished daily stays finished when you reload the page
+- **World map that lights up**: every solved group lights its countries on a world map (cities, peaks, seas and areas appear as pins) and the map zooms to them
 - Optional 💡 fun fact for each group (add a `fact` field in the quiz JSON)
 - Win streak counter, confetti and a colored recap of your guesses
 - "One away" feedback, lives counter, spoiler hints, shareable results, sound toggle
@@ -54,6 +55,8 @@ js/
   logic.js            pure game rules (no DOM), easy to unit test
   storage.js          localStorage wrapper (stats, results, settings)
   sound.js            sound effects
+  map.js              the world map (drawing only)
+  confetti.js         win animation
 quizzes/
   YYYY-MM-DD.json     one daily puzzle per date
   practice-*.json     practice puzzles
@@ -61,7 +64,11 @@ quizzes/
 scripts/
   validate-quizzes.mjs   checks every quiz file
   build-index.mjs        regenerates quizzes/index.json
-assets/               favicon
+  build-map.mjs          regenerates assets/map-data.json
+data/
+  countries-110m.geojson  country outlines (Natural Earth, public domain)
+  places.json             where each quiz item is on the map (our own list)
+assets/               favicon + generated map-data.json
 docs/                 README images
 ```
 
@@ -77,21 +84,34 @@ Then open the address printed in the terminal. The game uses ES modules and load
 
 ## Adding a new daily quiz
 
-1. Copy an existing file in `quizzes/` and rename it to the date, e.g. `2026-09-20.json`. The `id` inside must match the file name.
+1. Copy an existing file in `quizzes/` and rename it to the date, e.g. `2026-10-01.json`. The `id` inside must match the file name.
 2. Fill in four categories with four unique items each, plus a `spoiler` hint.
 3. Update the index and validate:
 
    ```bash
    npm run build:index
+   npm run build:map    # lists items that have no place on the map yet
    npm run validate
    ```
+
+   Items whose name is a country (e.g. `Norway`) light up automatically. For anything else (cities, mountains, seas) add a line to `data/places.json`, e.g. `"Hanoi": { "lat": 21.03, "lon": 105.85, "kind": "city" }`. Use `"Nile@Rivers of Africa"` to apply an entry only inside one group.
+
+The dailies currently run from 2026-09-01 to 2026-09-30.
+
+## Changing the colours
+
+Every colour lives in the `:root` block at the top of `css/style.css` (`--group-0` to `--group-3` are the four group colours; the confetti, logo and map use them too). Edit those values and nothing else needs to change.
+
+## Credits
+
+Country outlines: [Natural Earth](https://www.naturalearthdata.com) (public domain). Pin positions are approximate.
 
 ## Roadmap
 
 - [ ] Automated tests for the game logic, run in CI with GitHub Actions
 - [ ] Medium-difficulty practice quiz
 - [ ] Optional accounts, personal statistics and a leaderboard (backend + database)
-- [ ] Colour coding for categories and difficulty
+- [ ] Revise mode: replay the groups you missed
 
 ## Author
 

@@ -28,6 +28,20 @@
   --group-2: #ffd45e;
   --group-3: #b99bff;
   --group-ink: #1b2733;
+  --accent: #8a5cf6;          /* second colour of the title gradient */
+  --primary-light: #4c8bf5;   /* top of the primary button */
+  --primary-disabled: #a9c1ea;
+  --primary-disabled-edge: #8ea9d6;
+  --streak-ink: #b45309; --streak-bg: #fff4e0; --streak-border: #ffd9a0; --streak-edge: #f2c98a;
+  --hint-bg: #fff9e0; --hint-border: #ffe08a;
+  --notice-bg: #fff7e6; --notice-border: #f5d9a6;
+  --wrong-ink: #b91c1c; --wrong-bg: #fde8e8; --wrong-border: #ef4444; --wrong-edge: #f2a5a5;
+  --win: #10b981; --fail: #ef476f;
+
+  /* World map */
+  --map-sea: #eaf5fc;
+  --map-land: #d5e2ee;
+  --map-border: #ffffff;
 
   --shadow: 0 10px 30px rgba(30, 73, 121, 0.12);
   --font: "Poppins", "Century Gothic", CenturyGothic, AppleGothic, system-ui, sans-serif;
@@ -43,10 +57,10 @@ body {
   font-family: var(--font);
   color: var(--ink);
   background:
-    radial-gradient(circle at 10% 6%, rgba(255, 212, 94, 0.28), transparent 38%),
-    radial-gradient(circle at 92% 10%, rgba(108, 184, 255, 0.32), transparent 36%),
-    radial-gradient(circle at 85% 90%, rgba(185, 155, 255, 0.24), transparent 40%),
-    radial-gradient(circle at 8% 88%, rgba(125, 219, 163, 0.24), transparent 36%),
+    radial-gradient(circle at 10% 6%, color-mix(in srgb, var(--group-2) 28%, transparent), transparent 38%),
+    radial-gradient(circle at 92% 10%, color-mix(in srgb, var(--group-1) 32%, transparent), transparent 36%),
+    radial-gradient(circle at 85% 90%, color-mix(in srgb, var(--group-3) 24%, transparent), transparent 40%),
+    radial-gradient(circle at 8% 88%, color-mix(in srgb, var(--group-0) 24%, transparent), transparent 36%),
     linear-gradient(180deg, var(--bg-top), var(--bg));
   background-attachment: fixed;
   -webkit-tap-highlight-color: transparent;
@@ -64,7 +78,7 @@ button { font-family: inherit; }
   margin-bottom: 16px;
 }
 .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.logo { width: 46px; height: 46px; flex: none; filter: drop-shadow(0 3px 0 rgba(30, 73, 121, 0.18)); }
+.logo { width: 46px; height: 46px; flex: none; filter: drop-shadow(0 3px 0 rgba(30, 73, 121, 0.18));  color: var(--ink); }
 h1 {
   margin: 0;
   font-size: clamp(28px, 6vw, 38px);
@@ -73,7 +87,7 @@ h1 {
   line-height: 1;
 }
 h1 span {
-  background: linear-gradient(90deg, #2f6fdd, #8a5cf6);
+  background: linear-gradient(90deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -95,8 +109,8 @@ h1 span {
 .chip:hover { background: var(--primary-weak); transform: translateY(-1px); }
 .chip:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge); }
 .chip-round { width: 36px; height: 36px; padding: 0; justify-content: center; font-weight: 800; font-size: 15px; }
-.chip-streak { cursor: default; color: #b45309; background: #fff4e0; border-color: #ffd9a0; box-shadow: 0 3px 0 #f2c98a; }
-.chip-streak:hover { background: #fff4e0; transform: none; }
+.chip-streak { cursor: default; color: var(--streak-ink); background: var(--streak-bg); border-color: var(--streak-border); box-shadow: 0 3px 0 var(--streak-edge); }
+.chip-streak:hover { background: var(--streak-bg); transform: none; }
 
 /* Spoiler box */
 .spoiler {
@@ -107,7 +121,7 @@ h1 span {
   text-align: left;
   font-size: 13px; color: var(--ink);
   background: rgba(255, 255, 255, 0.75);
-  border: 2px dashed #a9c4dd;
+  border: 2px dashed var(--edge);
   border-radius: 14px;
   cursor: pointer;
 }
@@ -117,13 +131,71 @@ h1 span {
 .spoiler.revealed .spoiler-label::after { content: ""; }
 .spoiler-text { filter: blur(5px); transition: filter 0.25s; user-select: none; }
 .spoiler.revealed .spoiler-text { filter: none; user-select: text; }
-.spoiler.revealed { background: #fff9e0; border: 2px solid #ffe08a; }
+.spoiler.revealed { background: var(--hint-bg); border: 2px solid var(--hint-border); }
 
 .notice {
   margin: 0 0 12px; padding: 10px 14px;
   font-size: 13px; color: var(--warn);
-  background: #fff7e6; border: 2px solid #f5d9a6; border-radius: 14px;
+  background: var(--notice-bg); border: 2px solid var(--notice-border); border-radius: 14px;
 }
+
+
+/* ---------- Layout: game on the left, map on the right (stacked on small screens) ---------- */
+.layout { display: grid; gap: 16px; }
+@media (min-width: 980px) {
+  .wrap { max-width: 1120px; }
+  .layout { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; }
+  .mapcard { position: sticky; top: 16px; }
+}
+
+/* ---------- World map ---------- */
+.mapcard {
+  padding: 14px;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+.mapcard-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.mapcard h2 { margin: 0; font-size: 16px; font-weight: 800; }
+.legend { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.lg { display: inline-block; width: 9px; height: 9px; margin: 0 2px 0 6px; background: var(--muted); vertical-align: -1px; }
+.lg.city { border-radius: 50%; }
+.lg.peak { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.lg.water { transform: rotate(45deg) scale(0.8); }
+.lg.area { border-radius: 2px; }
+.map { position: relative; background: var(--map-sea); border-radius: 16px; overflow: hidden; }
+.map-canvas { aspect-ratio: var(--map-ratio, 2 / 1); }
+.map-canvas svg { display: block; width: 100%; height: 100%; }
+.map-empty {
+  position: absolute; inset: auto 0 10px 0; text-align: center;
+  font-size: 12px; font-weight: 600; color: var(--muted); pointer-events: none;
+  transition: opacity 0.3s;
+}
+.map.has-lit .map-empty { opacity: 0; }
+.country {
+  fill: var(--map-land); stroke: var(--map-border); stroke-width: 0.7; vector-effect: non-scaling-stroke;
+  transition: fill 0.4s;
+}
+.country.lit { stroke: var(--ink); stroke-width: 1.2; }
+.country.pop { animation: mappop 0.6s ease-out; }
+.lit-0 { fill: var(--group-0); }
+.lit-1 { fill: var(--group-1); }
+.lit-2 { fill: var(--group-2); }
+.lit-3 { fill: var(--group-3); }
+.mark .shape { stroke: var(--ink); stroke-width: 1.5; }
+.mark .shape.micro { stroke-width: 2.5; }
+.mark.g0 .shape { fill: var(--group-0); }
+.mark.g1 .shape { fill: var(--group-1); }
+.mark.g2 .shape { fill: var(--group-2); }
+.mark.g3 .shape { fill: var(--group-3); }
+.mark.pop .shape { animation: markpop 0.5s ease-out; transform-box: fill-box; transform-origin: center; }
+.mark text {
+  font: 700 11px var(--font); fill: var(--ink);
+  paint-order: stroke; stroke: var(--card); stroke-width: 3px; stroke-linejoin: round; pointer-events: none;
+}
+@keyframes mappop { 0% { opacity: 0.2; } 100% { opacity: 1; } }
+@keyframes markpop { 0% { transform: scale(0); } 70% { transform: scale(1.5); } 100% { transform: scale(1); } }
 
 /* ---------- Panel ---------- */
 .panel {
@@ -203,13 +275,13 @@ h1 span {
 /* Only present while the "wrong guess" animation runs (removed by app.js afterwards) */
 .cell.shake {
   animation: shake 0.45s;
-  color: #b91c1c;
-  background: #fde8e8;
-  border-color: #ef4444;
-  box-shadow: 0 4px 0 #f2a5a5;
+  color: var(--wrong-ink);
+  background: var(--wrong-bg);
+  border-color: var(--wrong-border);
+  box-shadow: 0 4px 0 var(--wrong-edge);
 }
 .cell:focus-visible, .btn:focus-visible, .chip:focus-visible, .pill:focus-visible, .spoiler:focus-visible {
-  outline: 3px solid rgba(47, 111, 221, 0.45);
+  outline: 3px solid color-mix(in srgb, var(--primary) 45%, transparent);
   outline-offset: 2px;
 }
 
@@ -236,7 +308,7 @@ h1 span {
 .btn-primary {
   min-width: 140px;
   color: #fff;
-  background: linear-gradient(180deg, #4c8bf5, #2f6fdd);
+  background: linear-gradient(180deg, var(--primary-light), var(--primary));
   border: 2px solid var(--primary-dark);
   box-shadow: 0 5px 0 var(--primary-dark);
 }
@@ -244,7 +316,7 @@ h1 span {
 .btn-primary:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 var(--primary-dark); }
 .btn-primary:not(:disabled).ready { animation: nudge 0.45s ease-out 1; }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.btn-primary:disabled { background: #a9c1ea; border-color: #8ea9d6; box-shadow: 0 4px 0 #8ea9d6; }
+.btn-primary:disabled { background: var(--primary-disabled); border-color: var(--primary-disabled-edge); box-shadow: 0 4px 0 var(--primary-disabled-edge); }
 
 /* ---------- Status / lives ---------- */
 .status {
@@ -334,8 +406,8 @@ kbd { padding: 1px 6px; font-size: 12px; background: #f1f5f9; border: 1px solid 
 .archive-grid button:hover { background: var(--primary-weak); }
 .archive-grid .dot { position: absolute; top: 6px; right: 6px; }
 .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1; vertical-align: middle; }
-.dot.win { background: #10b981; }
-.dot.fail { background: #ef476f; }
+.dot.win { background: var(--win); }
+.dot.fail { background: var(--fail); }
 .empty-note { color: var(--muted); font-size: 14px; }
 
 #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }

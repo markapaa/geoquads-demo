@@ -24,7 +24,7 @@ export const setSound = (on) => write("gq-sound", !!on);
 export const getStats = () => read("gq-stats", {});
 export const setStats = (stats) => write("gq-stats", stats);
 
-/** Results per quiz id: { "2026-01-10": { won: true, mistakes: 1, history: [[0,0,1,2], ...] } } */
+/** Results per quiz id: { "2026-09-10": { won: true, mistakes: 1, history: [[0,0,1,2], ...] } } */
 export const getResults = () => read("gq-results", {});
 export function saveResult(id, result) {
   const all = getResults();

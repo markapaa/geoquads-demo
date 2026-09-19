@@ -1,5 +1,10 @@
 // A small confetti burst for winning. No libraries.
-const COLORS = ["#7ddba3", "#6cb8ff", "#ffd45e", "#b99bff", "#ff6b81"];
+// Colours come from the CSS variables, so changing the palette in style.css changes the confetti too.
+function palette() {
+  const cs = getComputedStyle(document.documentElement);
+  const list = ["--group-0", "--group-1", "--group-2", "--group-3", "--heart"].map((v) => cs.getPropertyValue(v).trim()).filter(Boolean);
+  return list.length ? list : ["#7ddba3", "#6cb8ff", "#ffd45e", "#b99bff", "#ff6b81"];
+}
 
 export function launchConfetti(duration = 2400) {
   if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
@@ -11,6 +16,7 @@ export function launchConfetti(duration = 2400) {
   canvas.height = window.innerHeight * dpr;
   ctx.scale(dpr, dpr);
 
+  const COLORS = palette();
   const w = window.innerWidth;
   const pieces = Array.from({ length: 130 }, () => ({
     x: w / 2 + (Math.random() - 0.5) * 120,

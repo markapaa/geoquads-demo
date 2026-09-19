@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <!-- SEO / Social -->
-  <meta name="description" content="GeoQuads — a daily geography Connections-style puzzle. Find 4 groups of 4. New puzzle every day." />
+  <meta name="description" content="GeoQuads — a daily geography puzzle. Find the 4 hidden groups of 4. New puzzle every day." />
   <meta property="og:title" content="GeoQuads — Daily Geography Puzzle" />
   <meta property="og:description" content="Find 4 groups of 4. New puzzle every day. Can you solve today's GeoQuads?" />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#156064" />
+  <meta name="theme-color" content="#e4f3fd" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,14 +24,14 @@
     <header class="top">
       <div class="brand">
         <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
-          <rect x="3" y="3" width="28" height="28" rx="8" fill="#7ddba3"/>
-          <rect x="33" y="3" width="28" height="28" rx="8" fill="#6cb8ff"/>
-          <rect x="3" y="33" width="28" height="28" rx="8" fill="#ffd45e"/>
-          <rect x="33" y="33" width="28" height="28" rx="8" fill="#b99bff"/>
-          <circle cx="32" cy="32" r="11" fill="#fff"/>
-          <circle cx="32" cy="32" r="11" fill="none" stroke="#1b2733" stroke-width="2.4"/>
-          <ellipse cx="32" cy="32" rx="4.6" ry="11" fill="none" stroke="#1b2733" stroke-width="2"/>
-          <path d="M21 32h22" stroke="#1b2733" stroke-width="2"/>
+          <rect x="3" y="3" width="28" height="28" rx="8" style="fill:var(--group-0)"/>
+          <rect x="33" y="3" width="28" height="28" rx="8" style="fill:var(--group-1)"/>
+          <rect x="3" y="33" width="28" height="28" rx="8" style="fill:var(--group-2)"/>
+          <rect x="33" y="33" width="28" height="28" rx="8" style="fill:var(--group-3)"/>
+          <circle cx="32" cy="32" r="11" style="fill:var(--card)"/>
+          <circle cx="32" cy="32" r="11" fill="none" stroke="currentColor" stroke-width="2.4"/>
+          <ellipse cx="32" cy="32" rx="4.6" ry="11" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M21 32h22" stroke="currentColor" stroke-width="2"/>
         </svg>
         <div>
           <h1>Geo<span>Quads</span></h1>
@@ -61,6 +61,7 @@
 
     <div id="notice" class="notice" hidden></div>
 
+    <div class="layout">
     <main class="panel">
       <div id="solved" class="solved" aria-live="polite"></div>
       <div id="grid" class="grid"></div>
@@ -87,6 +88,18 @@
         </div>
       </div>
     </main>
+
+    <aside id="mapCard" class="mapcard" aria-label="World map">
+      <div class="mapcard-head">
+        <h2>World map</h2>
+        <span class="legend" aria-hidden="true"><i class="lg city"></i>city <i class="lg peak"></i>peak <i class="lg water"></i>water <i class="lg area"></i>area</span>
+      </div>
+      <div class="map" id="map">
+        <div class="map-canvas" id="mapCanvas"></div>
+        <div class="map-empty">Solve a group to light it up on the map</div>
+      </div>
+    </aside>
+    </div>
 
     <footer class="footer">
       <div class="countdown">⏱️ Next daily in <span data-countdown>--:--:--</span></div>

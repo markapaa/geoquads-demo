@@ -6,12 +6,14 @@ import {
 import * as store from "./storage.js";
 import { sfx, setSoundEnabled, isSoundEnabled } from "./sound.js";
 import { launchConfetti } from "./confetti.js";
+import { loadMapData, createWorldMap } from "./map.js";
 
 const $ = (id) => document.getElementById(id);
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const DEFAULT_MANIFEST = { daily: [], practice: ["practice-easy", "practice-hard"] };
 
 let manifest = DEFAULT_MANIFEST;
+let worldMap = null;
 
 const state = {
   cfg: null,
@@ -122,6 +124,7 @@ function startQuiz(cfg, { id, mode, notice = "" }) {
 
   updateNav();
   updateURL();
+  syncMap(false);
 }
 
 function restoreFinished(saved) {
@@ -249,6 +252,26 @@ function renderHearts(justLost = false) {
   }
 }
 
+// --------------------------------------------------------------------- map ---
+
+/** Lights up every solved group on the world map. */
+function syncMap(animate = false) {
+  if (!worldMap || !state.cfg) return;
+  const groups = state.solved.map((gi) => ({ gi, name: state.cfg.groups[gi].name, items: state.cfg.groups[gi].items }));
+  worldMap.update(groups, { animate });
+  $("map").classList.toggle("has-lit", groups.length > 0);
+}
+
+async function initMap() {
+  const data = await loadMapData();
+  if (!data) {
+    $("mapCard").hidden = true; // no map data: the game works fine without it
+    return;
+  }
+  worldMap = createWorldMap($("mapCanvas"), data);
+  syncMap(false);
+}
+
 // ---------------------------------------------------------------- gameplay ---
 
 function toggleSelect(idx) {
@@ -286,6 +309,7 @@ function solveGroup(gi, { missed = false } = {}) {
   state.selected.clear();
   $("solved").appendChild(createBar(gi, missed));
   renderGrid();
+  syncMap(true);
 }
 
 async function submitGuess() {
@@ -538,6 +562,8 @@ function wireUI() {
     setMessage("Couldn't load the puzzle. If you opened index.html directly, run a local server instead (see README).", "error");
     return;
   }
+
+  initMap();
 
   if (!store.hasSeenHelp()) {
     store.markHelpSeen();
