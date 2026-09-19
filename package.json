@@ -1,0 +1,12 @@
+{
+  "name": "geoquads",
+  "version": "2.0.0",
+  "description": "GeoQuads: a daily geography Connections-style puzzle",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npx serve .",
+    "validate": "node scripts/validate-quizzes.mjs",
+    "build:index": "node scripts/build-index.mjs"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "practice-hard",
+  "title": "GeoQuads — Practice (Hard)",
+  "spoiler": "Focus on properties that don't overlap.",
+  "help": "Advanced: all categories are countries only (no capitals/rivers).",
+  "lives": 4,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Landlocked countries",
+      "items": ["Mongolia", "Kazakhstan", "Ethiopia", "Uzbekistan"],
+      "color": "#F0EFFF"
+    },
+    {
+      "name": "Island nations",
+      "items": ["Japan", "Iceland", "Madagascar", "Philippines"],
+      "color": "#FFF2E8"
+    },
+    {
+      "name": "Spanish-speaking countries",
+      "items": ["Mexico", "Chile", "Colombia", "Costa Rica"],
+      "color": "#E6FFF5"
+    },
+    {
+      "name": "Population over 100 million",
+      "items": ["India", "Nigeria", "Brazil", "Pakistan"],
+      "color": "#FFECEC"
+    }
+  ],
+  "ui": { "accent": "#DC2626", "locale": "en-US" }
+}
