@@ -1,53 +1,31 @@
 {
   "id": "2026-09-17",
   "title": "GeoQuads — Daily",
-  "spoiler": "Some of these names live a double life.",
+  "spoiler": "Think alliances, oil, armies and clubs.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
-      "name": "Landlocked countries in Europe",
-      "items": [
-        "Austria",
-        "Slovakia",
-        "Serbia",
-        "Liechtenstein"
-      ],
-      "fact": "Liechtenstein and Uzbekistan are the only two doubly landlocked countries: every neighbour is landlocked too."
+      "name": "In NATO but not in the EU",
+      "items": ["Norway", "Turkey", "Albania", "North Macedonia"],
+      "fact": "Turkey has been a NATO member since 1952."
     },
     {
-      "name": "Rivers of Africa",
-      "items": [
-        "Nile",
-        "Congo",
-        "Niger",
-        "Zambezi"
-      ],
-      "fact": "The Nile, at about 6,650 km, is traditionally considered the world's longest river, though the Amazon is a rival for the title."
+      "name": "Founding members of OPEC",
+      "items": ["Venezuela", "Iraq", "Kuwait", "Saudi Arabia"],
+      "fact": "OPEC was founded in Baghdad in 1960."
     },
     {
-      "name": "Capitals of Asia",
-      "items": [
-        "Hanoi",
-        "Manila",
-        "Kathmandu",
-        "Thimphu"
-      ],
-      "fact": "Kathmandu sits in a valley about 1,400 metres above sea level."
+      "name": "No standing army",
+      "items": ["Costa Rica", "Iceland", "Liechtenstein", "Mauritius"],
+      "fact": "Costa Rica abolished its army in 1948."
     },
     {
-      "name": "Island nations of the Indian Ocean",
-      "items": [
-        "Mauritius",
-        "Maldives",
-        "Seychelles",
-        "Comoros"
-      ],
-      "fact": "The Maldives is the lowest-lying country on Earth, with an average ground level of about 1.5 metres above the sea."
+      "name": "In the Commonwealth but never a British colony",
+      "items": ["Mozambique", "Rwanda", "Gabon", "Togo"],
+      "fact": "Mozambique and Rwanda joined the Commonwealth without any British colonial past; Gabon and Togo followed in 2022."
     }
   ],
-  "ui": {
-    "locale": "en-US"
-  }
+  "ui": { "locale": "en-US" }
 }
