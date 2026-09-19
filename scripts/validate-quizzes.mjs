@@ -58,6 +58,9 @@ function validateQuiz(json, file) {
         errors.push(`${gname}: must have exactly 4 items`);
         return;
       }
+      if (g.fact !== undefined && (typeof g.fact !== "string" || g.fact.trim() === "")) {
+        errors.push(`${gname}: \`fact\` must be a non-empty string if present`);
+      }
       // Trim + basic string check
       g.items = trimStrings(g.items);
       g.items.forEach((it, i) => {

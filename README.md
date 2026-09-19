@@ -23,7 +23,7 @@ A daily geography puzzle in the style of *Connections*. Sixteen words (countries
 | **?** | Shows the instructions |
 | **Stats** | Played, win rate, current and best streak |
 | **Share** | Copies your result as an emoji grid |
-| **Sound** | Toggles sound effects |
+| **Sound** | Toggles soft sound effects (off by default) |
 
 ## Features
 
@@ -31,6 +31,8 @@ A daily geography puzzle in the style of *Connections*. Sixteen words (countries
 - **Practice** rounds (easy and hard) that don't affect your stats
 - **Archive** of past dailies, with a marker on the ones you solved or failed
 - A finished daily stays finished when you reload the page
+- Optional 💡 fun fact for each group (add a `fact` field in the quiz JSON)
+- Win streak counter, confetti and a colored recap of your guesses
 - "One away" feedback, lives counter, spoiler hints, shareable results, sound toggle
 - Responsive layout that works on phones
 - Quizzes are plain JSON files, checked by a **validation script**

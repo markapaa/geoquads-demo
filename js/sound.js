@@ -1,4 +1,5 @@
-// Tiny WebAudio beeps (no audio files needed).
+// Soft, short sounds made with WebAudio (no audio files needed).
+// Sound is OFF by default: players turn it on with the Sound button.
 import { getSound, setSound } from "./storage.js";
 
 let enabled = getSound();
@@ -16,38 +17,41 @@ function getCtx() {
   return ctx;
 }
 
-function beep({ freq = 440, dur = 0.12, type = "sine", gain = 0.06 } = {}) {
+/** One gentle "pluck": a sine wave that fades out quickly. */
+function tone({ freq = 440, to = null, dur = 0.18, gain = 0.05, delay = 0 } = {}) {
   if (!enabled) return;
   try {
     const c = getCtx();
-    const t0 = c.currentTime;
+    const t0 = c.currentTime + delay;
     const osc = c.createOscillator();
     const g = c.createGain();
-    osc.type = type;
-    osc.frequency.value = freq;
-    g.gain.value = gain;
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(freq, t0);
+    if (to) osc.frequency.exponentialRampToValueAtTime(to, t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(gain, t0 + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
     osc.connect(g);
     g.connect(c.destination);
     osc.start(t0);
-    g.gain.setValueAtTime(gain, t0 + Math.max(0, dur - 0.04));
-    g.gain.linearRampToValueAtTime(0.0001, t0 + dur);
-    osc.stop(t0 + dur + 0.02);
+    osc.stop(t0 + dur + 0.03);
   } catch {
     /* audio not available: ignore */
   }
 }
 
 export const sfx = {
-  select: () => beep({ freq: 520, dur: 0.06, type: "square", gain: 0.03 }),
-  deselect: () => beep({ freq: 360, dur: 0.05, type: "square", gain: 0.03 }),
+  select: () => tone({ freq: 660, dur: 0.07, gain: 0.025 }),
+  deselect: () => tone({ freq: 500, dur: 0.06, gain: 0.02 }),
   shuffle: () => {
-    beep({ freq: 400, dur: 0.05 });
-    setTimeout(() => beep({ freq: 520, dur: 0.05 }), 60);
+    tone({ freq: 420, to: 560, dur: 0.12, gain: 0.03 });
   },
   correct: () => {
-    beep({ freq: 660, dur: 0.1, type: "triangle" });
-    setTimeout(() => beep({ freq: 880, dur: 0.1, type: "triangle" }), 90);
+    tone({ freq: 523, dur: 0.22, gain: 0.05 }); // C
+    tone({ freq: 659, dur: 0.26, gain: 0.05, delay: 0.09 }); // E
   },
-  wrong: () => beep({ freq: 220, dur: 0.12, type: "sawtooth" }),
-  win: () => [880, 1046, 1318].forEach((f, i) => setTimeout(() => beep({ freq: f, dur: 0.1, type: "triangle" }), i * 120)),
+  wrong: () => tone({ freq: 220, to: 165, dur: 0.22, gain: 0.05 }),
+  win: () => {
+    [523, 659, 784, 1047].forEach((f, i) => tone({ freq: f, dur: 0.35, gain: 0.05, delay: i * 0.11 }));
+  },
 };

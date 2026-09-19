@@ -6,10 +6,49 @@
   "lives": 4,
   "showOneAway": true,
   "groups": [
-    { "name": "Landlocked countries", "items": ["Nepal", "Bolivia", "Switzerland", "Ethiopia"] },
-    { "name": "Capitals starting with B", "items": ["Brussels", "Brasilia", "Bangkok", "Budapest"] },
-    { "name": "Largest islands (by area)", "items": ["Greenland", "New Guinea", "Borneo", "Madagascar"] },
-    { "name": "Countries crossed by the Equator", "items": ["Ecuador", "Colombia", "Kenya", "Indonesia"] }
+    {
+      "name": "Landlocked countries",
+      "items": [
+        "Nepal",
+        "Bolivia",
+        "Switzerland",
+        "Ethiopia"
+      ],
+      "fact": "Ethiopia lost its coastline in 1993, when Eritrea became independent."
+    },
+    {
+      "name": "Capitals starting with B",
+      "items": [
+        "Brussels",
+        "Brasilia",
+        "Bangkok",
+        "Budapest"
+      ],
+      "fact": "Brasília was built from scratch in the 1950s and became Brazil's capital in 1960."
+    },
+    {
+      "name": "Largest islands (by area)",
+      "items": [
+        "Greenland",
+        "New Guinea",
+        "Borneo",
+        "Madagascar"
+      ],
+      "fact": "Greenland is the world's largest island, at over 2 million square kilometres."
+    },
+    {
+      "name": "Countries crossed by the Equator",
+      "items": [
+        "Ecuador",
+        "Colombia",
+        "Kenya",
+        "Indonesia"
+      ],
+      "fact": "Ecuador is Spanish for \"equator\"."
+    }
   ],
-  "ui": { "accent": "#4F46E5", "locale": "en-US" }
+  "ui": {
+    "accent": "#4F46E5",
+    "locale": "en-US"
+  }
 }

@@ -18,7 +18,7 @@ function write(key, value) {
   }
 }
 
-export const getSound = () => read("gq-sound", true);
+export const getSound = () => read("gq-sound", false);
 export const setSound = (on) => write("gq-sound", !!on);
 
 export const getStats = () => read("gq-stats", {});

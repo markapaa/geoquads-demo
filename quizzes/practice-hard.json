@@ -8,24 +8,47 @@
   "groups": [
     {
       "name": "Landlocked countries",
-      "items": ["Mongolia", "Kazakhstan", "Ethiopia", "Uzbekistan"],
-      "color": "#F0EFFF"
+      "items": [
+        "Mongolia",
+        "Kazakhstan",
+        "Ethiopia",
+        "Uzbekistan"
+      ],
+      "fact": "Kazakhstan is the largest landlocked country in the world."
     },
     {
       "name": "Island nations",
-      "items": ["Japan", "Iceland", "Madagascar", "Philippines"],
-      "color": "#FFF2E8"
+      "items": [
+        "Japan",
+        "Iceland",
+        "Madagascar",
+        "Philippines"
+      ],
+      "fact": "The Philippines is made up of more than 7,000 islands."
     },
     {
       "name": "Spanish-speaking countries",
-      "items": ["Mexico", "Chile", "Colombia", "Costa Rica"],
-      "color": "#E6FFF5"
+      "items": [
+        "Mexico",
+        "Chile",
+        "Colombia",
+        "Costa Rica"
+      ],
+      "fact": "Mexico has more Spanish speakers than any other country."
     },
     {
       "name": "Population over 100 million",
-      "items": ["India", "Nigeria", "Brazil", "Pakistan"],
-      "color": "#FFECEC"
+      "items": [
+        "India",
+        "Nigeria",
+        "Brazil",
+        "Pakistan"
+      ],
+      "fact": "Nigeria is the most populous country in Africa."
     }
   ],
-  "ui": { "accent": "#DC2626", "locale": "en-US" }
+  "ui": {
+    "accent": "#DC2626",
+    "locale": "en-US"
+  }
 }

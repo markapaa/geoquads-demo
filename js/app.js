@@ -5,6 +5,7 @@ import {
 } from "./logic.js";
 import * as store from "./storage.js";
 import { sfx, setSoundEnabled, isSoundEnabled } from "./sound.js";
+import { launchConfetti } from "./confetti.js";
 
 const $ = (id) => document.getElementById(id);
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -111,8 +112,9 @@ function startQuiz(cfg, { id, mode, notice = "" }) {
   $("endcard").hidden = true;
   $("controls").hidden = false;
   renderSolved();
-  renderGrid();
+  renderGrid(true);
   renderHearts();
+  updateStreak();
 
   // Dailies can only be played once: if there's a saved result, show the finished board.
   const saved = mode === "practice" ? null : store.getResults()[id];
@@ -182,6 +184,12 @@ function createBar(gi, missed = false) {
   items.className = "items";
   items.textContent = g.items.join(" · ");
   bar.append(name, items);
+  if (g.fact) {
+    const fact = document.createElement("div");
+    fact.className = "fact";
+    fact.textContent = `💡 ${g.fact}`;
+    bar.append(fact);
+  }
   return bar;
 }
 
@@ -201,6 +209,7 @@ function renderGrid(animate = false) {
     cell.className = "cell";
     cell.textContent = t.label;
     cell.dataset.idx = idx;
+    cell.style.setProperty("--i", idx);
     cell.addEventListener("click", (e) => {
       toggleSelect(idx);
       if (e.detail > 0) cell.blur(); // mouse click: let Enter submit instead of re-toggling this tile
@@ -218,6 +227,7 @@ function syncSelection() {
     cell.setAttribute("aria-pressed", String(on));
   });
   $("submitBtn").disabled = state.selected.size !== 4 || state.over || state.busy;
+  $("submitBtn").classList.toggle("ready", state.selected.size === 4 && !state.over && !state.busy);
   $("clearBtn").disabled = state.over || state.selected.size === 0;
   $("shuffleBtn").disabled = state.over || state.tiles.length === 0;
 }
@@ -298,6 +308,7 @@ async function submitGuess() {
     if (state.showOneAway && result.oneAway) setMessage("One away! You're one word off.", "warn");
     else setMessage("Not quite, try again.", "error");
     await wait(450);
+    document.querySelectorAll("#grid .cell.shake").forEach((c) => c.classList.remove("shake"));
     state.selected.clear();
     syncSelection();
     if (state.mistakes >= state.maxMistakes) await revealRemaining();
@@ -325,8 +336,12 @@ function finishGame(won) {
     store.saveResult(state.quizId, { won, mistakes: state.mistakes, history: state.history });
     store.setStats(nextStats(store.getStats(), won));
   }
-  if (won) sfx.win();
+  if (won) {
+    sfx.win();
+    launchConfetti();
+  }
   setMessage("");
+  updateStreak();
   showEnd();
   syncSelection();
 }
@@ -335,10 +350,34 @@ function showEnd() {
   $("controls").hidden = true;
   $("endcard").hidden = false;
   const m = state.mistakes;
-  $("endTitle").textContent = state.won ? (m === 0 ? "Perfect!" : "You solved it!") : "Not this time";
+  $("endTitle").textContent = state.won ? (m === 0 ? "Perfect! 🎉" : "You solved it! 🎉") : "Not this time";
+  renderRecap();
   $("endSub").textContent = state.won
     ? `${m} mistake${m === 1 ? "" : "s"}.`
     : "Come back tomorrow for a fresh puzzle.";
+}
+
+/** Shows every guess as a row of colored squares (like the emoji grid you can share). */
+function renderRecap() {
+  const box = $("recap");
+  box.innerHTML = "";
+  state.history.forEach((row) => {
+    const r = document.createElement("div");
+    r.className = "recap-row";
+    row.forEach((gi) => {
+      const sq = document.createElement("span");
+      sq.className = `sq g${gi}`;
+      r.appendChild(sq);
+    });
+    box.appendChild(r);
+  });
+}
+
+function updateStreak() {
+  const streak = store.getStats().streak || 0;
+  $("streakChip").hidden = streak < 1;
+  $("streakNum").textContent = streak;
+  $("streakChip").title = `${streak} in a row`;
 }
 
 // ---------------------------------------------------------- stats / sharing ---
@@ -437,7 +476,7 @@ function tickCountdown() {
 function updateSoundButton() {
   const on = isSoundEnabled();
   $("soundBtn").setAttribute("aria-pressed", String(on));
-  $("soundIcon").textContent = on ? "🔊" : "🔈";
+  $("soundIcon").textContent = on ? "🔊" : "🔇";
 }
 
 function wireUI() {
