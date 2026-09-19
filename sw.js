@@ -2,7 +2,7 @@
 // Strategy: always try the network first, so a new daily quiz or a code update shows up right away.
 // If the network fails, fall back to the last copy we saved.
 
-const CACHE = "geoquads-v4";
+const CACHE = "geoquads-v5";
 
 self.addEventListener("install", () => self.skipWaiting());
 
