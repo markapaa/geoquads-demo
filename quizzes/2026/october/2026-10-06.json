@@ -1,0 +1,53 @@
+{
+  "id": "2026-10-06",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think old states, empires and breakups.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Once part of Yugoslavia",
+      "items": [
+        "Slovenia",
+        "Croatia",
+        "North Macedonia",
+        "Montenegro"
+      ],
+      "fact": "Yugoslavia was made up of six republics: Slovenia, Croatia, Bosnia and Herzegovina, Serbia, Montenegro and North Macedonia."
+    },
+    {
+      "name": "Once part of the Soviet Union",
+      "items": [
+        "Estonia",
+        "Uzbekistan",
+        "Georgia",
+        "Moldova"
+      ],
+      "fact": "When the Soviet Union dissolved in 1991, it split into 15 independent countries."
+    },
+    {
+      "name": "Once part of British India",
+      "items": [
+        "India",
+        "Pakistan",
+        "Bangladesh",
+        "Myanmar"
+      ],
+      "fact": "Burma was separated from British India in 1937, ten years before the rest was partitioned into India and Pakistan."
+    },
+    {
+      "name": "Once a German colony (before 1914)",
+      "items": [
+        "Namibia",
+        "Togo",
+        "Cameroon",
+        "Tanzania"
+      ],
+      "fact": "Germany lost all its colonies after World War I; Togo and Cameroon were split between France and Britain."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

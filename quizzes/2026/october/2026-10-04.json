@@ -1,0 +1,53 @@
+{
+  "id": "2026-10-04",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think languages.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "English is an official language in Asia",
+      "items": [
+        "India",
+        "Pakistan",
+        "Philippines",
+        "Singapore"
+      ],
+      "fact": "Singapore has four official languages: English, Malay, Mandarin and Tamil."
+    },
+    {
+      "name": "Italian is an official language",
+      "items": [
+        "Italy",
+        "Switzerland",
+        "San Marino",
+        "Vatican City"
+      ],
+      "fact": "Vatican City and San Marino are both tiny countries surrounded entirely by Italy."
+    },
+    {
+      "name": "Russian is an official language",
+      "items": [
+        "Russia",
+        "Belarus",
+        "Kazakhstan",
+        "Kyrgyzstan"
+      ],
+      "fact": "Russian is the most widely spoken native language in Europe."
+    },
+    {
+      "name": "Arabic is an official language in Africa",
+      "items": [
+        "Chad",
+        "Somalia",
+        "Djibouti",
+        "Comoros"
+      ],
+      "fact": "Comoros has three official languages: Comorian, Arabic and French."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { mistakeDistribution, nextStats, currentStreak } from "../js/logic.js";
+import { mistakeDistribution, nextStats, currentStreak, quizPath } from "../js/logic.js";
 
 test("mistakeDistribution counts wins by mistakes and losses", () => {
   const { rows, total } = mistakeDistribution({
@@ -28,4 +28,14 @@ test("streak only grows from today's daily quiz", () => {
   const s3 = nextStats(s2, true, { isTodaysDaily: true, today: "2026-09-20" });
   assert.equal(currentStreak(s3, "2026-09-20"), 2);
   assert.equal(currentStreak(s3, "2026-09-25"), 0);
+});
+
+test("quizPath puts daily quizzes in year/month folders", () => {
+  assert.equal(quizPath("2026-10-01"), "quizzes/2026/october/2026-10-01.json");
+  assert.equal(quizPath("2027-01-15"), "quizzes/2027/january/2027-01-15.json");
+  assert.equal(quizPath("2026-12-31"), "quizzes/2026/december/2026-12-31.json");
+});
+
+test("quizPath keeps practice quizzes in the quizzes folder", () => {
+  assert.equal(quizPath("practice-easy"), "quizzes/practice-easy.json");
 });

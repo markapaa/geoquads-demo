@@ -42,7 +42,8 @@ index.html            page
 css/style.css         styles (all colours are CSS variables)
 js/                   app.js (UI), logic.js (pure rules), storage.js, map.js,
                       telemetry.js (anonymous stats), sound.js, confetti.js
-quizzes/              one JSON file per daily quiz + practice quizzes
+quizzes/2026/<month>/  one JSON file per daily quiz (e.g. quizzes/2026/october/2026-10-01.json)
+quizzes/              practice quizzes and index.json
 scripts/              validate-quizzes, build-index, build-map
 data/, assets/        map data, icons, social preview image
 supabase/setup.sql    database table and security policy
@@ -61,7 +62,7 @@ npm run validate # checks every quiz file
 
 ## Add a quiz
 
-1. Copy a file in `quizzes/` and rename it to the date, e.g. `2026-10-01.json` (the `id` inside must match).
+1. Copy a quiz file and rename it to the date, e.g. `2026-11-01.json`. Put it in the folder for that year and month (`quizzes/2026/november/`, a new folder for a new month or year is fine). The `id` inside must match the file name.
 2. Write four groups of four unique items and a `spoiler`.
 3. Run `npm run build:index`, `npm run build:map` and `npm run validate`.
 

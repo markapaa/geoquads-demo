@@ -1,0 +1,53 @@
+{
+  "id": "2026-10-07",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think \"tall\", rivers and old capitals.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Held the title of world's tallest building",
+      "items": [
+        "Kuala Lumpur",
+        "Chicago",
+        "Taipei",
+        "Dubai"
+      ],
+      "fact": "The Burj Khalifa in Dubai has been the world's tallest building since 2010, at 828 m."
+    },
+    {
+      "name": "On the Nile",
+      "items": [
+        "Cairo",
+        "Aswan",
+        "Khartoum",
+        "Giza"
+      ],
+      "fact": "Khartoum is where the Blue Nile and the White Nile meet."
+    },
+    {
+      "name": "Former national capital",
+      "items": [
+        "Kyoto",
+        "Kraków",
+        "Turin",
+        "Saint Petersburg"
+      ],
+      "fact": "Saint Petersburg was Russia's capital for about two centuries, until 1918."
+    },
+    {
+      "name": "On the Volga",
+      "items": [
+        "Kazan",
+        "Volgograd",
+        "Saratov",
+        "Nizhny Novgorod"
+      ],
+      "fact": "The Volga is the longest river in Europe, at about 3,530 km."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

@@ -1,7 +1,7 @@
 // GeoQuads: UI and game flow. Pure rules live in logic.js, browser storage in storage.js, sounds in sound.js.
 import { reportResult, isConfigured, isEnabled, setEnabled } from "./telemetry.js";
 import {
-  todayStr, strToDate, isDateId, buildTiles, validateConfig, evaluateGuess,
+  todayStr, strToDate, isDateId, quizPath, buildTiles, validateConfig, evaluateGuess,
   nextStats, currentStreak, mistakeDistribution, msUntilMidnight, formatCountdown, shareText, shuffleArray,
 } from "./logic.js";
 import * as store from "./storage.js";
@@ -40,7 +40,7 @@ async function fetchJSON(url) {
   return res.json();
 }
 
-const fetchQuiz = async (id) => validateConfig(await fetchJSON(`quizzes/${id}.json`));
+const fetchQuiz = async (id) => validateConfig(await fetchJSON(quizPath(id)));
 
 async function loadManifest() {
   try {
@@ -212,6 +212,8 @@ function renderGrid(animate = false) {
     cell.type = "button";
     cell.className = "cell";
     cell.textContent = t.label;
+    // Very long single words (Kanchenjunga, Liechtenstein) get a smaller font so they stay inside the tile.
+    if (Math.max(...t.label.split(/\s+/).map((w) => w.length)) >= 11) cell.classList.add("long");
     cell.dataset.idx = idx;
     cell.style.setProperty("--i", idx);
     cell.addEventListener("click", (e) => {

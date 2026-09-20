@@ -1,0 +1,53 @@
+{
+  "id": "2026-10-08",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think forest, desert, mountains and latitude.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Part of the Amazon rainforest",
+      "items": [
+        "Brazil",
+        "Peru",
+        "Colombia",
+        "Bolivia"
+      ],
+      "fact": "About 60% of the Amazon rainforest lies inside Brazil."
+    },
+    {
+      "name": "Part of the Sahara",
+      "items": [
+        "Algeria",
+        "Libya",
+        "Mali",
+        "Mauritania"
+      ],
+      "fact": "The Sahara covers about 9 million km², about as large as the United States."
+    },
+    {
+      "name": "Part of the Himalayas",
+      "items": [
+        "Nepal",
+        "Bhutan",
+        "Pakistan",
+        "China"
+      ],
+      "fact": "Himalaya means \"abode of snow\" in Sanskrit."
+    },
+    {
+      "name": "Crossed by the Arctic Circle",
+      "items": [
+        "Norway",
+        "Finland",
+        "Canada",
+        "Iceland"
+      ],
+      "fact": "Inside the Arctic Circle the Sun stays above the horizon all day at least once a year: the midnight sun."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

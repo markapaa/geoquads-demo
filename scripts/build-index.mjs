@@ -4,18 +4,24 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { listQuizFiles } from "./quiz-files.mjs";
 
 const quizzesDir = path.resolve(process.argv[2] || "quizzes");
 
-const files = fs.readdirSync(quizzesDir).filter((f) => f.endsWith(".json") && f !== "index.json");
+// Looks inside every sub-folder too (quizzes/2026/october/...).
+const ids = listQuizFiles(quizzesDir).map((f) => f.id);
 
-const daily = files
-  .map((f) => f.replace(/\.json$/, ""))
+const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
+if (duplicates.length) {
+  console.error(`The same quiz exists in two places: ${[...new Set(duplicates)].join(", ")}. Delete the old copy.`);
+  process.exit(1);
+}
+
+const daily = ids
   .filter((id) => /^\d{4}-\d{2}-\d{2}$/.test(id))
   .sort();
 
-const practice = files
-  .map((f) => f.replace(/\.json$/, ""))
+const practice = ids
   .filter((id) => id.startsWith("practice-"))
   .sort((a, b) => {
     const order = ["easy", "medium", "hard"];

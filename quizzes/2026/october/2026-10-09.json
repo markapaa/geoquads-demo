@@ -1,0 +1,53 @@
+{
+  "id": "2026-10-09",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think politics, wine and borders.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Canadian provinces",
+      "items": [
+        "Alberta",
+        "Manitoba",
+        "Nova Scotia",
+        "Saskatchewan"
+      ],
+      "fact": "Canada has ten provinces and three territories."
+    },
+    {
+      "name": "Australian states",
+      "items": [
+        "Queensland",
+        "Tasmania",
+        "New South Wales",
+        "Western Australia"
+      ],
+      "fact": "Australia has six states, and Tasmania is the only one that is an island."
+    },
+    {
+      "name": "Famous wine regions",
+      "items": [
+        "Champagne",
+        "Bordeaux",
+        "Rioja",
+        "Tuscany"
+      ],
+      "fact": "Under European rules, only sparkling wine from Champagne can be called Champagne."
+    },
+    {
+      "name": "Regions split by a national border",
+      "items": [
+        "Patagonia",
+        "Lapland",
+        "Tyrol",
+        "Silesia"
+      ],
+      "fact": "Tyrol was split between Austria and Italy after World War I, and South Tyrol is still mostly German-speaking."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

@@ -4,7 +4,7 @@
 // Inputs
 //   data/countries-110m.geojson   country outlines (Natural Earth 1:110m, public domain, https://www.naturalearthdata.com)
 //   data/places.json              our own "gazetteer": where each quiz item is on the map
-//   quizzes/*.json                to report which items still have no place on the map
+//   quizzes/**/*.json             to report which items still have no place on the map
 //
 // Output
 //   assets/map-data.json          SVG paths (already projected) + pin positions, ready for the browser
@@ -20,6 +20,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { listQuizFiles } from "./quiz-files.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => JSON.parse(fs.readFileSync(path.join(root, p), "utf8"));
@@ -116,7 +117,8 @@ for (const [label, p] of Object.entries(placesIn)) {
     if (!countries[p.country]) problems.push(`"${label}": unknown country "${p.country}"`);
     else alias[label] = p.country;
   } else if (typeof p.lat === "number" && typeof p.lon === "number") {
-    const [x, y] = toMap(p.lon, p.lat);
+    // Antarctica is cropped from the map, so pins south of the crop line sit on its bottom edge instead of vanishing.
+    const [x, y] = toMap(p.lon, Math.max(LAT_SOUTH + 5, p.lat));
     points[label] = { x, y, kind: p.kind || "area" };
   } else {
     problems.push(`"${label}": needs "country" or "lat"/"lon"`);
@@ -127,9 +129,8 @@ for (const [label, p] of Object.entries(placesIn)) {
 
 const missing = new Map();
 const lower = new Set(Object.keys(countries).map((n) => n.toLowerCase()));
-for (const file of fs.readdirSync(path.join(root, "quizzes"))) {
-  if (!file.endsWith(".json") || file === "index.json") continue;
-  const quiz = read(`quizzes/${file}`);
+for (const { id: file, full } of listQuizFiles(path.join(root, "quizzes"))) {
+  const quiz = JSON.parse(fs.readFileSync(full, "utf8"));
   for (const g of quiz.groups) {
     for (const item of g.items) {
       const known = placesIn[`${item}@${g.name}`] || placesIn[item] || lower.has(item.toLowerCase());

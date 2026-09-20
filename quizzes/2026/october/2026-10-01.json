@@ -1,0 +1,53 @@
+{
+  "id": "2026-10-01",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think seas, lines on the globe and lands cut off from home.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Coast on the Baltic Sea",
+      "items": [
+        "Poland",
+        "Latvia",
+        "Lithuania",
+        "Denmark"
+      ],
+      "fact": "The Baltic is one of the largest bodies of brackish water on Earth, because so little salty ocean water can flow in."
+    },
+    {
+      "name": "Coast on the Black Sea",
+      "items": [
+        "Romania",
+        "Bulgaria",
+        "Georgia",
+        "Ukraine"
+      ],
+      "fact": "Deep water in the Black Sea has almost no oxygen, so ancient wooden shipwrecks survive there for thousands of years."
+    },
+    {
+      "name": "Crossed by the Tropic of Cancer",
+      "items": [
+        "Mexico",
+        "Egypt",
+        "India",
+        "China"
+      ],
+      "fact": "The Tropic of Cancer, about 23.4° north, is the northernmost latitude where the Sun can be directly overhead."
+    },
+    {
+      "name": "Has a part cut off from the rest of the country (exclave)",
+      "items": [
+        "Azerbaijan",
+        "Angola",
+        "United States",
+        "Brunei"
+      ],
+      "fact": "Nakhchivan, Cabinda, Temburong and Alaska are each cut off from their country's main territory by another country."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

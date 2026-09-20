@@ -1,0 +1,53 @@
+{
+  "id": "2026-10-02",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think rivers, seas and oceans.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Capitals on the Danube",
+      "items": [
+        "Vienna",
+        "Budapest",
+        "Bratislava",
+        "Belgrade"
+      ],
+      "fact": "The Danube flows through four national capitals, more than any other river in the world."
+    },
+    {
+      "name": "Capitals on the Baltic Sea",
+      "items": [
+        "Tallinn",
+        "Helsinki",
+        "Stockholm",
+        "Riga"
+      ],
+      "fact": "Helsinki and Tallinn face each other across the Gulf of Finland, only about 80 km apart."
+    },
+    {
+      "name": "Capitals on the Pacific coast",
+      "items": [
+        "Lima",
+        "Tokyo",
+        "Panama City",
+        "Suva"
+      ],
+      "fact": "Panama City sits at the Pacific end of the Panama Canal."
+    },
+    {
+      "name": "Capitals on the Atlantic coast",
+      "items": [
+        "Rabat",
+        "Dakar",
+        "Accra",
+        "Luanda"
+      ],
+      "fact": "Pointe des Almadies, in Dakar, is the westernmost point of mainland Africa."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "2026-10-10",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think rivers in Africa and Asia.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "The Nile flows through it",
+      "items": [
+        "Egypt",
+        "Sudan",
+        "South Sudan",
+        "Uganda"
+      ],
+      "fact": "At about 6,650 km, the Nile is traditionally counted as the longest river in the world."
+    },
+    {
+      "name": "The Mekong flows through it",
+      "items": [
+        "Laos",
+        "Thailand",
+        "Cambodia",
+        "Vietnam"
+      ],
+      "fact": "The Mekong runs through six countries: China, Myanmar, Laos, Thailand, Cambodia and Vietnam."
+    },
+    {
+      "name": "The Niger river flows through it",
+      "items": [
+        "Guinea",
+        "Mali",
+        "Niger",
+        "Nigeria"
+      ],
+      "fact": "The Niger starts only about 240 km from the Atlantic, yet flows away from the sea into the Sahara before curving back."
+    },
+    {
+      "name": "The Amu Darya flows through it",
+      "items": [
+        "Afghanistan",
+        "Tajikistan",
+        "Uzbekistan",
+        "Turkmenistan"
+      ],
+      "fact": "In ancient times the Amu Darya was known as the Oxus."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

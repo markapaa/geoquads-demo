@@ -5,8 +5,9 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { listQuizFiles } from "./quiz-files.mjs";
 
-const quizzesDir = process.argv[2] || path.resolve("quizzes");
+const quizzesDir = path.resolve(process.argv[2] || "quizzes");
 
 const err = (msg) => console.error("✗", msg);
 const ok = (msg) => console.log("✓", msg);
@@ -96,10 +97,8 @@ function main() {
     process.exit(2);
   }
 
-  const files = fs
-    .readdirSync(quizzesDir)
-    .filter((f) => f.endsWith(".json") && f !== "index.json")
-    .sort();
+  // Looks inside every sub-folder too (quizzes/2026/october/...).
+  const files = listQuizFiles(quizzesDir);
 
   if (files.length === 0) {
     err("No .json files in quizzes/ directory");
@@ -110,8 +109,8 @@ function main() {
 
   console.log(`Validating ${files.length} file(s) in: ${quizzesDir}\n`);
 
-  for (const f of files) {
-    const full = path.join(quizzesDir, f);
+  for (const { id, full, rel, expectedRel } of files) {
+    const f = rel;
     let json;
     try {
       const raw = fs.readFileSync(full, "utf8");
@@ -123,8 +122,15 @@ function main() {
     }
 
     const errors = validateQuiz(json, f);
-    if (json && json.id !== undefined && json.id !== f.replace(/\.json$/, "")) {
+    if (json && json.id !== undefined && json.id !== id) {
       errors.push(`\`id\` ("${json.id}") should match the file name`);
+    }
+    // The game finds a quiz from its date, so the file has to be in the matching year/month folder.
+    if (rel !== expectedRel) {
+      errors.push(`wrong folder: move it to quizzes/${expectedRel}`);
+    }
+    if (files.filter((x) => x.id === id).length > 1) {
+      errors.push(`the same quiz id exists in more than one place — delete the old copy`);
     }
     if (errors.length) {
       err(`${f}:`);
@@ -139,7 +145,7 @@ function main() {
   try {
     const index = JSON.parse(fs.readFileSync(path.join(quizzesDir, "index.json"), "utf8"));
     const listed = new Set([...(index.daily || []), ...(index.practice || [])]);
-    const missing = files.map((f) => f.replace(/\.json$/, "")).filter((id) => !listed.has(id));
+    const missing = files.map((f) => f.id).filter((id) => !listed.has(id));
     if (missing.length) {
       err(`index.json is missing: ${missing.join(", ")} (run: npm run build:index)`);
       totalErrors++;

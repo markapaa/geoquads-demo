@@ -22,6 +22,26 @@ export function isDateId(s) {
   return /^\d{4}-\d{2}-\d{2}$/.test(s);
 }
 
+const MONTH_FOLDERS = [
+  "january", "february", "march", "april", "may", "june",
+  "july", "august", "september", "october", "november", "december",
+];
+
+/**
+ * Where a quiz file lives. Daily quizzes are grouped by year and month:
+ *   "2026-10-01"     -> "quizzes/2026/october/2026-10-01.json"
+ * Anything else (practice quizzes) sits directly in quizzes/:
+ *   "practice-easy"  -> "quizzes/practice-easy.json"
+ */
+export function quizPath(id) {
+  if (isDateId(id)) {
+    const [year, month] = id.split("-");
+    const folder = MONTH_FOLDERS[Number(month) - 1];
+    if (folder) return `quizzes/${year}/${folder}/${id}.json`;
+  }
+  return `quizzes/${id}.json`;
+}
+
 export function msUntilMidnight(now = new Date()) {
   const next = new Date(now);
   next.setHours(24, 0, 0, 0);

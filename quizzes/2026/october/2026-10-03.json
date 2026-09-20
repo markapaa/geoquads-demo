@@ -1,0 +1,53 @@
+{
+  "id": "2026-10-03",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think type, place, height and records.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "Volcanoes",
+      "items": [
+        "Mount Fuji",
+        "Vesuvius",
+        "Etna",
+        "Mount St. Helens"
+      ],
+      "fact": "Mount St. Helens' 1980 eruption was the deadliest and most economically destructive volcanic event in US history."
+    },
+    {
+      "name": "Peaks of the Alps",
+      "items": [
+        "Mont Blanc",
+        "Matterhorn",
+        "Eiger",
+        "Jungfrau"
+      ],
+      "fact": "Mont Blanc is the highest peak in the Alps, at about 4,806 m."
+    },
+    {
+      "name": "Eight-thousanders (above 8,000 m)",
+      "items": [
+        "K2",
+        "Kanchenjunga",
+        "Lhotse",
+        "Makalu"
+      ],
+      "fact": "There are exactly 14 peaks above 8,000 m, and all of them are in the Himalaya and Karakoram."
+    },
+    {
+      "name": "Highest peak of a continent",
+      "items": [
+        "Denali",
+        "Aconcagua",
+        "Vinson Massif",
+        "Mount Kosciuszko"
+      ],
+      "fact": "Vinson Massif in Antarctica was first climbed only in 1966."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

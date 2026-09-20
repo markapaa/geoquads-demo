@@ -8,24 +8,46 @@
   "groups": [
     {
       "name": "Land borders with nine or more countries",
-      "items": ["China", "Brazil", "Germany", "DR Congo"],
+      "items": [
+        "China",
+        "Brazil",
+        "Germany",
+        "DR Congo"
+      ],
       "fact": "China and Russia are tied for the most land neighbours in the world: 14 each."
     },
     {
       "name": "Usually written with \"the\"",
-      "items": ["Gambia", "Bahamas", "Netherlands", "Philippines"],
+      "items": [
+        "Gambia",
+        "Bahamas",
+        "Netherlands",
+        "Philippines"
+      ],
       "fact": "The official name is the Republic of The Gambia, with a capital T."
     },
     {
       "name": "First-time World Cup hosts since 2000",
-      "items": ["Japan", "South Korea", "South Africa", "Qatar"],
+      "items": [
+        "Japan",
+        "South Korea",
+        "South Africa",
+        "Qatar"
+      ],
       "fact": "The 2002 World Cup was the first hosted by two countries."
     },
     {
       "name": "Swahili is an official language",
-      "items": ["Tanzania", "Kenya", "Uganda", "Rwanda"],
+      "items": [
+        "Tanzania",
+        "Kenya",
+        "Uganda",
+        "Rwanda"
+      ],
       "fact": "Swahili is one of the official languages of the African Union."
     }
   ],
-  "ui": { "locale": "en-US" }
+  "ui": {
+    "locale": "en-US"
+  }
 }

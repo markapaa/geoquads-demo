@@ -1,29 +1,49 @@
 {
   "id": "2026-09-18",
   "title": "GeoQuads — Daily",
-  "spoiler": "Look at the names, the flags and the capitals. And do some counting.",
+  "spoiler": "Think names, flags, capitals and neighbours.",
   "help": "Find the 4 hidden categories. Each has 4 unique items.",
-  "lives": 4,
+  "lives": 5,
   "showOneAway": true,
   "groups": [
     {
       "name": "Capital has the same name as the country",
-      "items": ["Kuwait", "Panama", "Luxembourg", "Singapore"],
+      "items": [
+        "Kuwait",
+        "Panama",
+        "Luxembourg",
+        "Singapore"
+      ],
       "fact": "Luxembourg is the world's only remaining sovereign grand duchy."
     },
     {
       "name": "Flag features an animal",
-      "items": ["Bhutan", "Uganda", "Albania", "Sri Lanka"],
+      "items": [
+        "Bhutan",
+        "Uganda",
+        "Albania",
+        "Sri Lanka"
+      ],
       "fact": "Bhutan's flag shows a Druk, the Thunder Dragon; the country's local name means \"Land of the Thunder Dragon\"."
     },
     {
       "name": "Name hides another country",
-      "items": ["Nigeria", "Romania", "Somalia", "South Sudan"],
+      "items": [
+        "Nigeria",
+        "Romania",
+        "Somalia",
+        "South Sudan"
+      ],
       "fact": "Nigeria is named after the Niger River, and Niger is its next-door neighbour."
     },
     {
       "name": "Exactly one land neighbour",
-      "items": ["Portugal", "Lesotho", "Qatar", "Denmark"],
+      "items": [
+        "Portugal",
+        "Lesotho",
+        "Qatar",
+        "Denmark"
+      ],
       "fact": "Lesotho is completely surrounded by South Africa."
     }
   ],

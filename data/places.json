@@ -55,8 +55,8 @@
     "kind": "micro"
   },
   "Cabo Verde": {
-    "lat": 16,
-    "lon": -24,
+    "lat": 16.0,
+    "lon": -24.0,
     "kind": "micro"
   },
   "São Tomé and Príncipe": {
@@ -385,7 +385,7 @@
     "kind": "city"
   },
   "Mainz": {
-    "lat": 50,
+    "lat": 50.0,
     "lon": 8.27,
     "kind": "city"
   },
@@ -531,56 +531,56 @@
   },
   "Andes": {
     "lat": -13.5,
-    "lon": -72,
+    "lon": -72.0,
     "kind": "peak"
   },
   "Atlas": {
-    "lat": 32,
-    "lon": -5,
+    "lat": 32.0,
+    "lon": -5.0,
     "kind": "peak"
   },
   "Urals": {
-    "lat": 60,
+    "lat": 60.0,
     "lon": 59.5,
     "kind": "peak"
   },
   "Nile": {
-    "lat": 26,
+    "lat": 26.0,
     "lon": 32.7,
     "kind": "water"
   },
   "Zambezi": {
     "lat": -16.2,
-    "lon": 29,
+    "lon": 29.0,
     "kind": "water"
   },
   "Congo@Rivers of Africa": {
     "lat": -1.5,
-    "lon": 17,
+    "lon": 17.0,
     "kind": "water"
   },
   "Niger@Rivers of Africa": {
     "lat": 13.5,
-    "lon": -6,
+    "lon": -6.0,
     "kind": "water"
   },
   "Mekong": {
-    "lat": 15,
+    "lat": 15.0,
     "lon": 105.8,
     "kind": "water"
   },
   "Ganges": {
     "lat": 25.4,
-    "lon": 83,
+    "lon": 83.0,
     "kind": "water"
   },
   "Yangtze": {
     "lat": 30.5,
-    "lon": 111,
+    "lon": 111.0,
     "kind": "water"
   },
   "Indus": {
-    "lat": 28,
+    "lat": 28.0,
     "lon": 69.5,
     "kind": "water"
   },
@@ -590,7 +590,7 @@
     "kind": "water"
   },
   "Seine": {
-    "lat": 49,
+    "lat": 49.0,
     "lon": 1.5,
     "kind": "water"
   },
@@ -606,17 +606,17 @@
   },
   "Amazon": {
     "lat": -3.5,
-    "lon": -62,
+    "lon": -62.0,
     "kind": "water"
   },
   "Mississippi@Rivers of the Americas": {
     "lat": 34.5,
-    "lon": -91,
+    "lon": -91.0,
     "kind": "water"
   },
   "Orinoco": {
     "lat": 7.5,
-    "lon": -64,
+    "lon": -64.0,
     "kind": "water"
   },
   "Yukon": {
@@ -646,7 +646,7 @@
   },
   "Baltic": {
     "lat": 58.5,
-    "lon": 20,
+    "lon": 20.0,
     "kind": "water"
   },
   "Caspian": {
@@ -655,32 +655,32 @@
     "kind": "water"
   },
   "Adriatic": {
-    "lat": 43,
+    "lat": 43.0,
     "lon": 15.5,
     "kind": "water"
   },
   "Aegean": {
     "lat": 38.8,
-    "lon": 25,
+    "lon": 25.0,
     "kind": "water"
   },
   "Victoria@Lakes of Africa": {
-    "lat": -1,
-    "lon": 33,
+    "lat": -1.0,
+    "lon": 33.0,
     "kind": "water"
   },
   "Tanganyika": {
-    "lat": -6,
+    "lat": -6.0,
     "lon": 29.5,
     "kind": "water"
   },
   "Malawi@Lakes of Africa": {
-    "lat": -12,
+    "lat": -12.0,
     "lon": 34.5,
     "kind": "water"
   },
   "Chad@Lakes of Africa": {
-    "lat": 13,
+    "lat": 13.0,
     "lon": 14.5,
     "kind": "water"
   },
@@ -735,7 +735,7 @@
     "kind": "water"
   },
   "Kiel": {
-    "lat": 54,
+    "lat": 54.0,
     "lon": 9.4,
     "kind": "water"
   },
@@ -745,63 +745,63 @@
     "kind": "water"
   },
   "Atlantic": {
-    "lat": 0,
-    "lon": -25,
+    "lat": 0.0,
+    "lon": -25.0,
     "kind": "water"
   },
   "Pacific": {
-    "lat": 0,
-    "lon": -150,
+    "lat": 0.0,
+    "lon": -150.0,
     "kind": "water"
   },
   "Indian": {
-    "lat": -15,
-    "lon": 80,
+    "lat": -15.0,
+    "lon": 80.0,
     "kind": "water"
   },
   "Arctic": {
-    "lat": 80,
-    "lon": 0,
+    "lat": 80.0,
+    "lon": 0.0,
     "kind": "water"
   },
   "Gobi": {
-    "lat": 43,
-    "lon": 105,
+    "lat": 43.0,
+    "lon": 105.0,
     "kind": "area"
   },
   "Sahara": {
-    "lat": 23,
-    "lon": 12,
+    "lat": 23.0,
+    "lon": 12.0,
     "kind": "area"
   },
   "Kalahari": {
-    "lat": -23,
-    "lon": 22,
+    "lat": -23.0,
+    "lon": 22.0,
     "kind": "area"
   },
   "Atacama": {
-    "lat": -24,
+    "lat": -24.0,
     "lon": -69.5,
     "kind": "area"
   },
   "Iberia": {
-    "lat": 40,
+    "lat": 40.0,
     "lon": -4.5,
     "kind": "area"
   },
   "Balkan": {
-    "lat": 42,
-    "lon": 22,
+    "lat": 42.0,
+    "lon": 22.0,
     "kind": "area"
   },
   "Kamchatka": {
-    "lat": 56,
-    "lon": 160,
+    "lat": 56.0,
+    "lon": 160.0,
     "kind": "area"
   },
   "Yucatán": {
     "lat": 20.5,
-    "lon": -89,
+    "lon": -89.0,
     "kind": "area"
   },
   "Yellowstone": {
@@ -816,7 +816,7 @@
   },
   "Zion": {
     "lat": 37.3,
-    "lon": -113,
+    "lon": -113.0,
     "kind": "area"
   },
   "Everglades": {
@@ -851,17 +851,17 @@
   },
   "Borneo": {
     "lat": 0.5,
-    "lon": 114,
+    "lon": 114.0,
     "kind": "area"
   },
   "Amazon@Rainforests": {
-    "lat": -5,
-    "lon": -64,
+    "lat": -5.0,
+    "lon": -64.0,
     "kind": "area"
   },
   "Congo@Rainforests": {
-    "lat": 0,
-    "lon": 22,
+    "lat": 0.0,
+    "lon": 22.0,
     "kind": "area"
   },
   "New Guinea": {
@@ -871,7 +871,7 @@
   },
   "Sicily": {
     "lat": 37.6,
-    "lon": 14,
+    "lon": 14.0,
     "kind": "area"
   },
   "Crete": {
@@ -880,28 +880,28 @@
     "kind": "area"
   },
   "Sardinia": {
-    "lat": 40,
-    "lon": 9,
+    "lat": 40.0,
+    "lon": 9.0,
     "kind": "area"
   },
   "Alberta": {
-    "lat": 55,
-    "lon": -115,
+    "lat": 55.0,
+    "lon": -115.0,
     "kind": "area"
   },
   "Manitoba": {
-    "lat": 55,
-    "lon": -98,
+    "lat": 55.0,
+    "lon": -98.0,
     "kind": "area"
   },
   "Quebec": {
-    "lat": 52,
-    "lon": -72,
+    "lat": 52.0,
+    "lon": -72.0,
     "kind": "area"
   },
   "Saskatchewan": {
-    "lat": 54,
-    "lon": -106,
+    "lat": 54.0,
+    "lon": -106.0,
     "kind": "area"
   },
   "Hawaii": {
@@ -910,12 +910,12 @@
     "kind": "area"
   },
   "California": {
-    "lat": 37,
-    "lon": -120,
+    "lat": 37.0,
+    "lon": -120.0,
     "kind": "area"
   },
   "Oregon": {
-    "lat": 44,
+    "lat": 44.0,
     "lon": -120.5,
     "kind": "area"
   },
@@ -940,7 +940,7 @@
     "kind": "area"
   },
   "Wyoming": {
-    "lat": 43,
+    "lat": 43.0,
     "lon": -107.5,
     "kind": "area"
   },
@@ -960,8 +960,8 @@
     "kind": "area"
   },
   "Louisiana": {
-    "lat": 31,
-    "lon": -92,
+    "lat": 31.0,
+    "lon": -92.0,
     "kind": "area"
   },
   "Maine": {
@@ -1031,7 +1031,7 @@
   },
   "Karachi": {
     "lat": 24.86,
-    "lon": 67,
+    "lon": 67.0,
     "kind": "city"
   },
   "Istanbul": {
@@ -1050,8 +1050,8 @@
     "kind": "area"
   },
   "Thar": {
-    "lat": 27,
-    "lon": 71,
+    "lat": 27.0,
+    "lon": 71.0,
     "kind": "area"
   },
   "Elbrus": {
@@ -1080,8 +1080,8 @@
     "kind": "water"
   },
   "Aral Sea": {
-    "lat": 45,
-    "lon": 60,
+    "lat": 45.0,
+    "lon": 60.0,
     "kind": "water"
   },
   "Sea of Galilee": {
@@ -1121,18 +1121,18 @@
     "kind": "city"
   },
   "Red Sea": {
-    "lat": 20,
+    "lat": 20.0,
     "lon": 38.5,
     "kind": "water"
   },
   "Black Sea": {
     "lat": 43.5,
-    "lon": 34,
+    "lon": 34.0,
     "kind": "water"
   },
   "White Sea": {
     "lat": 65.5,
-    "lon": 38,
+    "lon": 38.0,
     "kind": "water"
   },
   "Yellow Sea": {
@@ -1141,8 +1141,8 @@
     "kind": "water"
   },
   "Lake Victoria": {
-    "lat": -1,
-    "lon": 33,
+    "lat": -1.0,
+    "lon": 33.0,
     "kind": "water"
   },
   "Lake Chad": {
@@ -1157,22 +1157,22 @@
   },
   "Lake Prespa": {
     "lat": 40.9,
-    "lon": 21,
+    "lon": 21.0,
     "kind": "water"
   },
   "Ob": {
-    "lat": 62,
-    "lon": 70,
+    "lat": 62.0,
+    "lon": 70.0,
     "kind": "water"
   },
   "Lena": {
-    "lat": 66,
-    "lon": 123,
+    "lat": 66.0,
+    "lon": 123.0,
     "kind": "water"
   },
   "Mackenzie": {
-    "lat": 66,
-    "lon": -134,
+    "lat": 66.0,
+    "lon": -134.0,
     "kind": "water"
   },
   "São Paulo": {
@@ -1227,5 +1227,293 @@
   },
   "DR Congo": {
     "country": "Dem. Rep. Congo"
+  },
+  "United States": {
+    "country": "United States of America"
+  },
+  "Tallinn": {
+    "lat": 59.44,
+    "lon": 24.75,
+    "kind": "city"
+  },
+  "Helsinki": {
+    "lat": 60.17,
+    "lon": 24.94,
+    "kind": "city"
+  },
+  "Riga": {
+    "lat": 56.95,
+    "lon": 24.11,
+    "kind": "city"
+  },
+  "Panama City": {
+    "lat": 8.98,
+    "lon": -79.52,
+    "kind": "city"
+  },
+  "Suva": {
+    "lat": -18.14,
+    "lon": 178.44,
+    "kind": "city"
+  },
+  "Luanda": {
+    "lat": -8.84,
+    "lon": 13.23,
+    "kind": "city"
+  },
+  "Mount Fuji": {
+    "lat": 35.36,
+    "lon": 138.73,
+    "kind": "peak"
+  },
+  "Mount St. Helens": {
+    "lat": 46.2,
+    "lon": -122.19,
+    "kind": "peak"
+  },
+  "Mont Blanc": {
+    "lat": 45.83,
+    "lon": 6.86,
+    "kind": "peak"
+  },
+  "Matterhorn": {
+    "lat": 45.98,
+    "lon": 7.66,
+    "kind": "peak"
+  },
+  "Eiger": {
+    "lat": 46.58,
+    "lon": 8.01,
+    "kind": "peak"
+  },
+  "Jungfrau": {
+    "lat": 46.54,
+    "lon": 7.96,
+    "kind": "peak"
+  },
+  "Kanchenjunga": {
+    "lat": 27.7,
+    "lon": 88.15,
+    "kind": "peak"
+  },
+  "Lhotse": {
+    "lat": 27.96,
+    "lon": 86.93,
+    "kind": "peak"
+  },
+  "Makalu": {
+    "lat": 27.89,
+    "lon": 87.09,
+    "kind": "peak"
+  },
+  "Denali": {
+    "lat": 63.07,
+    "lon": -151.01,
+    "kind": "peak"
+  },
+  "Vinson Massif": {
+    "lat": -78.53,
+    "lon": -85.62,
+    "kind": "peak"
+  },
+  "Mount Kosciuszko": {
+    "lat": -36.46,
+    "lon": 148.26,
+    "kind": "peak"
+  },
+  "Lake Superior": {
+    "lat": 47.7,
+    "lon": -87.5,
+    "kind": "water"
+  },
+  "Lake Michigan": {
+    "lat": 44.0,
+    "lon": -87.0,
+    "kind": "water"
+  },
+  "Lake Huron": {
+    "lat": 44.8,
+    "lon": -82.2,
+    "kind": "water"
+  },
+  "Lake Erie": {
+    "lat": 42.2,
+    "lon": -81.2,
+    "kind": "water"
+  },
+  "Lake Como": {
+    "lat": 46.0,
+    "lon": 9.26,
+    "kind": "water"
+  },
+  "Lake Garda": {
+    "lat": 45.65,
+    "lon": 10.7,
+    "kind": "water"
+  },
+  "Lake Maggiore": {
+    "lat": 45.96,
+    "lon": 8.65,
+    "kind": "water"
+  },
+  "Lake Iseo": {
+    "lat": 45.72,
+    "lon": 10.05,
+    "kind": "water"
+  },
+  "Salton Sea": {
+    "lat": 33.3,
+    "lon": -115.83,
+    "kind": "water"
+  },
+  "Lake Tanganyika": {
+    "lat": -6.0,
+    "lon": 29.5,
+    "kind": "water"
+  },
+  "Lake Malawi": {
+    "lat": -12.0,
+    "lon": 34.5,
+    "kind": "water"
+  },
+  "Lake Turkana": {
+    "lat": 3.6,
+    "lon": 36.0,
+    "kind": "water"
+  },
+  "Lake Kivu": {
+    "lat": -2.0,
+    "lon": 29.1,
+    "kind": "water"
+  },
+  "Kuala Lumpur": {
+    "lat": 3.14,
+    "lon": 101.69,
+    "kind": "city"
+  },
+  "Chicago": {
+    "lat": 41.88,
+    "lon": -87.63,
+    "kind": "city"
+  },
+  "Taipei": {
+    "lat": 25.03,
+    "lon": 121.57,
+    "kind": "city"
+  },
+  "Cairo": {
+    "lat": 30.04,
+    "lon": 31.24,
+    "kind": "city"
+  },
+  "Aswan": {
+    "lat": 24.09,
+    "lon": 32.9,
+    "kind": "city"
+  },
+  "Khartoum": {
+    "lat": 15.5,
+    "lon": 32.56,
+    "kind": "city"
+  },
+  "Giza": {
+    "lat": 30.01,
+    "lon": 31.21,
+    "kind": "city"
+  },
+  "Kyoto": {
+    "lat": 35.01,
+    "lon": 135.77,
+    "kind": "city"
+  },
+  "Kraków": {
+    "lat": 50.06,
+    "lon": 19.94,
+    "kind": "city"
+  },
+  "Kazan": {
+    "lat": 55.79,
+    "lon": 49.12,
+    "kind": "city"
+  },
+  "Volgograd": {
+    "lat": 48.71,
+    "lon": 44.51,
+    "kind": "city"
+  },
+  "Saratov": {
+    "lat": 51.53,
+    "lon": 46.03,
+    "kind": "city"
+  },
+  "Nizhny Novgorod": {
+    "lat": 56.33,
+    "lon": 44.0,
+    "kind": "city"
+  },
+  "Nova Scotia": {
+    "lat": 45.0,
+    "lon": -63.0,
+    "kind": "area"
+  },
+  "Queensland": {
+    "lat": -22.5,
+    "lon": 144.0,
+    "kind": "area"
+  },
+  "Tasmania": {
+    "lat": -42.0,
+    "lon": 146.6,
+    "kind": "area"
+  },
+  "New South Wales": {
+    "lat": -32.5,
+    "lon": 146.5,
+    "kind": "area"
+  },
+  "Western Australia": {
+    "lat": -25.5,
+    "lon": 122.0,
+    "kind": "area"
+  },
+  "Champagne": {
+    "lat": 49.0,
+    "lon": 4.0,
+    "kind": "area"
+  },
+  "Bordeaux": {
+    "lat": 44.84,
+    "lon": -0.58,
+    "kind": "area"
+  },
+  "Rioja": {
+    "lat": 42.3,
+    "lon": -2.5,
+    "kind": "area"
+  },
+  "Tuscany": {
+    "lat": 43.4,
+    "lon": 11.0,
+    "kind": "area"
+  },
+  "Patagonia": {
+    "lat": -45.0,
+    "lon": -70.0,
+    "kind": "area"
+  },
+  "Lapland": {
+    "lat": 68.0,
+    "lon": 24.0,
+    "kind": "area"
+  },
+  "Tyrol": {
+    "lat": 47.0,
+    "lon": 11.5,
+    "kind": "area"
+  },
+  "Silesia": {
+    "lat": 50.8,
+    "lon": 17.0,
+    "kind": "area"
   }
 }

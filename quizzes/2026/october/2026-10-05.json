@@ -1,0 +1,53 @@
+{
+  "id": "2026-10-05",
+  "title": "GeoQuads — Daily",
+  "spoiler": "Think famous groups, countries, names and geology.",
+  "help": "Find the 4 hidden categories. Each has 4 unique items.",
+  "lives": 5,
+  "showOneAway": true,
+  "groups": [
+    {
+      "name": "The Great Lakes",
+      "items": [
+        "Lake Superior",
+        "Lake Michigan",
+        "Lake Huron",
+        "Lake Erie"
+      ],
+      "fact": "Together the Great Lakes hold roughly a fifth of the world's surface fresh water."
+    },
+    {
+      "name": "Northern Italian lakes",
+      "items": [
+        "Lake Como",
+        "Lake Garda",
+        "Lake Maggiore",
+        "Lake Iseo"
+      ],
+      "fact": "Lake Garda is the largest lake in Italy."
+    },
+    {
+      "name": "Lakes that are called seas",
+      "items": [
+        "Aral Sea",
+        "Dead Sea",
+        "Sea of Galilee",
+        "Salton Sea"
+      ],
+      "fact": "The Aral Sea has lost most of its water since the 1960s, because the rivers feeding it were diverted for irrigation."
+    },
+    {
+      "name": "Lakes in Africa's Rift Valley",
+      "items": [
+        "Lake Tanganyika",
+        "Lake Malawi",
+        "Lake Turkana",
+        "Lake Kivu"
+      ],
+      "fact": "Lake Tanganyika is the longest freshwater lake in the world, and the second deepest after Baikal."
+    }
+  ],
+  "ui": {
+    "locale": "en-US"
+  }
+}

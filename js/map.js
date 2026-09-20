@@ -118,6 +118,8 @@ export function createWorldMap(container, data) {
     const hit = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
     const overlapArea = (a, b) => Math.max(0, Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x)) * Math.max(0, Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y));
 
+    const viewBox = rect(0, 0, target.w / u, target.h / u);
+    const outside = (r) => r.w * r.h - overlapArea(r, viewBox); // the part of a label that would be cut off
     const pos = items.map((it) => ({ px: (it.mx - target.x) / u, py: (it.my - target.y) / u }));
     // Markers are obstacles for every label, so reserve their space first.
     const taken = items.flatMap((it, i) => (it.type === "pin" || it.small ? [rect(pos[i].px - 7, pos[i].py - 7, 14, 14)] : []));
@@ -140,7 +142,7 @@ export function createWorldMap(container, data) {
       let bestScore = Infinity;
       for (const o of options) {
         const r = rect(px + o[0], py + o[1], tw, th);
-        const score = taken.reduce((sum, t) => sum + overlapArea(r, t), 0);
+        const score = taken.reduce((sum, t) => sum + overlapArea(r, t), 0) + outside(r) * 2;
         if (score < bestScore) { bestScore = score; best = o; }
         if (score === 0) break;
       }

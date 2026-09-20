@@ -8,24 +8,46 @@
   "groups": [
     {
       "name": "Named after a saint",
-      "items": ["São Paulo", "San Francisco", "Santiago", "Saint Petersburg"],
+      "items": [
+        "São Paulo",
+        "San Francisco",
+        "Santiago",
+        "Saint Petersburg"
+      ],
       "fact": "São Paulo takes its name from Saint Paul, whose feast day was the day the city was founded."
     },
     {
       "name": "Name means \"new town\" or \"new castle\"",
-      "items": ["Naples", "Novi Sad", "Neuchâtel", "Newcastle"],
+      "items": [
+        "Naples",
+        "Novi Sad",
+        "Neuchâtel",
+        "Newcastle"
+      ],
       "fact": "Naples comes from the Greek \"Neapolis\", meaning \"new city\"."
     },
     {
       "name": "Hosted the Summer Olympics more than once",
-      "items": ["London", "Paris", "Athens", "Tokyo"],
+      "items": [
+        "London",
+        "Paris",
+        "Athens",
+        "Tokyo"
+      ],
       "fact": "London was the first city to host the Summer Games three times."
     },
     {
       "name": "Above 2,500 metres",
-      "items": ["La Paz", "Lhasa", "Cusco", "Quito"],
+      "items": [
+        "La Paz",
+        "Lhasa",
+        "Cusco",
+        "Quito"
+      ],
       "fact": "Lhasa sits at about 3,650 m, so there is roughly a third less oxygen than at sea level."
     }
   ],
-  "ui": { "locale": "en-US" }
+  "ui": {
+    "locale": "en-US"
+  }
 }

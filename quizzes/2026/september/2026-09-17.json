@@ -8,24 +8,46 @@
   "groups": [
     {
       "name": "In NATO but not in the EU",
-      "items": ["Norway", "Turkey", "Albania", "North Macedonia"],
+      "items": [
+        "Norway",
+        "Turkey",
+        "Albania",
+        "North Macedonia"
+      ],
       "fact": "Turkey has been a NATO member since 1952."
     },
     {
       "name": "Founding members of OPEC",
-      "items": ["Venezuela", "Iraq", "Kuwait", "Saudi Arabia"],
+      "items": [
+        "Venezuela",
+        "Iraq",
+        "Kuwait",
+        "Saudi Arabia"
+      ],
       "fact": "OPEC was founded in Baghdad in 1960."
     },
     {
       "name": "No standing army",
-      "items": ["Costa Rica", "Iceland", "Liechtenstein", "Mauritius"],
+      "items": [
+        "Costa Rica",
+        "Iceland",
+        "Liechtenstein",
+        "Mauritius"
+      ],
       "fact": "Costa Rica abolished its army in 1948."
     },
     {
       "name": "In the Commonwealth but never a British colony",
-      "items": ["Mozambique", "Rwanda", "Gabon", "Togo"],
+      "items": [
+        "Mozambique",
+        "Rwanda",
+        "Gabon",
+        "Togo"
+      ],
       "fact": "Mozambique and Rwanda joined the Commonwealth without any British colonial past; Gabon and Togo followed in 2022."
     }
   ],
-  "ui": { "locale": "en-US" }
+  "ui": {
+    "locale": "en-US"
+  }
 }

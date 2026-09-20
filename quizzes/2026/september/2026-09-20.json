@@ -8,24 +8,46 @@
   "groups": [
     {
       "name": "Seas named after a colour",
-      "items": ["Red Sea", "Black Sea", "White Sea", "Yellow Sea"],
+      "items": [
+        "Red Sea",
+        "Black Sea",
+        "White Sea",
+        "Yellow Sea"
+      ],
       "fact": "The Red Sea is one of the saltiest seas in the world."
     },
     {
       "name": "Straits",
-      "items": ["Malacca", "Hormuz", "Bosphorus", "Gibraltar"],
+      "items": [
+        "Malacca",
+        "Hormuz",
+        "Bosphorus",
+        "Gibraltar"
+      ],
       "fact": "The Strait of Malacca is one of the busiest shipping lanes on Earth."
     },
     {
       "name": "Lakes shared by three or more countries",
-      "items": ["Lake Victoria", "Lake Chad", "Lake Constance", "Lake Prespa"],
+      "items": [
+        "Lake Victoria",
+        "Lake Chad",
+        "Lake Constance",
+        "Lake Prespa"
+      ],
       "fact": "Lake Victoria is the largest lake in Africa."
     },
     {
       "name": "Rivers that flow north",
-      "items": ["Nile", "Ob", "Lena", "Mackenzie"],
+      "items": [
+        "Nile",
+        "Ob",
+        "Lena",
+        "Mackenzie"
+      ],
       "fact": "The Nile is one of the few great rivers that flows north."
     }
   ],
-  "ui": { "locale": "en-US" }
+  "ui": {
+    "locale": "en-US"
+  }
 }
